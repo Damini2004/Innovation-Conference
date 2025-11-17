@@ -1,0 +1,14 @@
+/* TEAM */
+Founder: Pure Research Insights
+URL: https://www.pureresearchinsights.com
+
+/* THANKS */
+Next.js
+Firebase
+ShadCN UI
+
+/* SITE */
+Last update: 2024/07/26
+Standards: HTML5, CSS3, JavaScript
+Components: React, ShadCN UI
+Software: Next.js, Firebase

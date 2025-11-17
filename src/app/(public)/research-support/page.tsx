@@ -1,9 +1,17 @@
 
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CheckCircle, FileText, BarChart, Search, Palette, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Research Support Services",
+  description: "Comprehensive support for researchers, including manuscript editing, statistical analysis, plagiarism checks, and journal selection assistance to enhance publication success.",
+  keywords: ["research support", "manuscript editing", "statistical analysis", "plagiarism check", "journal selection"],
+};
 
 const supportServices = [
   {

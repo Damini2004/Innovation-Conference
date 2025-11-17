@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   description: 'The leading platform for academic journal submissions, conference management, and publication support.',
   keywords: ['academic publishing', 'research journals', 'scientific conferences', 'manuscript submission', 'peer review'],
+  manifest: '/manifest.json',
+  themeColor: '#D32F2F',
   openGraph: {
     title: 'Pure Research Insights',
     description: 'The leading platform for academic journal submissions and management.',
