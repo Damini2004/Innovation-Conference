@@ -5,6 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import Image from "next/image";
 import { Globe, ShieldCheck, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Submit Manuscript | Journal & Conference Publication",
+  description: "Submit your research paper for publication in our peer-reviewed journals and international conferences. We offer a streamlined research journal submission process.",
+  keywords: ["publish research paper", "research journal submission", "international journal publication", "submit manuscript", "conference paper submission", "call for papers"],
+};
 
 const submissionBenefits = [
     {

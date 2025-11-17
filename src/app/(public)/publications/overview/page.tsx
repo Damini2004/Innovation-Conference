@@ -1,9 +1,16 @@
 
 
+import { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, AlertTriangle } from "lucide-react";
 import Image from "next/image";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+
+export const metadata: Metadata = {
+    title: 'Publications Overview | Policies & Ethics',
+    description: 'Understand the publication policies, terms, and ethics at Pure Research Insights, including our strict plagiarism policy. Learn how to publish with us.',
+    keywords: ['how to publish a research paper', 'publication ethics', 'plagiarism policy', 'scholarly articles', 'peer-reviewed journals', 'manuscript peer-review process explained'],
+};
 
 const plagiarismPolicies = [
     { text: "Plagiarized articles will be rejected (Must be 20% below including references).", icon: AlertTriangle, iconColor: "text-destructive" },
@@ -59,7 +66,7 @@ export default function PublicationsOverviewPage() {
                         </CarouselItem>
                          <CarouselItem>
                              <Image
-                                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1200&h=400&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1527192491265-7e626dcf327dd653?q=80&w=1200&h=400&auto=format&fit=crop"
                                 alt="Background 3"
                                 data-ai-hint="academic conference"
                                 width={1200}

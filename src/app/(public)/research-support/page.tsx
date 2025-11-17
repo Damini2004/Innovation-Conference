@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Research Support Services",
   description: "Comprehensive support for researchers, including manuscript editing, statistical analysis, plagiarism checks, and journal selection assistance to enhance publication success.",
-  keywords: ["research support", "manuscript editing", "statistical analysis", "plagiarism check", "journal selection"],
+  keywords: ["research support", "manuscript editing", "statistical analysis", "plagiarism check", "journal selection", "academic writing services", "research paper writing help", "literature review writing", "publication support services"],
 };
 
 const supportServices = [

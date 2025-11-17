@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: '%s | Pure Research Insights',
   },
   description: 'The leading platform for academic journal submissions, conference management, and publication support.',
-  keywords: ['academic publishing', 'research journals', 'scientific conferences', 'manuscript submission', 'peer review'],
+  keywords: ['academic publishing', 'research journals', 'scientific conferences', 'manuscript submission', 'peer review', 'journal publication', 'research publication', 'scientific research papers'],
   manifest: '/manifest.json',
   themeColor: '#D32F2F',
   openGraph: {
