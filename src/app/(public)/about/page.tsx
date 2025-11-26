@@ -76,7 +76,7 @@ export default async function AboutPage() {
             </div>
               <div className="p-8 md:p-12">
                 <div 
-                  className="prose prose-lg max-w-none prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto text-card-foreground"
+                  className="prose prose-lg max-w-none prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto text-card-foreground text-justify"
                   dangerouslySetInnerHTML={{ __html: content || "" }} 
                 />
             </div>
