@@ -86,11 +86,11 @@ const mainNavLinks = [
     isMegaMenu: true,
     children: [...conferenceSubMenuLinks, ...conferenceSubMenuItems],
   },
-  { 
-    href: "/publications", 
-    label: "Publications",
-    children: publicationSubMenu
-  },
+  // { 
+  //   href: "/publications", 
+  //   label: "Publications",
+  //   children: publicationSubMenu
+  // },
   { 
     href: "/ipr-services", 
     label: "Services",
