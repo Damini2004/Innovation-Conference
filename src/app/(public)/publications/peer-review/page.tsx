@@ -67,7 +67,7 @@ export default function PeerReviewPage() {
                              <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary">Our Philosophy</div>
                             <h2 className="text-3xl font-bold tracking-tighter">A Foundation of Trust & Quality</h2>
                             <p className="text-muted-foreground text-justify">
-                                At Pure Research Insights, we believe that rigorous peer review is the cornerstone of high-quality academic publishing. Our process is designed not only to validate research but also to provide constructive feedback that enhances the final publication. By engaging independent experts, we ensure that every article meets the highest standards of scientific merit, originality, and significance, thereby fostering trust within the global research community.
+                                At Innovation Conferences, we believe that rigorous peer review is the cornerstone of high-quality academic publishing. Our process is designed not only to validate research but also to provide constructive feedback that enhances the final publication. By engaging independent experts, we ensure that every article meets the highest standards of scientific merit, originality, and significance, thereby fostering trust within the global research community.
                             </p>
                         </div>
                     </div>
@@ -107,8 +107,3 @@ export default function PeerReviewPage() {
                             ))}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    );
-}

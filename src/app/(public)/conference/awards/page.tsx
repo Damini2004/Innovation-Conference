@@ -42,7 +42,7 @@ export default function AwardsPage() {
                     Awards & Recognition
                 </h1>
                 <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                    PRI is committed to celebrating excellence in research and innovation. Our awards honor the outstanding contributions of researchers and scholars who are pushing the boundaries of knowledge.
+                    Innovation Conferences is committed to celebrating excellence in research and innovation. Our awards honor the outstanding contributions of researchers and scholars who are pushing the boundaries of knowledge.
                 </p>
             </div>
         </section>
@@ -63,7 +63,7 @@ export default function AwardsPage() {
                          <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary">Celebrating Excellence</div>
                         <h2 className="text-3xl font-bold tracking-tighter">Honoring Groundbreaking Research</h2>
                         <p className="text-muted-foreground text-justify">
-                            The PRI Awards program is designed to recognize and celebrate the exceptional achievements of individuals and teams whose work demonstrates scientific rigor, innovation, and the potential for significant impact. By acknowledging these contributions, we aim to inspire the next generation of researchers and foster a culture of excellence within the global academic community. Each award is a testament to the dedication and intellectual curiosity that drives scientific progress forward.
+                            The Innovation Conferences Awards program is designed to recognize and celebrate the exceptional achievements of individuals and teams whose work demonstrates scientific rigor, innovation, and the potential for significant impact. By acknowledging these contributions, we aim to inspire the next generation of researchers and foster a culture of excellence within the global academic community. Each award is a testament to the dedication and intellectual curiosity that drives scientific progress forward.
                         </p>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 
-
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
@@ -9,8 +8,8 @@ import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
 
 export const metadata: Metadata = {
-  title: 'Home | Pure Research Insights | Best Publication in Nagpur',
-  description: 'Pure Research Insights empowers researchers and businesses with expert solutions for journal submissions, conference organization, and publication consultancy. Leading publication house in Nagpur.',
+  title: 'Home | Innovation Conferences | Best Publication in Nagpur',
+  description: 'Innovation Conferences empowers researchers and businesses with expert solutions for journal submissions, conference organization, and publication consultancy. Leading publication house in Nagpur.',
   keywords: ['research publication', 'academic publication', 'journal indexing', 'Scopus', 'Web of Science', 'conference management', 'publication support services', 'call for papers', 'Best publication in Nagpur', 'Top publication in Nagpur'],
 };
 
@@ -161,7 +160,7 @@ export default function HomePage() {
           <div className="container px-4 md:px-6 z-20 relative text-center text-white">
               <div className="mx-auto max-w-3xl">
                   <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight xl:text-6xl animated fadeInDown">
-                      Pure Research Insights
+                      Innovation Conferences
                   </h1>
                   <p className="mt-6 max-w-xl mx-auto text-lg text-white/90 md:text-xl animated fadeInUp">
                       Our solutions empower researchers and businesses to save time, gain deeper understanding, and move forward with confidence.

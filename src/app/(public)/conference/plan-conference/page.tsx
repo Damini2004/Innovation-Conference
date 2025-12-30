@@ -1,4 +1,5 @@
 
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, CalendarCheck, Megaphone, Users, BookOpen } from "lucide-react";
@@ -65,7 +66,7 @@ export default function PlanConferencePage() {
                          <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary">A Partnership for Success</div>
                         <h2 className="text-3xl font-bold tracking-tighter">Your Vision, Our Expertise</h2>
                         <p className="text-muted-foreground text-justify">
-                            Planning a scientific conference requires meticulous attention to detail and a deep understanding of the academic landscape. By partnering with Pure Research Insights, you gain access to a dedicated team of professionals who are committed to making your event a resounding success. We work closely with you to understand your goals, develop a comprehensive strategy, and execute every aspect of the conference with precision and care.
+                            Planning a scientific conference requires meticulous attention to detail and a deep understanding of the academic landscape. By partnering with Innovation Conferences, you gain access to a dedicated team of professionals who are committed to making your event a resounding success. We work closely with you to understand your goals, develop a comprehensive strategy, and execute every aspect of the conference with precision and care.
                         </p>
                         <Button asChild>
                             <Link href="/contact-us">

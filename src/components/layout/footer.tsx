@@ -14,16 +14,15 @@ const quickLinks = [
 ]
 
 const exploreLinks = [
-    { href: "#", label: "Pure Research Insights" },
     { href: "/about", label: "Careers" },
     { href: "/research-support", label: "Research Support" },
     { href: "/contact-us", label: "Contact Us" },
 ]
 
 const socialLinks = [
-    { href: "https://www.linkedin.com/company/pure-researcher-insights/", icon: Linkedin },
+    { href: "https://www.linkedin.com/company/pure-research-insights/", icon: Linkedin },
     { href: "https://www.youtube.com/@PureResearchInsights", icon: Youtube },
-    { href: "2) https://www.facebook.com/profile.php?id=61580467397343", icon: Facebook },
+    { href: "https://www.facebook.com/profile.php?id=61580467397343", icon: Facebook },
     { href: "https://www.instagram.com/pure_research_insights?igsh=ZjdqZXN5NHRtemhn", icon: Instagram },
 ]
 
@@ -42,7 +41,7 @@ const Footer = () => {
                         <div className="space-y-2 text-sm text-gray-400">
                             <p className="flex items-start gap-2">
                                 <MapPin className="h-4 w-4 mt-0.5 text-[#D32F2F] flex-shrink-0" />
-                                <span>202-Pure Research Insights, Planet Apartment, Jaywant Nagar, Omkar Nagar, Nagpur, Maharashtra 440027</span>
+                                <span>202-Innovation Conferences, Planet Apartment, Jaywant Nagar, Omkar Nagar, Nagpur, Maharashtra 440027</span>
                             </p>
                             <p className="flex items-start gap-2">
                                 <Phone className="h-4 w-4 mt-0.5 text-[#D32F2F] flex-shrink-0" />
@@ -82,7 +81,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Map Section - Moved to bottom */}
+                {/* Map Section */}
                 <div className="mt-10 pt-10 border-t border-gray-700">
                      <div className="space-y-6">
                         <div>
@@ -119,10 +118,14 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div className="bg-black py-4">
+                <div className="container mx-auto px-4 text-center text-sm text-gray-500">
+                    <p>&copy; {new Date().getFullYear()} Innovation Conferences. All Rights Reserved.</p>
+                </div>
             </div>
         </footer>
-    )
-}
+    );
+};
 
 export default Footer;

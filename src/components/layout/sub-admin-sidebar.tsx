@@ -42,7 +42,7 @@ export default function SubAdminSidebar({ journalCount = 0, conferenceCount = 0,
       <SidebarHeader>
         <div className="flex items-center justify-center gap-2">
             <Logo className="h-10 w-10" />
-            <span className="text-lg font-semibold">Pure Research Insights</span>
+            <span className="text-lg font-semibold">Innovation Conferences</span>
         </div>
         <SidebarTrigger />
       </SidebarHeader>
@@ -84,4 +84,3 @@ export default function SubAdminSidebar({ journalCount = 0, conferenceCount = 0,
       </SidebarFooter>
     </Sidebar>
   );
-}

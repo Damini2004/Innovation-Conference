@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us | Pure Research Insights",
-  description: "Learn about Pure Research Insights' mission to advance knowledge and foster innovation by connecting the brightest minds from around the globe through conference management, publications, and PhD services.",
+  title: "About Us | Innovation Conferences",
+  description: "Learn about Innovation Conferences' mission to advance knowledge and foster innovation by connecting the brightest minds from around the globe through conference management, publications, and PhD services.",
   keywords: ["about us", "mission", "vision", "academic services", "conference management", "Leading publication house in Nagpur", "Trusted publisher in Nagpur"],
 };
 
@@ -118,8 +118,3 @@ export default async function AboutPage() {
                      </div>
                 ))}
             </div>
-        </div>
-      </section>
-    </>
-  );
-}

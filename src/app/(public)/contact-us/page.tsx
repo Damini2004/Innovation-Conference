@@ -5,8 +5,8 @@ import ContactForm from "@/components/forms/contact-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Pure Research Insights | Nagpur",
-  description: "Get in touch with the Pure Research Insights team in Nagpur. Contact us for the best publication services, research support, and partnership inquiries.",
+  title: "Contact Us | Innovation Conferences | Nagpur",
+  description: "Get in touch with the Innovation Conferences team in Nagpur. Contact us for the best publication services, research support, and partnership inquiries.",
   keywords: [
     "contact", "support", "inquiry", "email", "phone number", "address",
     "Best publication in Nagpur", "Top publication in Nagpur", "Leading publication house in Nagpur",
@@ -63,10 +63,4 @@ export default function ContactUsPage() {
                     <MapPin className="h-8 w-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Office</h3>
-                <p className="text-muted-foreground">202-Pure Research Insights, Planet Apartment, Jaywant Nagar, Omkar Nagar, Nagpur, Maharashtra 440027</p>
-            </Card>
-        </div>
-      </div>
-    </div>
-  );
-}
+                <p className="text-muted-foreground">202-Innovation Conferences, Planet Apartment, Jaywant Nagar, Omkar Nagar,

@@ -8,7 +8,7 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 
 export const metadata: Metadata = {
     title: 'Publications Overview | Policies & Ethics',
-    description: 'Understand the publication policies, terms, and ethics at Pure Research Insights, including our strict plagiarism policy. Learn how to publish with us.',
+    description: 'Understand the publication policies, terms, and ethics at Innovation Conferences, including our strict plagiarism policy. Learn how to publish with us.',
     keywords: ['how to publish a research paper', 'publication ethics', 'plagiarism policy', 'scholarly articles', 'peer-reviewed journals', 'manuscript peer-review process explained'],
 };
 
@@ -16,8 +16,8 @@ const plagiarismPolicies = [
     { text: "Plagiarized articles will be rejected (Must be 20% below including references).", icon: AlertTriangle, iconColor: "text-destructive" },
     { text: "Copying of contents from other articles is strictly prohibited.", icon: AlertTriangle, iconColor: "text-destructive" },
     { text: "Only articles with 80% original content should be submitted with the expectation of being accepted for our conferences and journals.", icon: CheckCircle, iconColor: "text-green-500" },
-    { text: "PRI keenly discourages plagiarism in research articles, proposals and thesis submitted to us.", icon: CheckCircle, iconColor: "text-green-500" },
-    { text: "All articles submitted to PRI Conferences and Publications first undergo a plagiarism check before being sent to our editorial board for review.", icon: CheckCircle, iconColor: "text-green-500" },
+    { text: "Innovation Conferences keenly discourages plagiarism in research articles, proposals and thesis submitted to us.", icon: CheckCircle, iconColor: "text-green-500" },
+    { text: "All articles submitted to Innovation Conferences and Publications first undergo a plagiarism check before being sent to our editorial board for review.", icon: CheckCircle, iconColor: "text-green-500" },
     { text: "Articles failing plagiarism check will be subjected to rejection.", icon: AlertTriangle, iconColor: "text-destructive" },
 ];
 
@@ -79,10 +79,10 @@ export default function PublicationsOverviewPage() {
                 <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                     <div className="text-center text-white p-4">
                         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                            <span className="text-primary">PRI</span> Publications
+                            <span className="text-primary">Innovation Conferences</span> Publications
                         </h1>
                         <p className="mt-6 text-lg text-white/90 max-w-3xl mx-auto">
-                            PRI Journals are peer-reviewed and collaborative journals that strive to publish the most fascinating and dependable source of current information on Arts & Science, Management, Engineering, and Technology.
+                            Innovation Conferences Journals are peer-reviewed and collaborative journals that strive to publish the most fascinating and dependable source of current information on Arts & Science, Management, Engineering, and Technology.
                         </p>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ export default function PublicationsOverviewPage() {
                     <div className="p-8 md:p-10 flex flex-col justify-center">
                         <h2 className="text-3xl font-bold tracking-tight text-primary mb-4">Expert Publishing Assistance</h2>
                         <p className="text-muted-foreground text-lg">
-                            PRI provides help, assistance, and direction in preparation for SCI and SCIE journal publishing. The SCI & SCIE Indexed Journal Search might be exhausting. Get help with SCI and SCIE Indexed journal publishing.
+                            Innovation Conferences provides help, assistance, and direction in preparation for SCI and SCIE journal publishing. The SCI & SCIE Indexed Journal Search might be exhausting. Get help with SCI and SCIE Indexed journal publishing.
                         </p>
                     </div>
                     <div className="relative min-h-[300px] md:min-h-0">
@@ -147,4 +147,3 @@ export default function PublicationsOverviewPage() {
         </div>
     </div>
   );
-}
