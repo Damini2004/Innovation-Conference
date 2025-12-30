@@ -9,8 +9,8 @@ import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
 
 export const metadata: Metadata = {
-  title: 'Home | Academic Publishing & Conference Management',
-  description: 'Pure Research Insights empowers researchers and businesses with expert solutions for journal submissions, conference organization, and publication consultancy.',
+  title: 'Home | Pure Research Insights | Best Publication in Nagpur',
+  description: 'Pure Research Insights empowers researchers and businesses with expert solutions for journal submissions, conference organization, and publication consultancy. Leading publication house in Nagpur.',
   keywords: ['research publication', 'academic publication', 'journal indexing', 'Scopus', 'Web of Science', 'conference management', 'publication support services', 'call for papers', 'Best publication in Nagpur', 'Top publication in Nagpur'],
 };
 
@@ -160,13 +160,13 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-black/60 z-10" />
           <div className="container px-4 md:px-6 z-20 relative text-center text-white">
               <div className="mx-auto max-w-3xl">
-                  <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight xl:text-6xl">
+                  <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight xl:text-6xl animated fadeInDown">
                       Pure Research Insights
                   </h1>
-                  <p className="mt-6 max-w-xl mx-auto text-lg text-white/90 md:text-xl">
+                  <p className="mt-6 max-w-xl mx-auto text-lg text-white/90 md:text-xl animated fadeInUp">
                       Our solutions empower researchers and businesses to save time, gain deeper understanding, and move forward with confidence.
                   </p>
-                  <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+                  <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center animated bounceIn">
                       <Button size="lg" asChild>
                           <Link href="/submit-journal">
                               Submit Your Paper
@@ -197,7 +197,7 @@ export default function HomePage() {
                         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
                             {keyServices.map((service) => (
                                 <div key={service.title} className="flex flex-col items-center text-center">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full border bg-background mb-4 animate-dance">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-full border bg-background mb-4 animated pulse">
                                         <service.icon className="h-6 w-6 text-primary" />
                                     </div>
                                     <h3 className="text-md font-bold">{service.title}</h3>
