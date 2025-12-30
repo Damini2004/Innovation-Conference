@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield } from "lucide-react";
+import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
@@ -106,6 +106,38 @@ const partnerLogos = [
                                                       { src: "/Vnit.jpeg", alt: "Partner Logo 5", hint: "logo education" },
                                                       ]
 
+const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M4 4h16v16H4z"/><path d="M4 12h8"/><path d="M12 4v16"/><path d="M18 4v16"/></svg>
+);
+
+
+const speakers = [
+    {
+        name: "Jon Doe",
+        title: "CEO, Peloton Cycle",
+        description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those intereste.",
+        imageSrc: "https://picsum.photos/seed/s1/300/300",
+        imageHint: "person portrait",
+        social: { facebook: "#", twitter: "#", linkedin: "#", dribbble: "#", behance: "#" }
+    },
+    {
+        name: "Natali Aero",
+        title: "Co-founder, Hometeam",
+        description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those intereste.",
+        imageSrc: "https://picsum.photos/seed/s2/300/300",
+        imageHint: "person portrait",
+        social: { facebook: "#", twitter: "#", linkedin: "#", dribbble: "#", behance: "#" }
+    },
+    {
+        name: "Leo Amber",
+        title: "Director, Via",
+        description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those intereste.",
+        imageSrc: "https://picsum.photos/seed/s3/300/300",
+        imageHint: "person portrait",
+        social: { facebook: "#", twitter: "#", linkedin: "#", dribbble: "#", behance: "#" }
+    },
+];
+
 function IndexedJournalsSection() {
   return (
     <section id="highlights" className="w-full py-12 md:py-24 lg:py-32 bg-background">
@@ -141,6 +173,49 @@ function IndexedJournalsSection() {
       </div>
     </section>
   )
+}
+
+function SpeakersSection() {
+    return (
+        <section id="speakers" className="section py-12 md:py-24 lg:py-32">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <h2 className="section-title wow fadeInUp animated" data-wow-delay="0s">Meet Our Speakers</h2>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {speakers.map((speaker, index) => (
+                             <div key={index} className="speakers-member wow fadeIn animated group" data-wow-delay={`${(index + 1) * 0.1}s`}>
+                                <Card className="text-center overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform-gpu hover:-translate-y-2">
+                                  <div className="member-img bg-secondary relative h-60 w-full p-4 overflow-hidden">
+                                    <Image 
+                                      src={speaker.imageSrc} 
+                                      alt={speaker.name} 
+                                      data-ai-hint={speaker.imageHint}
+                                      fill
+                                      className="object-contain transition-transform duration-500 ease-in-out group-hover:scale-105 group-hover:-translate-y-8"
+                                    />
+                                  </div>
+                                  <CardContent className="member-desc p-6">
+                                    <h3 className="text-xl font-bold">{speaker.name}</h3>
+                                    <h5 className="text-sm text-muted-foreground mb-4">{speaker.title}</h5>
+                                    <p className="text-sm text-muted-foreground mb-4">{speaker.description}</p>
+                                    <div className="social-icon flex justify-center gap-2">
+                                      <Link className="social" href={speaker.social.facebook} target="_blank"><Facebook className="h-5 w-5 text-gray-400 hover:text-primary transition-colors" /></Link>
+                                      <Link className="social" href={speaker.social.twitter} target="_blank"><Twitter className="h-5 w-5 text-gray-400 hover:text-primary transition-colors" /></Link>
+                                      <Link className="social" href={speaker.social.linkedin} target="_blank"><Linkedin className="h-5 w-5 text-gray-400 hover:text-primary transition-colors" /></Link>
+                                      <Link className="social" href={speaker.social.dribbble} target="_blank"><Dribbble className="h-5 w-5 text-gray-400 hover:text-primary transition-colors" /></Link>
+                                      <Link className="social" href={speaker.social.behance} target="_blank"><BehanceIcon className="h-5 w-5 text-gray-400 hover:text-primary transition-colors" /></Link>
+                                    </div>
+                                  </CardContent>              
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 
@@ -211,6 +286,8 @@ export default function HomePage() {
         </section>
         
         <IndexedJournalsSection />
+        
+        <SpeakersSection />
 
         <section id="partners" className="w-full py-12 md:py-24 lg:py-32 bg-background">
           <div className="container mx-auto px-4 md:px-6">
