@@ -36,7 +36,8 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https'
+        ,
         hostname: 'fourwaves.com',
         port: '',
         pathname: '/**',
@@ -44,6 +45,12 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'topazconsultancy.in',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
       },
