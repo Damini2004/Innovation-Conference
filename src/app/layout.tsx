@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
+import './animate.css';
 
 export const metadata: Metadata = {
   title: {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   description: 'The leading platform for academic journal submissions, conference management, and publication support.',
   keywords: ['academic publishing', 'research journals', 'scientific conferences', 'manuscript submission', 'peer review', 'journal publication', 'research publication', 'scientific research papers'],
   manifest: '/site.webmanifest',
-  themeColor: '#3F51B5',
+  themeColor: '#E91E63',
   openGraph: {
     title: 'Pure Research Insights',
     description: 'The leading platform for academic journal submissions and management.',
