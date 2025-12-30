@@ -152,22 +152,24 @@ function IndexedJournalsSection() {
           </div>
         </div>
         <div className="mx-auto grid items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 mt-12">
-          {indexedJournalCategories.map(category => (
-            <Card key={category.title} className="group overflow-hidden rounded-xl flex flex-col hover:shadow-lg transition-shadow bg-background/50 hover:border-primary/20">
-              <div className="relative h-40 w-full">
-                  <Image
-                      src={category.imageSrc}
-                      alt={category.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+          {indexedJournalCategories.map((category, index) => (
+             <div key={category.title} className="speakers-member wow fadeIn animated group" data-wow-delay={`${(index + 1) * 0.1}s`}>
+                <Card className="text-center overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform-gpu hover:-translate-y-2">
+                  <div className="member-img bg-secondary relative h-60 w-full p-4 overflow-hidden">
+                    <Image 
+                      src={category.imageSrc} 
+                      alt={category.title} 
                       data-ai-hint={category.imageHint}
-                  />
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                  <CardTitle className="text-lg mb-2">{category.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground flex-grow">{category.description}</p>
-              </div>
-            </Card>
+                      fill
+                      className="object-contain transition-transform duration-500 ease-in-out group-hover:scale-105"
+                    />
+                  </div>
+                  <CardContent className="member-desc p-6">
+                    <h3 className="text-lg font-bold">{category.title}</h3>
+                    <p className="text-sm text-muted-foreground mt-2">{category.description}</p>
+                  </CardContent>              
+                </Card>
+            </div>
           ))}
         </div>
       </div>
