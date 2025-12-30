@@ -1,9 +1,11 @@
 // src/app/(public)/about/page.tsx
 import { getPageContent } from "@/services/cmsService";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import Image from "next/image";
-import { Target, Eye, Presentation, BookOpen, GraduationCap } from "lucide-react";
+import { Target, Eye, Presentation, BookOpen, GraduationCap, Calendar, Clock, Compass } from "lucide-react";
 import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Us | Pure Research Insights",
@@ -11,129 +13,109 @@ export const metadata: Metadata = {
   keywords: ["about us", "mission", "vision", "academic services", "conference management", "Leading publication house in Nagpur", "Trusted publisher in Nagpur"],
 };
 
-async function getAboutContent() {
-    const result = await getPageContent("about");
-    if (result.success) {
-        return result.content;
-    }
-    return "<p>Error loading content. Please try again later.</p>";
-}
+const aboutEvent = [
+    {
+        imageSrc: "https://picsum.photos/seed/a1/600/400",
+        imageHint: "team meeting",
+        title: "Why we are doing this?",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque"
+    },
+    {
+        imageSrc: "https://picsum.photos/seed/a2/600/400",
+        imageHint: "learning book",
+        title: "What you will learn?",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque"
+    },
+    {
+        imageSrc: "https://picsum.photos/seed/a3/600/400",
+        imageHint: "achievement award",
+        title: "What are the benefits?",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque"
+    },
+];
 
-const services = [
+const features = [
     {
-        icon: Presentation,
-        title: "Conference Management",
-        description: "End-to-end support for organizing successful academic conferences and events."
+        icon: Calendar,
+        title: "Issues",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque"
     },
     {
-        icon: BookOpen,
-        title: "Publications Consultancy",
-        description: "Expert assistance with manuscript preparation and publishing in high-impact journals."
+        icon: Clock,
+        title: "Maintenance",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque"
     },
     {
-        icon: GraduationCap,
-        title: "PhD Services",
-        description: "Comprehensive support and guidance throughout your entire PhD journey."
-    },
+        icon: Compass,
+        title: "Destination",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque"
+    }
 ]
 
 export default async function AboutPage() {
-  const content = await getAboutContent();
-  
   return (
     <>
-      <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
-        <Image
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&h=400&auto=format&fit=crop"
-          alt="A diverse team collaborating on a project in a modern office"
-          data-ai-hint="team collaboration"
-          fill
-          className="object-cover opacity-10"
-        />
-        <div className="relative z-10">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                About Pure Research Insights
+      <div className="page-header relative bg-gray-800 text-white py-16">
+        <div className="absolute inset-0">
+             <Image
+                src="https://picsum.photos/seed/header/1600/400"
+                alt="Abstract background"
+                data-ai-hint="abstract background"
+                fill
+                className="object-cover opacity-20"
+            />
+        </div>
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="page-header-inner text-center">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl wow fadeInRight animated" data-wow-delay="300ms">
+              About Us
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                Discover our mission to advance knowledge and foster innovation by connecting the brightest minds from around the globe.
-            </p>
+            <ol className="breadcrumb wow fadeInDown flex justify-center items-center gap-2 mt-4 text-white/80" data-wow-delay="300ms">
+              <li><Link href="/" className="hover:text-primary">Home</Link></li>
+              <li className="text-primary">/ About Us</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      
+      <section id="about" className="section py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 wow fadeInUp animated" data-wow-delay="0s">About This Event</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {aboutEvent.map((item, index) => (
+              <div key={item.title} className="service-block wow fadeInDown animated" data-wow-delay={`${(index + 1) * 0.1}s`}>
+                <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="relative h-56">
+                        <Image src={item.imageSrc} alt={item.title} data-ai-hint={item.imageHint} fill className="object-cover"/>
+                    </div>
+                    <CardContent className="p-6 text-center">
+                        <h4 className="text-xl font-semibold mb-2">{item.title}</h4>
+                        <p className="text-muted-foreground">{item.description}</p>
+                        <Button variant="link" className="mt-4 text-primary">Read More</Button>
+                    </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-
-      <section className="container mx-auto px-4 md:px-6 pb-12 md:pb-24 lg:pb-32 pt-16">
-        <Card className="shadow-xl overflow-hidden border-primary/10">
-          <div className="grid md:grid-cols-2 items-center">
-            <div className="relative h-64 md:h-full min-h-[300px]">
-              <Image
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&h=600&auto=format&fit=crop"
-                alt="A group of professionals working together around a laptop"
-                data-ai-hint="team collaboration"
-                fill
-                className="object-cover"
-              />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            </div>
-              <div className="p-8 md:p-12">
-                <div 
-                  className="prose prose-lg max-w-none prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto text-card-foreground text-justify"
-                  dangerouslySetInnerHTML={{ __html: content || "" }} 
-                />
-            </div>
-          </div>
-        </Card>
-
-        <div className="mt-16 md:mt-24">
-          <div className="grid gap-12 md:grid-cols-2">
-            <Card className="shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-              <CardHeader className="items-center text-center">
-                <div className="p-4 bg-primary/10 rounded-full w-fit mb-3">
-                  <Target className="h-8 w-8 text-primary" />
-                </div>
-                <CardTitle>Our Mission</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-center">
-                  To provide a premier platform for researchers, academics, and industry professionals to present and discuss the most recent innovations, trends, and concerns in various fields of study, fostering a collaborative environment for the advancement of knowledge.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-              <CardHeader className="items-center text-center">
-                <div className="p-4 bg-primary/10 rounded-full w-fit mb-3">
-                  <Eye className="h-8 w-8 text-primary" />
-                </div>
-                <CardTitle>Our Vision</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-center">
-                  To be a leading global facilitator of scientific and technological innovation, recognized for our commitment to quality, integrity, and the dissemination of high-impact research that addresses the challenges of today and shapes the world of tomorrow.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        <div className="mt-16 md:mt-24">
-            <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold tracking-tighter">Our Services</h2>
-                <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
-                    We offer a comprehensive range of services to support your research and publication goals.
-                </p>
-            </div>
-            <div className="grid gap-8 md:grid-cols-3">
-                {services.map((service) => (
-                      <Card key={service.title} className="text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                        <CardHeader className="items-center">
-                            <div className="p-4 bg-primary/10 rounded-full w-fit mb-3">
-                                <service.icon className="h-8 w-8 text-primary" />
+      <section id="featured" className="section py-16 md:py-24 bg-secondary/50">
+        <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 wow fadeInUp animated" data-wow-delay="0s">Our Feature</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+                {features.map((feature, index) => (
+                     <div key={feature.title} className="featured-box wow fadeInLeft animated" data-wow-delay={`${(index + 1) * 0.1}s`}>
+                        <Card className="p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                            <div className="icon inline-block p-4 mb-4 bg-primary/10 rounded-full">
+                                <feature.icon className="h-10 w-10 text-primary" />
                             </div>
-                            <CardTitle>{service.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground">{service.description}</p>
-                        </CardContent>
-                    </Card>
+                            <div className="featured-content">
+                                <h4 className="text-xl font-semibold mb-2">{feature.title}</h4>
+                                <p className="text-muted-foreground">{feature.description}</p>
+                            </div>
+                        </Card>
+                     </div>
                 ))}
             </div>
         </div>
