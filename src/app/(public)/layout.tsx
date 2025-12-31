@@ -116,8 +116,12 @@ export default function PublicLayout({
       <main className="flex-1">
         {children}
       </main>
-      <MapSection />
-      <ContactSection />
+      <div className="relative">
+        <MapSection />
+        <div className="relative -mt-48">
+            <ContactSection />
+        </div>
+      </div>
       <Footer />
       <WhatsappFab />
     </div>
