@@ -261,43 +261,45 @@ const heroSlides = [
 function HeroCarousel() {
   return (
     <section className="relative h-[600px] w-full overflow-hidden">
-      <Carousel
-        className="w-full h-full"
-        opts={{
-          loop: true,
-        }}
-      >
-        <CarouselContent className="h-full">
-          {heroSlides.map((slide, index) => (
-            <CarouselItem key={index} className="h-full">
-              <div className="relative h-full w-full">
-                <Image
-                  src={slide.imageSrc}
-                  alt={slide.title}
-                  data-ai-hint={slide.imageHint}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-black/60 z-10" />
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white p-4">
-                  <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight animated fadeInRight" dangerouslySetInnerHTML={{ __html: slide.title }} />
-                  <p className="mt-4 max-w-2xl text-lg text-white/90 animated fadeInUp">{slide.subtitle}</p>
-                  <div className="mt-8 flex flex-wrap justify-center gap-4 animated fadeInDown">
-                    {slide.buttons.map(button => (
-                      <Button key={button.text} size="lg" variant={button.variant} asChild>
-                        <Link href={button.href}>{button.text}</Link>
-                      </Button>
-                    ))}
-                  </div>
-                </div>
+      <div className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar">
+
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className="relative h-full w-full flex-shrink-0 snap-center"
+          >
+            <Image
+              src={slide.imageSrc}
+              alt={slide.title}
+              fill
+              priority={index === 0}
+              className="object-cover"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/60" />
+
+            {/* Content */}
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white px-4">
+              <h1 className="text-4xl md:text-5xl font-extrabold">
+                {slide.title}
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg text-white/90">
+                {slide.subtitle}
+              </p>
+
+              <div className="mt-8 flex gap-4">
+                {slide.buttons.map(btn => (
+                  <Button key={btn.text} variant={btn.variant} asChild>
+                    <Link href={btn.href}>{btn.text}</Link>
+                  </Button>
+                ))}
               </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30" />
-      </Carousel>
+            </div>
+          </div>
+        ))}
+
+      </div>
     </section>
   );
 }
@@ -599,5 +601,7 @@ export default function HomePage() {
     </>
   );
 }
+
+    
 
     
