@@ -273,10 +273,10 @@ function Hero() {
            <div className="pt-4">
             <div className="flex justify-center gap-4">
                 <Button asChild size="lg" variant="secondary">
-                    <Link href="#preamble">View Highlights</Link>
+                    <Link href="#highlights">View Highlights</Link>
                 </Button>
                 <Button asChild size="lg">
-                    <Link href="/registration">Buy Ticket</Link>
+                    <Link href="/submit-journal">Buy Ticket</Link>
                 </Button>
             </div>
           </div>
@@ -409,8 +409,8 @@ export default function HomePage() {
       <Hero />
       
       <section className="countdown-timer section py-12">
-        <div className="container flex justify-around items-center">
-            <div className="wow fadeInLeft animated text-center md:text-left" data-wow-delay="0.2s">
+          <div className="container flex flex-col md:flex-row items-center justify-around gap-8 text-center">
+            <div className="wow fadeInLeft animated" data-wow-delay="0.2s">
               <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
               <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
               <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
@@ -421,18 +421,26 @@ export default function HomePage() {
         </div>
       </section>
       
-      <section id="event" className="section py-12 bg-secondary/30">
-        <div className="container">
+      <section id="event" className="section relative py-20 text-white">
+        <Image
+            src="https://picsum.photos/seed/event-bg/1600/800"
+            alt="Event background"
+            data-ai-hint="conference stage"
+            fill
+            className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="container relative z-10">
             <div className="grid md:grid-cols-4 gap-8">
                 {welcomeFeatures.map((feature, index) => (
                     <div key={feature.title} className="tab-block wow fadeInDown animated" data-wow-delay={`${index * 0.2}s`}>
-                        <Card className="text-center p-6">
+                        <Card className="text-center p-6 bg-white/10 backdrop-blur-sm border border-white/20">
                             <div className="icon inline-block mb-4">
                                 <feature.icon className="h-10 w-10 text-primary" />
                             </div>
                             <div className="desc">
                                 <h4 className='font-bold text-lg'>{feature.title}</h4>
-                                <p className='text-muted-foreground mt-2'>{feature.description}</p>
+                                <p className='text-white/80 mt-2'>{feature.description}</p>
                             </div>
                         </Card>
                     </div>
@@ -441,7 +449,7 @@ export default function HomePage() {
             <div className="text-center mt-12">
                 <div className="content-text">
                     <h3 className="wow fadeInUp animated text-2xl font-bold" data-wow-delay="0.8s">Get fresh insights into the world of tech and startups</h3>
-                    <p className="wow fadeInUp animated text-muted-foreground max-w-3xl mx-auto mt-4" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    <p className="wow fadeInUp animated text-white/80 max-w-3xl mx-auto mt-4" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
                 </div>
             </div>
         </div>
@@ -584,5 +592,3 @@ export default function HomePage() {
     </>
   );
 }
-
-    
