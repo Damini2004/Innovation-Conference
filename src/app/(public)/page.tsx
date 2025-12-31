@@ -276,7 +276,7 @@ function HeroCarousel() {
                   alt={slide.title}
                   data-ai-hint={slide.imageHint}
                   fill
-                  className="object-cover z-0"
+                  className="object-cover"
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-black/60 z-10" />
@@ -295,8 +295,8 @@ function HeroCarousel() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-20" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-20" />
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30" />
       </Carousel>
     </section>
   );
