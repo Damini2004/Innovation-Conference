@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CheckCircle, AlertTriangle } from "lucide-react";
 import Image from "next/image";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'Publications Overview | Policies & Ethics',
@@ -34,61 +35,37 @@ const termsAndConditions = [
 export default function PublicationsOverviewPage() {
   return (
     <div className="bg-background">
-      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
-            {/* Header Section with Carousel */}
-            <div className="relative mb-16 rounded-xl overflow-hidden shadow-lg">
-                <Carousel
-                    className="w-full"
-                    opts={{
-                        loop: true,
-                    }}
-                >
-                    <CarouselContent>
-                        <CarouselItem>
-                            <Image
-                                src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&h=400&auto=format&fit=crop"
-                                alt="Background 1"
-                                data-ai-hint="library books"
-                                width={1200}
-                                height={400}
-                                className="w-full h-[400px] object-cover"
-                            />
-                        </CarouselItem>
-                        <CarouselItem>
-                             <Image
-                                src="https://images.unsplash.com/photo-1579165466949-3180a3d056d5?q=80&w=1200&h=400&auto=format&fit=crop"
-                                alt="Background 2"
-                                data-ai-hint="research lab"
-                                width={1200}
-                                height={400}
-                                className="w-full h-[400px] object-cover"
-                            />
-                        </CarouselItem>
-                         <CarouselItem>
-                             <Image
-                                src="https://images.unsplash.com/photo-1527192491265-7e626dcf327dd653?q=80&w=1200&h=400&auto=format&fit=crop"
-                                alt="Background 3"
-                                data-ai-hint="academic conference"
-                                width={1200}
-                                height={400}
-                                className="w-full h-[400px] object-cover"
-                            />
-                        </CarouselItem>
-                    </CarouselContent>
-                </Carousel>
-                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                    <div className="text-center text-white p-4">
-                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                            <span className="text-primary">Innovation Conferences</span> Publications
-                        </h1>
-                        <p className="mt-6 text-lg text-white/90 max-w-3xl mx-auto">
-                            Innovation Conferences Journals are peer-reviewed and collaborative journals that strive to publish the most fascinating and dependable source of current information on Arts & Science, Management, Engineering, and Technology.
-                        </p>
-                    </div>
+        <section className="relative w-full py-20 md:py-32 bg-gray-800 text-white">
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1527192491265-7e626dcf327dd653?q=80&w=1200&auto=format&fit=crop"
+                    alt="Publications Overview"
+                    data-ai-hint="academic conference"
+                    fill
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/60" />
+            </div>
+            <div className="relative container mx-auto px-4 md:px-6 z-10">
+                <div className="max-w-3xl">
+                    <ol className="flex items-center gap-2 text-white/80">
+                      <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                      <li>/ <Link href="/publications" className="hover:text-primary">Publications</Link></li>
+                      <li className="text-primary">/ Overview</li>
+                    </ol>
+                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                        Publications Overview
+                    </h1>
                 </div>
             </div>
+        </section>
+      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+            
+            <p className="text-center text-lg text-muted-foreground max-w-4xl mx-auto my-16">
+                Innovation Conferences Journals are peer-reviewed and collaborative journals that strive to publish the most fascinating and dependable source of current information on Arts & Science, Management, Engineering, and Technology.
+            </p>
 
-            {/* Main Content with Image */}
+
             <Card className="overflow-hidden mb-16 shadow-xl border-2 border-primary/10 transition-shadow duration-300 hover:shadow-primary/20">
                 <div className="grid md:grid-cols-2">
                     <div className="p-8 md:p-10 flex flex-col justify-center">
@@ -109,7 +86,6 @@ export default function PublicationsOverviewPage() {
                 </div>
             </Card>
 
-            {/* Policies Grid */}
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
                 <Card className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-destructive/20 border-t-4 border-destructive">
                     <CardHeader>
@@ -147,3 +123,4 @@ export default function PublicationsOverviewPage() {
         </div>
     </div>
   );
+}

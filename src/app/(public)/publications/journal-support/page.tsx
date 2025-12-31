@@ -29,21 +29,28 @@ const supportInfo = [
 export default function JournalSupportPage() {
   return (
     <div className="bg-secondary/50">
-        <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
-            <Image
-                src="/journal-support.png"
-                alt="Journal Support"
-                data-ai-hint="researcher writing"
-                fill
-                className="object-cover opacity-10"
-            />
-            <div className="relative z-10">
-                <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                    Journal Publication Support
-                </h1>
-                <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                    Navigating the path to publication with expert guidance and dedicated support.
-                </p>
+        <section className="relative w-full py-20 md:py-32 bg-gray-800 text-white">
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/journal-support.png"
+                    alt="Journal Support"
+                    data-ai-hint="researcher writing"
+                    fill
+                    className="object-cover opacity-20"
+                />
+                <div className="absolute inset-0 bg-black/60" />
+            </div>
+            <div className="relative container mx-auto px-4 md:px-6 z-10">
+                <div className="max-w-3xl">
+                    <ol className="flex items-center gap-2 text-white/80">
+                      <li><a href="/" className="hover:text-primary">Home</a></li>
+                      <li>/ <a href="/publications" className="hover:text-primary">Publications</a></li>
+                      <li className="text-primary">/ Journal Support</li>
+                    </ol>
+                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                        Journal Publication Support
+                    </h1>
+                </div>
             </div>
         </section>
 

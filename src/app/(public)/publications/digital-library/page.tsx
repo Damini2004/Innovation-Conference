@@ -39,21 +39,28 @@ export default function DigitalLibraryPage() {
 
   return (
     <div className="bg-secondary/30">
-        <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
-            <Image
-                src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1600&h=400&auto=format&fit=crop"
-                alt="Digital Library"
-                data-ai-hint="library books"
-                fill
-                className="object-cover opacity-10"
-            />
-            <div className="relative z-10">
-                <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                    Journal Listing
-                </h1>
-                <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                    Browse through our extensive collection of journals published with Innovation Conferences.
-                </p>
+        <section className="relative w-full py-20 md:py-32 bg-gray-800 text-white">
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1600&auto=format&fit=crop"
+                    alt="Digital Library"
+                    data-ai-hint="library books"
+                    fill
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/60" />
+            </div>
+            <div className="relative container mx-auto px-4 md:px-6 z-10">
+                <div className="max-w-3xl">
+                    <ol className="flex items-center gap-2 text-white/80">
+                      <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                      <li>/ <Link href="/publications" className="hover:text-primary">Publications</Link></li>
+                      <li className="text-primary">/ Digital Library</li>
+                    </ol>
+                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                        Digital Library
+                    </h1>
+                </div>
             </div>
         </section>
 

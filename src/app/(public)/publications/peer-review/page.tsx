@@ -1,6 +1,7 @@
 import { FileUp, Search, UserCheck, MessageSquare, CheckCircle, ShieldCheck } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const reviewSteps = [
     {
@@ -33,21 +34,28 @@ const reviewSteps = [
 export default function PeerReviewPage() {
     return (
         <div>
-            <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
-                <Image
-                    src="/peer-review.png"
-                    alt="Peer Review Process"
-                    data-ai-hint="research paper"
-                    fill
-                    className="object-cover opacity-10"
-                />
-                <div className="relative z-10">
-                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                        Upholding Academic Integrity
-                    </h1>
-                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                        Our commitment to quality through a rigorous, transparent, and constructive peer-review process.
-                    </p>
+            <section className="relative w-full py-20 md:py-32 bg-gray-800 text-white">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/peer-review.png"
+                        alt="Peer Review Process"
+                        data-ai-hint="research paper"
+                        fill
+                        className="object-cover opacity-10"
+                    />
+                    <div className="absolute inset-0 bg-black/60" />
+                </div>
+                <div className="relative container mx-auto px-4 md:px-6 z-10">
+                    <div className="max-w-3xl">
+                        <ol className="flex items-center gap-2 text-white/80">
+                          <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                          <li>/ <Link href="/publications" className="hover:text-primary">Publications</Link></li>
+                          <li className="text-primary">/ Peer Review</li>
+                        </ol>
+                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                           Peer Review Process
+                        </h1>
+                    </div>
                 </div>
             </section>
 
@@ -107,3 +115,8 @@ export default function PeerReviewPage() {
                             ))}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    );
+}
