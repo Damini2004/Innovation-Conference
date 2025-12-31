@@ -118,9 +118,7 @@ export default function PublicLayout({
       </main>
       <div className="relative">
         <MapSection />
-        <div className="relative -mt-48 flex items-center justify-center">
-            <ContactSection />
-        </div>
+        <ContactSection />
       </div>
       <Footer />
       <WhatsappFab />
