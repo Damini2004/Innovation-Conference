@@ -271,16 +271,7 @@ function Hero() {
               <span>{heroData.location}</span>
             </div>
           </div>
-           <div className="pt-4">
-            <div className="flex justify-center gap-4">
-                <Button asChild size="lg" variant="secondary">
-                    <Link href="#preamble">View Highlights</Link>
-                </Button>
-                <Button asChild size="lg">
-                    <Link href="/registration">Buy Ticket</Link>
-                </Button>
-            </div>
-          </div>
+           
         </div>
       </div>
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
@@ -409,12 +400,12 @@ export default function HomePage() {
     <>
       <Hero />
       
-      <section className="countdown-timer section py-12">
+      <section className="countdown-timer section py-16">
           <div className="container flex flex-wrap items-center justify-around gap-8 text-center">
               <div className="wow fadeInLeft animated text-center md:text-left" data-wow-delay="0.2s">
-                  <h2 className="text-3xl font-bold">Impression Startup Event</h2>
-                  <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
-                  <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
+                  <h2 className="text-4xl font-bold">Impression Startup Event</h2>
+                  <h4 className="text-muted-foreground mt-2 text-lg">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
+                  <Link href="#pricing" className="btn-common inline-block mt-6">Buy Tickets</Link>
               </div>
             <div className="wow fadeInRight animated" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
