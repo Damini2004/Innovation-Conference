@@ -8,6 +8,7 @@ import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import ConferenceCountdown from '@/components/ui/conference-countdown';
+import { XCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: 'Home | Innovation Conferences | Best Publication in Nagpur',
@@ -331,7 +332,7 @@ export default function HomePage() {
                       </Button>
                   </div>
               </div>
-          </div>
+          </div> 
       </section>
 
       <section className="countdown-timer section py-12">
@@ -341,8 +342,8 @@ export default function HomePage() {
               <div className="text">
                 <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
                 <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
-                <a href="pricing.html" className="btn btn-lg btn-common mt-4 inline-block">Buy Tickets</a>
-              </div>
+                <Link href="/pricing">Buy Tickets</Link>
+                </div>
             </div>
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight flex justify-center" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
@@ -475,10 +476,13 @@ export default function HomePage() {
             </div>
             <div className="grid md:grid-cols-3 gap-8 mt-8">
                 {pricingTiers.map((tier, index) => (
-                    <div key={tier.name} className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`} data-wow-delay="0.3s`}>
-                        <Card className={`pricing-table text-center ${tier.active ? 'shadow-2xl border-primary' : 'shadow-lg'}`}>
+                  <div
+  key={tier.name}
+  className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`}
+  data-wow-delay="0.3s"
+>                        <Card className={`pricing-table text-center ${tier.active ? 'shadow-2xl border-primary' : 'shadow-lg'}`}>
                             <CardHeader>
-                                <div className="table-icon p-4 bg-primary/10 inline-block rounded-full mb-4">
+                                <div className = "table-icon p-4 bg-primary/10 inline-block rounded-full mb-4">
                                     <tier.icon className="h-10 w-10 text-primary" />
                                 </div>
                                 <CardTitle className="text-2xl">{tier.name}</CardTitle>
