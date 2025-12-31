@@ -410,7 +410,7 @@ export default function HomePage() {
       
       <section className="countdown-timer section py-12">
         <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-around gap-8 text-center">
+          <div className="flex flex-col md:flex-row items-center justify-end gap-8 text-center">
             <div className="wow fadeInLeft animated text-center md:text-left" data-wow-delay="0.2s">
               <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
               <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
