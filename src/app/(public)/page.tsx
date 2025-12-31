@@ -229,7 +229,7 @@ const pricingTiers = [
 
 function HeroSection() {
   return (
-    <section className="relative h-[600px] w-full bg-gray-800 text-white flex items-center justify-center">
+    <section className="relative h-[600px] w-full bg-gray-800 text-white flex items-center justify-center text-center">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format&fit=crop"
@@ -240,7 +240,7 @@ function HeroSection() {
           className="object-cover opacity-20"
         />
       </div>
-      <div className="relative z-10 text-center px-4">
+      <div className="relative z-10 px-4">
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-white animate-fade-in-down">
           Empowering Research & Innovation
         </h1>
@@ -378,15 +378,13 @@ export default function HomePage() {
       
       <section className="countdown-timer section py-12">
         <div className="container">
-          <div className="row grid md:grid-cols-2 gap-8 items-center">
-            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft animated" data-wow-delay="0.2s">
-              <div className="text">
-                <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
-                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
-                <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
-              </div>
+          <div className="flex flex-col items-center text-center gap-8">
+            <div className="wow fadeInLeft animated" data-wow-delay="0.2s">
+              <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
+              <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
+              <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
             </div>
-            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight animated flex justify-center" data-wow-delay="0.2s">
+            <div className="wow fadeInRight animated" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
             </div>
           </div>
