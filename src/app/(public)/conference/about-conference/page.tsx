@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CheckCircle, Presentation, BookOpen, Users, Award } from "lucide-react";
 import Image from "next/image";
+import Link from 'next/link';
 
 const corePrinciples = [
     "Fostering Collaboration: We create environments that encourage networking and interdisciplinary collaboration among academics, researchers, and industry professionals.",
@@ -35,21 +36,30 @@ const conferenceServices = [
 export default function AboutConferencePage() {
   return (
     <div className="bg-secondary/30">
-        <section className="relative w-full py-20 md:py-32 text-center text-white bg-gray-800">
-             <Image
-                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format=fit=crop"
-                alt="Conference audience"
-                fill
-                className="object-cover opacity-20"
-                data-ai-hint="conference audience"
-            />
-            <div className="container relative z-10 px-4 md:px-6">
-                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">About Innovation Conferences</h1>
-                <p className="mt-4 max-w-[900px] mx-auto text-white/90 md:text-xl/relaxed">
-                    Advancing knowledge and fostering innovation by connecting the brightest minds from around the globe.
-                </p>
-            </div>
-        </section>
+        <section className="relative bg-background overflow-hidden">
+          <div className="absolute inset-0 z-0">
+              <Image
+                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&h=600&auto=format=fit=crop"
+                  alt="Conference audience"
+                  data-ai-hint="conference audience"
+                  fill
+                  className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60"></div>
+          </div>
+          <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+              <div className="max-w-3xl">
+                  <ol className="flex items-center gap-2 text-white/80">
+                      <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                      <li>/ <Link href="/conference" className="hover:text-primary">Conferences</Link></li>
+                      <li className="text-primary">/ About Conferences</li>
+                  </ol>
+                  <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                      About Innovation Conferences
+                  </h1>
+              </div>
+          </div>
+      </section>
         
         <section className="w-full py-12 md:py-24">
             <div className="container mx-auto px-4 md:px-6">

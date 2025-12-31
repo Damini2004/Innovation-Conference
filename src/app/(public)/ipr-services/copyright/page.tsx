@@ -28,7 +28,7 @@ export default function CopyrightPage() {
             <section className="relative bg-background overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1600&h=600&auto=format&fit=crop"
+                        src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1600&h=600&auto=format=fit=crop"
                         alt="Copyright services background"
                         data-ai-hint="legal books"
                         fill
@@ -53,7 +53,7 @@ export default function CopyrightPage() {
                 <div className="container px-4 md:px-6">
                     <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_600px] items-center">
                          <Image
-                            src="https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=600&h=400&auto=format&fit=crop"
+                            src="https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=600&h=400&auto=format=fit=crop"
                             width="600"
                             height="400"
                             alt="Copyright Symbol"

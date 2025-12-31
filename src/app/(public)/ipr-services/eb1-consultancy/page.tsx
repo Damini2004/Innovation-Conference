@@ -55,7 +55,7 @@ export default function EB1ConsultancyPage() {
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl transform transition-transform duration-500 hover:scale-105">
                             <Image
-                                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&h=600&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&h=600&auto=format=fit=crop"
                                 alt="Innovation"
                                 data-ai-hint="team innovation"
                                 fill

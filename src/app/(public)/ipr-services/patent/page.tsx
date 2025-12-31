@@ -33,11 +33,11 @@ export default function PatentPage() {
             <section className="relative bg-background overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/patent-services.png"
+                        src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1600&h=600&auto=format=fit=crop"
                         alt="Patent services background"
                         data-ai-hint="legal documents"
                         fill
-                        className="object-cover opacity-10"
+                        className="object-cover"
                     />
                     <div className="absolute inset-0 bg-black/60"></div>
                 </div>

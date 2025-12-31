@@ -32,30 +32,37 @@ const planningServices = [
 export default function PlanConferencePage() {
   return (
     <div className="bg-secondary/30">
-        <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
-            <Image
-                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&h=400&auto=format&fit=crop"
-                alt="Conference planning session"
-                data-ai-hint="team meeting"
-                fill
-                className="object-cover opacity-10"
-            />
-            <div className="relative z-10">
-                <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                    Partner with Us on Your Next Conference
-                </h1>
-                <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                    Collaborate with our experienced team to organize a successful and impactful scientific event. We provide end-to-end support to bring your vision to life.
-                </p>
-            </div>
-        </section>
+        <section className="relative bg-background overflow-hidden">
+          <div className="absolute inset-0 z-0">
+              <Image
+                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&h=600&auto=format=fit=crop"
+                  alt="Conference planning session"
+                  data-ai-hint="team meeting"
+                  fill
+                  className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60"></div>
+          </div>
+          <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+              <div className="max-w-3xl">
+                  <ol className="flex items-center gap-2 text-white/80">
+                      <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                      <li>/ <Link href="/conference" className="hover:text-primary">Conferences</Link></li>
+                      <li className="text-primary">/ Plan a Conference</li>
+                  </ol>
+                  <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                      Partner with Us on Your Next Conference
+                  </h1>
+              </div>
+          </div>
+      </section>
         
         <section className="w-full py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                      <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl transform transition-transform duration-500 hover:scale-105">
                          <Image
-                            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&h=600&auto=format&fit=crop"
+                            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&h=600&auto=format=fit=crop"
                             alt="Collaboration"
                             data-ai-hint="team collaboration"
                             fill
