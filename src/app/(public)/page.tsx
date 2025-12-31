@@ -1,4 +1,5 @@
 
+
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
@@ -15,34 +16,6 @@ export const metadata: Metadata = {
   description: 'Innovation Conferences empowers researchers and businesses with expert solutions for journal submissions, conference organization, and publication consultancy. Leading publication house in Nagpur.',
   keywords: ['research publication', 'academic publication', 'journal indexing', 'Scopus', 'Web of Science', 'conference management', 'publication support services', 'call for papers', 'Best publication in Nagpur', 'Top publication in Nagpur'],
 };
-
-const heroSlides = [
-    {
-      title: "Impression - Startup Event",
-      subtitle: "Join us, be the first to book your ticket",
-      imageSrc: "/slider/bg-1.jpg",
-      buttons: [
-        { text: "Registration", href: "/submit-journal", variant: "default" as const },
-      ],
-    },
-    {
-      title: "Showcase Your Product",
-      subtitle: "An opportunity to showcase your product and services to attendees",
-      imageSrc: "/slider/bg-2.jpg",
-      buttons: [
-        { text: "Buy Tickets", href: "#pricing", variant: "default" as const },
-        { text: "Know More", href: "/about", variant: "outline" as const },
-      ],
-    },
-    {
-      title: "Expert and Love to Speak?",
-      subtitle: "Apply as a speaker for a session",
-      imageSrc: "/slider/bg-3.jpg",
-      buttons: [
-        { text: "Apply Now", href: "/contact-us", variant: "default" as const }
-      ],
-    },
-];
 
 const indexedJournalCategories = [
 
@@ -256,40 +229,33 @@ const pricingTiers = [
 
 function HeroSection() {
   return (
-    <section className="relative h-[600px] w-full">
-      <Carousel className="w-full h-full" opts={{ loop: true }}>
-        <CarouselContent>
-          {heroSlides.map((slide, index) => (
-            <CarouselItem key={index} className="relative w-full h-full">
-              <Image
-                src={slide.imageSrc}
-                alt={slide.title}
-                fill
-                priority={index === 0}
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-black/60" />
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white px-4">
-                <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-                  {slide.title}
-                </h1>
-                <p className="mt-4 max-w-2xl text-lg text-white/90">
-                  {slide.subtitle}
-                </p>
-                <div className="mt-8 flex flex-wrap justify-center gap-4">
-                  {slide.buttons.map((btn) => (
-                    <Button key={btn.text} variant={btn.variant} size="lg" asChild>
-                      <Link href={btn.href}>{btn.text}</Link>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
-      </Carousel>
+    <section className="relative h-[600px] w-full bg-gray-800 text-white flex items-center justify-center">
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format&fit=crop"
+          alt="Conference background"
+          data-ai-hint="conference audience"
+          fill
+          priority
+          className="object-cover opacity-20"
+        />
+      </div>
+      <div className="relative z-10 text-center px-4">
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-white animate-fade-in-down">
+          Empowering Research & Innovation
+        </h1>
+        <p className="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-white/90 animate-fade-in-up">
+          Your trusted partner for academic publishing, conference management, and intellectual property services.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <Button size="lg" asChild>
+            <Link href="/submit-journal">Submit Your Paper</Link>
+          </Button>
+          <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-primary" asChild>
+            <Link href="/about">Learn More</Link>
+          </Button>
+        </div>
+      </div>
     </section>
   );
 }
