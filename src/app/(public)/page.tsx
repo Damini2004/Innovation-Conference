@@ -276,7 +276,7 @@ function HeroCarousel() {
                   alt={slide.title}
                   data-ai-hint={slide.imageHint}
                   fill
-                  className="object-cover"
+                  className="object-cover z-0"
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-black/60 z-10" />
@@ -430,7 +430,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight animated flex justify-center" data-wow-delay="0.2s">
-                <ConferenceCountdown targetDate="2025-10-25T09:00:00" />
+                <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
             </div>
           </div>
         </div>
@@ -599,3 +599,5 @@ export default function HomePage() {
     </>
   );
 }
+
+    
