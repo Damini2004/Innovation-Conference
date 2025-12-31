@@ -43,30 +43,37 @@ const services = [
 export default function ConferenceProceedingsPage() {
     return (
         <div>
-            <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
-                <Image
-                    src="/conference-proceeding.png"
-                    alt="Conference Presentation"
-                    data-ai-hint="conference presentation"
-                    fill
-                    className="object-cover opacity-10"
-                />
-                <div className="relative z-10">
-                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                        Conference Proceedings
-                    </h1>
-                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                        Share your research on a global stage. All accepted abstracts from our conferences are published in our prestigious, indexed Conference Proceedings.
-                    </p>
-                    <Button size="lg" className="mt-8" asChild>
-                        <a href="/conference">
-                            View Upcoming Conferences <ArrowRight className="ml-2 h-5 w-5" />
-                        </a>
-                    </Button>
+            <section className="relative bg-background overflow-hidden">
+                <div className="container mx-auto px-4 md:px-6 py-20 md:py-32">
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
+                        <div className="relative z-10 space-y-6 text-center md:text-left">
+                             <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary">Global Stage for Research</div>
+                            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                                Conference Proceedings
+                            </h1>
+                            <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto md:mx-0">
+                                Share your research on a global stage. All accepted abstracts from our conferences are published in our prestigious, indexed Conference Proceedings.
+                            </p>
+                            <Button size="lg" className="mt-8" asChild>
+                                <a href="/conference">
+                                    View Upcoming Conferences <ArrowRight className="ml-2 h-5 w-5" />
+                                </a>
+                            </Button>
+                        </div>
+                        <div className="relative h-64 md:h-full min-h-[300px] md:min-h-[400px]">
+                             <Image
+                                src="/conference-proceeding.png"
+                                alt="Conference Presentation"
+                                data-ai-hint="conference presentation"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
                 </div>
             </section>
             
-            <section className="w-full py-16 md:py-24 bg-background">
+            <section className="w-full py-16 md:py-24 bg-secondary/30">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative aspect-square rounded-xl overflow-hidden shadow-2xl transform transition-transform duration-500 hover:scale-105">
@@ -79,7 +86,7 @@ export default function ConferenceProceedingsPage() {
                             />
                         </div>
                         <div className="space-y-6">
-                             <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary">Why Publish With Us?</div>
+                             <div className="inline-block rounded-lg bg-background px-3 py-1 text-sm font-semibold text-primary">Why Publish With Us?</div>
                             <h2 className="text-3xl font-bold tracking-tighter">Amplify Your Research Impact</h2>
                             <p className="text-muted-foreground">
                                 Our conference proceedings offer a unique platform to disseminate your findings, gain valuable feedback, and connect with a global network of researchers and industry leaders.
@@ -87,7 +94,7 @@ export default function ConferenceProceedingsPage() {
                             <ul className="space-y-4">
                                 {benefits.map((benefit) => (
                                     <li key={benefit.title} className="flex items-start gap-4">
-                                        <div className="p-3 bg-primary/10 rounded-full mt-1">
+                                        <div className="p-3 bg-background rounded-full mt-1">
                                             <benefit.icon className="h-5 w-5 text-primary" />
                                         </div>
                                         <div>
@@ -102,27 +109,27 @@ export default function ConferenceProceedingsPage() {
                 </div>
             </section>
 
-             <section className="w-full py-16 md:py-24 bg-secondary/30">
+             <section className="w-full py-16 md:py-24 bg-background">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold tracking-tighter">Our Services</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter">Our Publishing Services</h2>
                         <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
                             We provide a complete suite of services to ensure your work is published professionally and reaches the widest possible audience.
                         </p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
                         {services.map((service) => (
-                            <div key={service.title} className="featured-box">
-                                <Card className="p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
-                                    <div className="icon inline-block p-4 mb-4 bg-primary/10 rounded-full">
-                                        <service.icon className="h-10 w-10 text-primary" />
+                           <Card key={service.title} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 border-primary/10">
+                                <CardHeader className="items-center">
+                                    <div className="p-4 bg-primary/10 rounded-full w-fit mb-3">
+                                        <service.icon className="h-8 w-8 text-primary" />
                                     </div>
-                                    <div className="featured-content">
-                                        <h4 className="text-xl font-semibold mb-2">{service.title}</h4>
-                                        <p className="text-muted-foreground">{service.description}</p>
-                                    </div>
-                                </Card>
-                            </div>
+                                    <CardTitle>{service.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex-grow">
+                                    <p className="text-muted-foreground">{service.description}</p>
+                                </CardContent>
+                            </Card>
                         ))}
                     </div>
                 </div>
