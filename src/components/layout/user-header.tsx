@@ -61,8 +61,6 @@ const conferenceSubItems = [
   { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", icon: Calendar, description: "Find our next events." },
   { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart, description: "Explore our event archive." },
   { href: "/conference/plan-conference", title: "Plan a Conference", icon: Briefcase, description: "Partner with us for your event." },
-  { href: "/conference/awards", title: "Awards", icon: Award, description: "Recognizing academic excellence." },
-  { href: "/conference/faq", title: "FAQs", icon: HelpCircle, description: "Answers to common questions." },
   { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
   { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
   { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
