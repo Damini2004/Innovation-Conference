@@ -55,7 +55,7 @@ export default function ConferenceProceedingsPage() {
                         className="object-cover"
                     />
                     <div
-                        className="absolute inset-0 bg-black/40"
+                        className="absolute inset-0 bg-black/60"
                     ></div>
                 </div>
                 <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
