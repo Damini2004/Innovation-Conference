@@ -209,8 +209,8 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-               <Button key={item.label} variant="ghost" asChild className={cn("text-sm font-medium", pathname === item.href ? "text-primary" : "text-foreground")}>
-                  <Link href={item.href}>{item.label}</Link>
+               <Button key={item.label} variant="ghost" asChild>
+                  <Link href={item.href} className={cn("text-sm font-medium", pathname === item.href ? "text-primary" : "text-foreground")}>{item.label}</Link>
                 </Button>
             )
           )}
