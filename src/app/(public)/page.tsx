@@ -280,7 +280,7 @@ function HeroCarousel() {
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-black/60" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 p-4">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white p-4">
                   <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight animated fadeInRight" dangerouslySetInnerHTML={{ __html: slide.title }} />
                   <p className="mt-4 max-w-2xl text-lg text-white/90 animated fadeInUp">{slide.subtitle}</p>
                   <div className="mt-8 flex flex-wrap justify-center gap-4 animated fadeInDown">
