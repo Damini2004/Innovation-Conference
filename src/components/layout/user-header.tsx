@@ -148,7 +148,6 @@ export default function UserHeader() {
       description: "Protect your IP.",
       subItems: iprServicesSubItems,
     },
-    { href: "/internship", label: "Internship", icon: Briefcase, description: "Start your career with us." },
     { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
     { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
   ];
