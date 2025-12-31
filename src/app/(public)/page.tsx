@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble, User, MapPin, Calendar, Wallet, Link as LinkIcon, Eye, CheckCircle } from "lucide-react";
+import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble, User, MapPin, Calendar, Wallet, Link as LinkIcon, Eye, CheckCircle, Zap, Users, BarChart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
@@ -146,6 +146,12 @@ const welcomeFeatures = [
     { icon: User, title: "Speakers", description: "10 Tech Icons and Professionals" },
     { icon: Wallet, title: "Tickets", description: "150 People" },
 ];
+
+const whyJoinFeatures = [
+    { icon: Zap, title: "Get Inspired", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque" },
+    { icon: Users, title: "Meet New Faces", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque" },
+    { icon: BarChart, title: "Fresh Tech Insights", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque" },
+]
 
 const galleryImages = [
     { src: "https://picsum.photos/seed/g1/800/600", hint: "conference event" },
@@ -302,6 +308,36 @@ function SpeakersSection() {
     );
 }
 
+function WhyJoinSection() {
+    return (
+        <section id="featured" className="section py-12 md:py-24">
+            <div className="container">
+                <div className="text-center">
+                    <h2 className="section-title wow fadeInUp animated text-3xl font-bold" data-wow-delay="0s">Why Join</h2>
+                    <p className="section-subcontent wow fadeInUp animated text-muted-foreground mt-2 max-w-2xl mx-auto" data-wow-delay="0.2s">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
+                    </p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-8 mt-12">
+                    {whyJoinFeatures.map((feature, index) => (
+                        <div key={feature.title} className="featured-box wow fadeInLeft animated" data-wow-delay={`${(index + 1) * 0.1}s`}>
+                            <Card className="p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                                <div className="icon inline-block p-4 mb-4 bg-primary/10 rounded-full">
+                                    <feature.icon className="h-10 w-10 text-primary" />
+                                </div>
+                                <div className="featured-content">
+                                    <h4 className="text-xl font-semibold mb-2">{feature.title}</h4>
+                                    <p className="text-muted-foreground">{feature.description}</p>
+                                </div>
+                            </Card>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
 
 export default function HomePage() {
   return (
@@ -338,14 +374,14 @@ export default function HomePage() {
       <section className="countdown-timer section py-12">
         <div className="container">
           <div className="row grid md:grid-cols-2 gap-8 items-center">
-            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.2s">
+            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft animated" data-wow-delay="0.2s">
               <div className="text">
                 <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
                 <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
                 <Link href="/pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
               </div>
             </div>
-            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight flex justify-center" data-wow-delay="0.2s">
+            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight animated flex justify-center" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
             </div>
           </div>
@@ -356,7 +392,7 @@ export default function HomePage() {
         <div className="container">
             <div className="grid md:grid-cols-4 gap-8">
                 {welcomeFeatures.map((feature, index) => (
-                    <div key={feature.title} className="tab-block wow fadeInDown" data-wow-delay={`${index * 0.2}s`}>
+                    <div key={feature.title} className="tab-block wow fadeInDown animated" data-wow-delay={`${index * 0.2}s`}>
                         <Card className="text-center p-6">
                             <div className="icon inline-block mb-4">
                                 <feature.icon className="h-10 w-10 text-primary" />
@@ -371,8 +407,8 @@ export default function HomePage() {
             </div>
             <div className="col-md-12 text-center mt-12">
                 <div className="content-text">
-                    <h3 className="wow fadeInUp text-2xl font-bold" data-wow-delay="0.8s">Get fresh insights into the world of tech and startups</h3>
-                    <p className="wow fadeInUp text-muted-foreground max-w-3xl mx-auto mt-4" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    <h3 className="wow fadeInUp animated text-2xl font-bold" data-wow-delay="0.8s">Get fresh insights into the world of tech and startups</h3>
+                    <p className="wow fadeInUp animated text-muted-foreground max-w-3xl mx-auto mt-4" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
                 </div>
             </div>
         </div>
@@ -380,16 +416,18 @@ export default function HomePage() {
       
       <IndexedJournalsSection />
 
+      <WhyJoinSection />
+      
       <section id="sponsors" className="section py-12 md:py-24">
         <div className="container">
             <div className="text-center">
-                <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Our Associations & Partners</h2>
-                <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">We are proud to collaborate with leading institutions and organizations in the academic community.</p>
+                <h2 className="section-title wow fadeInUp animated text-3xl font-bold" data-wow-delay="0s">Our Associations & Partners</h2>
+                <p className="section-subcontent wow fadeInUp animated text-muted-foreground mt-2" data-wow-delay="0.2s">We are proud to collaborate with leading institutions and organizations in the academic community.</p>
             </div>
             <div className="relative mt-12 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
                 <div className="flex w-max animate-scroll-x">
                     {[...partnerLogos, ...partnerLogos].map((logo, index) => (
-                        <div key={index} className="spnsors-logo wow fadeInUp mx-8" data-wow-delay={`${(index % 4) * 0.1}s`}>
+                        <div key={index} className="spnsors-logo wow fadeInUp animated mx-8" data-wow-delay={`${(index % 4) * 0.1}s`}>
                             <Link href="#">
                                 <Image 
                                     src={logo.src} 
@@ -410,10 +448,10 @@ export default function HomePage() {
       <section id="gallery" className="section py-12 md:py-24 bg-secondary/30">
           <div className="container">        
             <div className="text-center">
-              <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Our Gallery</h2>
-              <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">A visual journey through our most memorable events and moments.</p>                      
+              <h2 className="section-title wow fadeInUp animated text-3xl font-bold" data-wow-delay="0s">Our Gallery</h2>
+              <p className="section-subcontent wow fadeInUp animated text-muted-foreground mt-2" data-wow-delay="0.2s">A visual journey through our most memorable events and moments.</p>                      
             </div>  
-            <div className="gallery-wrap wow fadeInDown grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8">
+            <div className="gallery-wrap wow fadeInDown animated grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8">
                 {galleryImages.map((image, index) => (
                     <div key={index} className="gallery-item group relative overflow-hidden">
                         <Link href="#">
@@ -427,7 +465,7 @@ export default function HomePage() {
                 ))}
             </div>
             <div className="text-center mt-8">
-                <Button asChild className="wow fadeInUp" data-wow-delay="0.3s">
+                <Button asChild className="wow fadeInUp animated" data-wow-delay="0.3s">
                     <Link href="#">Show More</Link>
                 </Button>   
             </div>    
@@ -439,12 +477,12 @@ export default function HomePage() {
       <section id="blog" className="section py-12 md:py-24 bg-secondary/30">
           <div className="container">
               <div className="text-center">
-                <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Blog</h2>
-                <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">Stay updated with our latest news, articles, and insights.</p>                      
+                <h2 className="section-title wow fadeInUp animated text-3xl font-bold" data-wow-delay="0s">Blog</h2>
+                <p className="section-subcontent wow fadeInUp animated text-muted-foreground mt-2" data-wow-delay="0.2s">Stay updated with our latest news, articles, and insights.</p>                      
               </div> 
               <div className="grid md:grid-cols-3 gap-8 mt-8">
                   {blogPosts.map((post, index) => (
-                      <div key={post.title} className="blog-item wow fadeInRight group" data-wow-delay={`${(index + 1) * 0.2}s`}>
+                      <div key={post.title} className="blog-item wow fadeInRight animated group" data-wow-delay={`${(index + 1) * 0.2}s`}>
                         <Card className='overflow-hidden shadow-lg hover:shadow-xl transition-shadow'>
                             <div className="blog-image relative h-56">
                                 <Link href="#">
@@ -471,14 +509,14 @@ export default function HomePage() {
       <section id="pricing" className="section py-12 md:py-24">
         <div className="container">
             <div className="text-center">
-                <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Take a look at Our Pricing</h2>
-                <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">Choose the perfect plan for your needs.</p>
+                <h2 className="section-title wow fadeInUp animated text-3xl font-bold" data-wow-delay="0s">Take a look at Our Pricing</h2>
+                <p className="section-subcontent wow fadeInUp animated text-muted-foreground mt-2" data-wow-delay="0.2s">Choose the perfect plan for your needs.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8 mt-8">
                 {pricingTiers.map((tier, index) => (
                   <div
                     key={tier.name}
-                    className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`}
+                    className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'} animated`}
                     data-wow-delay="0.3s"
                   >
                     <Card className={`pricing-table text-center ${tier.active ? 'shadow-2xl border-primary' : 'shadow-lg'}`}>
