@@ -6,7 +6,7 @@ import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database,
 import Image from "next/image";
 import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 import ConferenceCountdown from '@/components/ui/conference-countdown';
 import { XCircle } from "lucide-react";
 
@@ -227,6 +227,81 @@ const pricingTiers = [
     }
 ];
 
+const heroSlides = [
+  {
+    title: "Impression - Startup Event",
+    subtitle: "Join us be The First to Book Your Ticket",
+    imageSrc: "https://picsum.photos/seed/hero1/1920/1080",
+    imageHint: "startup event",
+    buttons: [
+      { text: "Registration", href: "/submit-journal", variant: "outline" as const }
+    ]
+  },
+  {
+    title: "Opportunity to showcase",
+    subtitle: "your product and services to attendees",
+    imageSrc: "https://picsum.photos/seed/hero2/1920/1080",
+    imageHint: "product showcase",
+    buttons: [
+      { text: "Buy Tickets", href: "/#pricing", variant: "default" as const },
+      { text: "Know More", href: "/about", variant: "outline" as const }
+    ]
+  },
+  {
+    title: "Expert and Love to Speak?",
+    subtitle: "Apply as Speaker for Taking Session",
+    imageSrc: "https://picsum.photos/seed/hero3/1920/1080",
+    imageHint: "public speaking",
+    buttons: [
+      { text: "Apply Now", href: "/contact-us", variant: "default" as const }
+    ]
+  }
+];
+
+function HeroCarousel() {
+  return (
+    <section className="relative h-[600px] w-full overflow-hidden">
+      <Carousel
+        className="w-full h-full"
+        opts={{
+          loop: true,
+        }}
+      >
+        <CarouselContent className="h-full">
+          {heroSlides.map((slide, index) => (
+            <CarouselItem key={index} className="h-full">
+              <div className="relative h-full w-full">
+                <Image
+                  src={slide.imageSrc}
+                  alt={slide.title}
+                  data-ai-hint={slide.imageHint}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 p-4">
+                  <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight animated fadeInRight" dangerouslySetInnerHTML={{ __html: slide.title }} />
+                  <p className="mt-4 max-w-2xl text-lg text-white/90 animated fadeInUp">{slide.subtitle}</p>
+                  <div className="mt-8 flex flex-wrap justify-center gap-4 animated fadeInDown">
+                    {slide.buttons.map(button => (
+                      <Button key={button.text} size="lg" variant={button.variant} asChild>
+                        <Link href={button.href}>{button.text}</Link>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-20" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-20" />
+      </Carousel>
+    </section>
+  );
+}
+
 
 function IndexedJournalsSection() {
   return (
@@ -342,35 +417,8 @@ function WhyJoinSection() {
 export default function HomePage() {
   return (
     <>
-      <section className="relative h-[600px] w-full flex items-center justify-center overflow-hidden">
-          <video
-              className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover -translate-x-1/2 -translate-y-1/2 z-0"
-              src="/pri video.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-          />
-          <div className="absolute inset-0 bg-black/60 z-10" />
-          <div className="container px-4 md:px-6 z-20 relative text-center text-white">
-              <div className="mx-auto max-w-3xl">
-                  <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight xl:text-6xl animated fadeInDown">
-                      Impression - Startup Event
-                  </h1>
-                  <p className="mt-6 max-w-xl mx-auto text-lg text-white/90 md:text-xl animated fadeInUp">
-                      Join us be The First to Book Your Ticket
-                  </p>
-                  <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center animated bounceIn">
-                      <Button size="lg" asChild>
-                          <Link href="/contact-us">
-                              Registration
-                          </Link>
-                      </Button>
-                  </div>
-              </div>
-          </div> 
-      </section>
-
+      <HeroCarousel />
+      
       <section className="countdown-timer section py-12">
         <div className="container">
           <div className="row grid md:grid-cols-2 gap-8 items-center">
@@ -378,7 +426,7 @@ export default function HomePage() {
               <div className="text">
                 <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
                 <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
-                <Link href="/pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
+                <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
               </div>
             </div>
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight animated flex justify-center" data-wow-delay="0.2s">

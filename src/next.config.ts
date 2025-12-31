@@ -37,13 +37,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'topazconsultancy.in',
+        hostname: 'fourwaves.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'photos.demandstudios.com',
+        hostname: 'topazconsultancy.in',
         port: '',
         pathname: '/**',
       },
