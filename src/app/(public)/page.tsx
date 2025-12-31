@@ -266,7 +266,7 @@ function SpeakersSection() {
         <section id="speakers" className="section py-12 md:py-24 lg:py-32">
             <div className="container">
                 <div className="text-center">
-                    <h2 className="section-title wow fadeInUp animated" data-wow-delay="0s">Meet Our Speakers</h2>
+                    <h2 className="section-title wow fadeInUp animated text-3xl font-bold" data-wow-delay="0s">Meet Our Speakers</h2>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 mt-12">
                     {speakers.map((speaker, index) => (
@@ -341,9 +341,9 @@ export default function HomePage() {
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.2s">
               <div className="text">
                 <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
-                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
-                <Link href="/pricing">Buy Tickets</Link>
-                </div>
+                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
+                <Link href="/pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
+              </div>
             </div>
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight flex justify-center" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
@@ -383,8 +383,8 @@ export default function HomePage() {
       <section id="sponsors" className="section py-12 md:py-24">
         <div className="container">
             <div className="text-center">
-                <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Our Associations & Partners</h2>
-                <p className="section-subcontent wow fadeInUp" data-wow-delay="0.2s">We are proud to collaborate with leading institutions and organizations in the academic community.</p>
+                <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Our Associations & Partners</h2>
+                <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">We are proud to collaborate with leading institutions and organizations in the academic community.</p>
             </div>
             <div className="relative mt-12 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
                 <div className="flex w-max animate-scroll-x">
@@ -410,8 +410,8 @@ export default function HomePage() {
       <section id="gallery" className="section py-12 md:py-24 bg-secondary/30">
           <div className="container">        
             <div className="text-center">
-              <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Our Gallery</h2>
-              <p className="section-subcontent wow fadeInUp" data-wow-delay="0.2s">A visual journey through our most memorable events and moments.</p>                      
+              <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Our Gallery</h2>
+              <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">A visual journey through our most memorable events and moments.</p>                      
             </div>  
             <div className="gallery-wrap wow fadeInDown grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8">
                 {galleryImages.map((image, index) => (
@@ -439,8 +439,8 @@ export default function HomePage() {
       <section id="blog" className="section py-12 md:py-24 bg-secondary/30">
           <div className="container">
               <div className="text-center">
-                <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Blog</h2>
-                <p className="section-subcontent wow fadeInUp" data-wow-delay="0.2s">Stay updated with our latest news, articles, and insights.</p>                      
+                <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Blog</h2>
+                <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">Stay updated with our latest news, articles, and insights.</p>                      
               </div> 
               <div className="grid md:grid-cols-3 gap-8 mt-8">
                   {blogPosts.map((post, index) => (
@@ -471,40 +471,41 @@ export default function HomePage() {
       <section id="pricing" className="section py-12 md:py-24">
         <div className="container">
             <div className="text-center">
-                <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Take a look at Our Pricing</h2>
-                <p className="section-subcontent wow fadeInUp" data-wow-delay="0.2s">Choose the perfect plan for your needs.</p>
+                <h2 className="section-title wow fadeInUp text-3xl font-bold" data-wow-delay="0s">Take a look at Our Pricing</h2>
+                <p className="section-subcontent wow fadeInUp text-muted-foreground mt-2" data-wow-delay="0.2s">Choose the perfect plan for your needs.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8 mt-8">
                 {pricingTiers.map((tier, index) => (
                   <div
-  key={tier.name}
-  className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`}
-  data-wow-delay="0.3s"
->                        <Card className={`pricing-table text-center ${tier.active ? 'shadow-2xl border-primary' : 'shadow-lg'}`}>
-                            <CardHeader>
-                                <div className = "table-icon p-4 bg-primary/10 inline-block rounded-full mb-4">
-                                    <tier.icon className="h-10 w-10 text-primary" />
-                                </div>
-                                <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <ul className="plan-info space-y-2 text-muted-foreground">
-                                    {tier.features.map(feature => (
-                                        <li key={feature.text} className={`flex items-center justify-center gap-2 ${!feature.included && 'line-through text-muted-foreground/60'}`}>
-                                            {feature.included ? <CheckCircle className="h-5 w-5 text-green-500" /> : <XCircle className="h-5 w-5 text-red-500" />}
-                                            {feature.text}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div className="price py-6">
-                                    <h4 className="text-4xl font-bold">{tier.price}</h4>
-                                </div>
-                            </CardContent>
-                            <CardFooter>
-                                 <Button className="w-full">Buy Now</Button>
-                            </CardFooter>
-                        </Card>
-                    </div>
+                    key={tier.name}
+                    className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`}
+                    data-wow-delay="0.3s"
+                  >
+                    <Card className={`pricing-table text-center ${tier.active ? 'shadow-2xl border-primary' : 'shadow-lg'}`}>
+                        <CardHeader>
+                            <div className = "table-icon p-4 bg-primary/10 inline-block rounded-full mb-4">
+                                <tier.icon className="h-10 w-10 text-primary" />
+                            </div>
+                            <CardTitle className="text-2xl">{tier.name}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <ul className="plan-info space-y-2 text-muted-foreground">
+                                {tier.features.map(feature => (
+                                    <li key={feature.text} className={`flex items-center justify-center gap-2 ${!feature.included && 'line-through text-muted-foreground/60'}`}>
+                                        {feature.included ? <CheckCircle className="h-5 w-5 text-green-500" /> : <XCircle className="h-5 w-5 text-red-500" />}
+                                        {feature.text}
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="price py-6">
+                                <h4 className="text-4xl font-bold">{tier.price}</h4>
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                              <Button className="w-full">Buy Now</Button>
+                        </CardFooter>
+                    </Card>
+                  </div>
                 ))}
             </div>
         </div>
