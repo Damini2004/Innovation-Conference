@@ -1,5 +1,4 @@
 
-
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
@@ -277,11 +276,11 @@ function HeroCarousel() {
                   alt={slide.title}
                   data-ai-hint={slide.imageHint}
                   fill
-                  className="object-cover"
+                  className="object-cover z-0"
                   priority={index === 0}
                 />
-                <div className="absolute inset-0 bg-black/60" />
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white p-4">
+                <div className="absolute inset-0 bg-black/60 z-10" />
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white p-4">
                   <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight animated fadeInRight" dangerouslySetInnerHTML={{ __html: slide.title }} />
                   <p className="mt-4 max-w-2xl text-lg text-white/90 animated fadeInUp">{slide.subtitle}</p>
                   <div className="mt-8 flex flex-wrap justify-center gap-4 animated fadeInDown">
@@ -431,7 +430,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight animated flex justify-center" data-wow-delay="0.2s">
-                <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
+                <ConferenceCountdown targetDate="2025-10-25T09:00:00" />
             </div>
           </div>
         </div>
