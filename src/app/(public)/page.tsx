@@ -1,5 +1,4 @@
 
-
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
@@ -237,7 +236,7 @@ function IndexedJournalsSection() {
         </div>
         <div className="mx-auto grid items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 mt-12">
           {indexedJournalCategories.map((category, index) => (
-            <div key={category.title} className="speakers-member wow fadeIn animated group" data-wow-delay={`${(index + 1) * 0.1}s`}>
+             <div key={category.title} className="speakers-member wow fadeIn animated group" data-wow-delay={`${(index + 1) * 0.1}s`}>
               <Card className="text-center overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform-gpu hover:-translate-y-2">
                 <div className="member-img bg-secondary relative h-60 w-full p-4 overflow-hidden">
                   <Image 
@@ -341,7 +340,7 @@ export default function HomePage() {
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.2s">
               <div className="text">
                 <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
-                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
+                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
                 <a href="pricing.html" className="btn btn-lg btn-common mt-4 inline-block">Buy Tickets</a>
               </div>
             </div>
@@ -380,7 +379,7 @@ export default function HomePage() {
       
       <IndexedJournalsSection />
 
-      <section id="sponsors" className="section">
+      <section id="sponsors" className="section py-12 md:py-24">
         <div className="container">
             <div className="text-center">
                 <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Our Associations & Partners</h2>
@@ -407,17 +406,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="gallery" className="section">
+      <section id="gallery" className="section py-12 md:py-24 bg-secondary/30">
           <div className="container">        
             <div className="text-center">
               <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Our Gallery</h2>
-              <p className="section-subcontent wow fadeInUp" data-wow-delay="0.2s">A visual journey through our most memorable events and moments.</p>
+              <p className="section-subcontent wow fadeInUp" data-wow-delay="0.2s">A visual journey through our most memorable events and moments.</p>                      
             </div>  
-            <div className="gallery-wrap wow fadeInDown grid grid-cols-2 md:grid-cols-4 gap-2.5">
+            <div className="gallery-wrap wow fadeInDown grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8">
                 {galleryImages.map((image, index) => (
-                    <div key={index} className="gallery-item group">
+                    <div key={index} className="gallery-item group relative overflow-hidden">
                         <Link href="#">
-                            <Image src={image.src} alt="Gallery image" width={400} height={300} data-ai-hint={image.hint} className='w-full h-auto' />
+                            <Image src={image.src} alt="Gallery image" width={400} height={300} data-ai-hint={image.hint} className='w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-110' />
                         </Link>
                         <div className="overlay absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                             <Link className="preview lightbox" href={image.src}><Eye className="h-8 w-8 p-1.5 border-2 rounded-full text-white border-white hover:bg-white hover:text-primary transition-colors" /></Link>
@@ -436,7 +435,7 @@ export default function HomePage() {
 
       <SpeakersSection />
 
-      <section id="blog" className="section bg-secondary/30">
+      <section id="blog" className="section py-12 md:py-24 bg-secondary/30">
           <div className="container">
               <div className="text-center">
                 <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Blog</h2>
@@ -444,21 +443,22 @@ export default function HomePage() {
               </div> 
               <div className="grid md:grid-cols-3 gap-8 mt-8">
                   {blogPosts.map((post, index) => (
-                      <div key={post.title} className="blog-item wow fadeInRight" data-wow-delay={`${(index + 1) * 0.2}s`}>
+                      <div key={post.title} className="blog-item wow fadeInRight group" data-wow-delay={`${(index + 1) * 0.2}s`}>
                         <Card className='overflow-hidden shadow-lg hover:shadow-xl transition-shadow'>
                             <div className="blog-image relative h-56">
                                 <Link href="#">
-                                    <Image src={post.imageSrc} alt={post.title} fill data-ai-hint={post.imageHint} className="object-cover group-hover:scale-105 transition-transform" />
+                                    <Image src={post.imageSrc} alt={post.title} fill data-ai-hint={post.imageHint} className="object-cover transform transition-transform duration-500 group-hover:scale-110" />
                                 </Link>
                             </div>
                             <CardContent className="blog-info p-6">
-                                <h3><Link href="#">{post.title}</Link></h3>
-                                <div className="meta text-xs text-muted-foreground flex items-center gap-4">
-                                <span className="meta-part flex items-center gap-1"><Eye className="h-4 w-4" /> {post.views}</span>
-                                <span className="meta-part flex items-center gap-1"><BookOpen className="h-4 w-4" /> {post.comments}</span>
-                                <span className="meta-part flex items-center gap-1"><Calendar className="h-4 w-4" /> {post.date}</span>
+                                <h3 className="font-bold text-lg hover:text-primary transition-colors"><Link href="#">{post.title}</Link></h3>
+                                <div className="meta text-xs text-muted-foreground flex items-center gap-4 mt-2">
+                                    <span className="meta-part flex items-center gap-1"><Eye className="h-4 w-4" /> {post.views}</span>
+                                    <span className="meta-part flex items-center gap-1"><BookOpen className="h-4 w-4" /> {post.comments}</span>
+                                    <span className="meta-part flex items-center gap-1"><Calendar className="h-4 w-4" /> {post.date}</span>
                                 </div>
-                                <p className='mt-2 text-sm'>{post.excerpt}</p>
+                                <p className='mt-2 text-sm text-muted-foreground'>{post.excerpt}</p>
+                                <Button variant="link" asChild className="p-0 mt-2"><Link href="#">Read More <ArrowRight className="ml-1 h-4 w-4" /></Link></Button>
                             </CardContent>
                         </Card>
                       </div>
@@ -467,7 +467,7 @@ export default function HomePage() {
           </div>
       </section>
 
-      <section id="pricing" className="section">
+      <section id="pricing" className="section py-12 md:py-24">
         <div className="container">
             <div className="text-center">
                 <h2 className="section-title wow fadeInUp" data-wow-delay="0s">Take a look at Our Pricing</h2>
@@ -486,8 +486,8 @@ export default function HomePage() {
                             <CardContent>
                                 <ul className="plan-info space-y-2 text-muted-foreground">
                                     {tier.features.map(feature => (
-                                        <li key={feature.text} className={`flex items-center justify-center gap-2 ${!feature.included && 'line-through'}`}>
-                                            {feature.included ? <CheckCircle className="h-5 w-5 text-green-500" /> : <ShieldCheck className="h-5 w-5 text-red-500" />}
+                                        <li key={feature.text} className={`flex items-center justify-center gap-2 ${!feature.included && 'line-through text-muted-foreground/60'}`}>
+                                            {feature.included ? <CheckCircle className="h-5 w-5 text-green-500" /> : <XCircle className="h-5 w-5 text-red-500" />}
                                             {feature.text}
                                         </li>
                                     ))}
@@ -508,4 +508,3 @@ export default function HomePage() {
     </>
   );
 }
-

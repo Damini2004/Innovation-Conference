@@ -3,19 +3,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, BookOpen, ChevronDown, FileText, Book, Presentation, MessageSquare, ThumbsUp, Library, Users, Award, DraftingCompass, TrendingUp, Globe, ArrowRight, User, Info, Handshake, PenTool, HelpCircle, Briefcase, MapPin, Phone, Mail } from "lucide-react";
+import { Menu, BookOpen, ChevronDown, FileText, Book, Presentation, MessageSquare, ThumbsUp, Library, Users, Award, DraftingCompass, TrendingUp, Globe, ArrowRight, User, Info, Handshake, PenTool, HelpCircle, Briefcase, MapPin, Phone, Mail, XCircle } from "lucide-react";
 import { Logo } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -122,7 +115,7 @@ export default function UserHeader() {
 
   return (
     <header className={cn("sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300", isScrolled ? 'shadow-md' : '')}>
-       <div className="hidden md:block bg-primary text-primary-foreground text-xs py-1">
+       <div id="roof" className="hidden md:block bg-primary text-primary-foreground text-xs py-1">
           <div className="container flex justify-between items-center">
             <div className="flex items-center gap-4">
                  <div className="flex items-center gap-1.5">
@@ -169,22 +162,6 @@ export default function UserHeader() {
               </NavLink>
             )
           )}
-           {/* Publications Menu - hidden */}
-          {/*
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="ghost" className={cn("flex items-center gap-1 text-sm font-medium", pathname.startsWith('/publications') ? "text-primary" : "text-muted-foreground")}>
-                Publications
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[500px] p-4 grid grid-cols-2 gap-2">
-              {publicationSubItems.map((subItem) => (
-                <DropdownNavLink key={subItem.href} {...subItem} />
-              ))}
-            </PopoverContent>
-          </Popover>
-          */}
 
           {/* Conference Menu */}
           <Popover>
@@ -298,5 +275,3 @@ export default function UserHeader() {
     </header>
   );
 }
-
-    
