@@ -3,7 +3,7 @@
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble, CheckCircle, Calendar, MapPin, User, Eye, Link as LinkIcon, Wallet } from "lucide-react";
+import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble, User, MapPin, Calendar, Wallet, Link as LinkIcon, Eye, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
@@ -237,22 +237,22 @@ function IndexedJournalsSection() {
         </div>
         <div className="mx-auto grid items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 mt-12">
           {indexedJournalCategories.map((category, index) => (
-             <div key={category.title} className="speakers-member wow fadeIn animated group" data-wow-delay={`${(index + 1) * 0.1}s`}>
-                <Card className="text-center overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform-gpu hover:-translate-y-2">
-                  <div className="member-img bg-secondary relative h-60 w-full p-4 overflow-hidden">
-                    <Image 
-                      src={category.imageSrc} 
-                      alt={category.title} 
-                      data-ai-hint={category.imageHint}
-                      fill
-                      className="object-contain transition-transform duration-500 ease-in-out group-hover:scale-105"
-                    />
-                  </div>
-                  <CardContent className="member-desc p-6">
-                    <h3 className="text-lg font-bold">{category.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2">{category.description}</p>
-                  </CardContent>              
-                </Card>
+            <div key={category.title} className="speakers-member wow fadeIn animated group" data-wow-delay={`${(index + 1) * 0.1}s`}>
+              <Card className="text-center overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform-gpu hover:-translate-y-2">
+                <div className="member-img bg-secondary relative h-60 w-full p-4 overflow-hidden">
+                  <Image 
+                    src={category.imageSrc} 
+                    alt={category.title} 
+                    data-ai-hint={category.imageHint}
+                    fill
+                    className="object-contain transition-transform duration-500 ease-in-out group-hover:scale-105"
+                  />
+                </div>
+                <CardContent className="member-desc p-6">
+                  <h3 className="text-lg font-bold">{category.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-2">{category.description}</p>
+                </CardContent>              
+              </Card>
             </div>
           ))}
         </div>
@@ -335,13 +335,13 @@ export default function HomePage() {
           </div>
       </section>
 
-      <section className="countdown-timer section">
+      <section className="countdown-timer section py-12">
         <div className="container">
           <div className="row grid md:grid-cols-2 gap-8 items-center">
             <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.2s">
               <div className="text">
                 <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
-                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
+                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
                 <a href="pricing.html" className="btn btn-lg btn-common mt-4 inline-block">Buy Tickets</a>
               </div>
             </div>
@@ -505,8 +505,6 @@ export default function HomePage() {
             </div>
         </div>
       </section>
-
     </>
   );
 }
-
