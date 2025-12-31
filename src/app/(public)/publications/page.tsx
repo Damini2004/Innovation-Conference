@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -43,73 +44,97 @@ export default function PublicationsPage() {
   );
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Our Publications</h1>
-        <p className="mt-4 text-lg text-muted-foreground">Browse through the latest research published with Innovation Conferences.</p>
-        <div className="relative mt-6 max-w-lg mx-auto">
-          <Input 
-            placeholder="Search journals by title or description..." 
-            className="pl-10 h-12"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+    <>
+      <div className="page-header relative bg-gray-800 text-white py-16">
+        <div className="absolute inset-0">
+          <Image
+            src="https://picsum.photos/seed/publications/1600/400"
+            alt="Publications background"
+            data-ai-hint="library books"
+            fill
+            className="object-cover opacity-20"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        </div>
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="page-header-inner text-center">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl wow fadeInRight animated" data-wow-delay="300ms">
+              Our Publications
+            </h1>
+            <ol className="breadcrumb wow fadeInDown flex justify-center items-center gap-2 mt-4 text-white/80" data-wow-delay="300ms">
+              <li><Link href="/" className="hover:text-primary">Home</Link></li>
+              <li className="text-primary">/ Publications</li>
+            </ol>
+          </div>
         </div>
       </div>
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Our Publications</h1>
+          <p className="mt-4 text-lg text-muted-foreground">Browse through the latest research published with Innovation Conferences.</p>
+          <div className="relative mt-6 max-w-lg mx-auto">
+            <Input 
+              placeholder="Search journals by title or description..." 
+              className="pl-10 h-12"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          </div>
+        </div>
 
-      {isLoading ? (
-         <div className="flex items-center justify-center py-24">
-            <Logo className="h-32 w-32" />
-         </div>
-      ) : (
-        <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredJournals.map(journal => (
-                <Card key={journal.id} className="hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden">
-                    <div className="relative w-full aspect-[4/3]">
-                        <Image 
-                            src={journal.imageSrc}
-                            alt={`Cover for ${journal.journalName}`}
-                            fill
-                            data-ai-hint="journal cover"
-                            className="object-cover"
-                        />
-                    </div>
-                    <div className="flex flex-col flex-grow">
-                        <CardHeader>
-                            <CardTitle className="text-xl leading-snug">{journal.journalName}</CardTitle>
-                            <CardDescription className="pt-1 line-clamp-2">{journal.description}</CardDescription>
-                        </CardHeader>
-                        <CardContent className="flex-grow space-y-2">
-                            <p className="text-sm text-muted-foreground">Status: {journal.status}</p>
-                            <Link href="#" className="text-sm text-primary hover:underline">
-                                Read more...
-                            </Link>
-                        </CardContent>
-                        <CardFooter>
-                            <Button asChild variant="secondary" className="w-full">
-                                <Link href="#">
-                                    View Journal <ArrowRight className="ml-2 h-4 w-4" />
-                                </Link>
-                            </Button>
-                        </CardFooter>
-                    </div>
-                </Card>
-                ))}
-            </div>
-            {filteredJournals.length > 0 && (
-                <div className="mt-12 text-center">
-                    <Button size="lg" variant="outline">Load More Journals</Button>
-                </div>
-            )}
-            {filteredJournals.length === 0 && !isLoading && (
-                 <div className="text-center py-16 text-muted-foreground">
-                    <p>No journals found matching your search criteria.</p>
-                </div>
-            )}
-        </>
-      )}
-    </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center py-24">
+              <Logo className="h-32 w-32" />
+          </div>
+        ) : (
+          <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredJournals.map(journal => (
+                  <Card key={journal.id} className="hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden">
+                      <div className="relative w-full aspect-[4/3]">
+                          <Image 
+                              src={journal.imageSrc}
+                              alt={`Cover for ${journal.journalName}`}
+                              fill
+                              data-ai-hint="journal cover"
+                              className="object-cover"
+                          />
+                      </div>
+                      <div className="flex flex-col flex-grow">
+                          <CardHeader>
+                              <CardTitle className="text-xl leading-snug">{journal.journalName}</CardTitle>
+                              <CardDescription className="pt-1 line-clamp-2">{journal.description}</CardDescription>
+                          </CardHeader>
+                          <CardContent className="flex-grow space-y-2">
+                              <p className="text-sm text-muted-foreground">Status: {journal.status}</p>
+                              <Link href="#" className="text-sm text-primary hover:underline">
+                                  Read more...
+                              </Link>
+                          </CardContent>
+                          <CardFooter>
+                              <Button asChild variant="secondary" className="w-full">
+                                  <Link href="#">
+                                      View Journal <ArrowRight className="ml-2 h-4 w-4" />
+                                  </Link>
+                              </Button>
+                          </CardFooter>
+                      </div>
+                  </Card>
+                  ))}
+              </div>
+              {filteredJournals.length > 0 && (
+                  <div className="mt-12 text-center">
+                      <Button size="lg" variant="outline">Load More Journals</Button>
+                  </div>
+              )}
+              {filteredJournals.length === 0 && !isLoading && (
+                  <div className="text-center py-16 text-muted-foreground">
+                      <p>No journals found matching your search criteria.</p>
+                  </div>
+              )}
+          </>
+        )}
+      </div>
+    </>
   );
 }
