@@ -3,7 +3,7 @@
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble, Calendar, MapPin, User, Eye, Link as LinkIcon, Wallet, CheckCircle } from "lucide-react";
+import { ArrowRight, BookCheck, BrainCircuit, Microscope, ShieldCheck, Database, GitBranch, Cpu, Presentation, GraduationCap, Award, Briefcase, BookOpen, FileText, Shield, Facebook, Twitter, Linkedin, Dribbble, CheckCircle, Calendar, MapPin, User, Eye, Link as LinkIcon, Wallet } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getJournals, Journal } from "@/services/journalService";
@@ -335,25 +335,23 @@ export default function HomePage() {
           </div>
       </section>
 
-      <section className="countdown-timer section py-12">
+      <section className="countdown-timer section">
         <div className="container">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div className="wow fadeInLeft" data-wow-delay="0.2s">
-                    <div className="text-left">
-                        <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
-                        <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
-                        <Button asChild size="lg" className="mt-4">
-                            <Link href="#">Buy Tickets</Link>
-                        </Button>
-                    </div>
-                </div>
-                <div className="wow fadeInRight flex justify-center" data-wow-delay="0.2s">
-                    <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
-                </div>
+          <div className="row grid md:grid-cols-2 gap-8 items-center">
+            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.2s">
+              <div className="text">
+                <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
+                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
+                <a href="pricing.html" className="btn btn-lg btn-common mt-4 inline-block">Buy Tickets</a>
+              </div>
             </div>
+            <div className="col-md-6 col-sm-6 col-xs-12 wow fadeInRight flex justify-center" data-wow-delay="0.2s">
+                <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
+            </div>
+          </div>
         </div>
       </section>
-
+      
       <section id="event" className="section py-12 bg-secondary/30">
         <div className="container">
             <div className="grid md:grid-cols-4 gap-8">
@@ -477,7 +475,7 @@ export default function HomePage() {
             </div>
             <div className="grid md:grid-cols-3 gap-8 mt-8">
                 {pricingTiers.map((tier, index) => (
-                    <div key={tier.name} className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`} data-wow-delay="0.3s">
+                    <div key={tier.name} className={`wow ${index === 0 ? 'fadeInLeft' : index === 1 ? 'fadeInDown' : 'fadeInRight'}`} data-wow-delay="0.3s`}>
                         <Card className={`pricing-table text-center ${tier.active ? 'shadow-2xl border-primary' : 'shadow-lg'}`}>
                             <CardHeader>
                                 <div className="table-icon p-4 bg-primary/10 inline-block rounded-full mb-4">
@@ -511,3 +509,4 @@ export default function HomePage() {
     </>
   );
 }
+
