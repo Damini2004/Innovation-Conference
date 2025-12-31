@@ -1,3 +1,4 @@
+
 // src/components/layout/user-header.tsx
 "use client";
 
@@ -21,6 +22,8 @@ import {
   GalleryVertical,
   DollarSign,
   Heart,
+  File,
+  Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,6 +68,14 @@ const publicationsSubItems = [
     { href: "/publications/peer-review", title: "Peer Review Process", description: "How we ensure quality." },
     { href: "/publications/digital-library", title: "Digital Library", description: "Browse our published journals." },
 ];
+
+const iprServicesSubItems = [
+    { href: "/ipr-services/patent", title: "Patent", description: "Secure your inventions.", icon: FileText },
+    { href: "/ipr-services/trademark", title: "Trademark", description: "Protect your brand identity.", icon: Award },
+    { href: "/ipr-services/copyright", title: "Copyright", description: "Safeguard your creative works.", icon: ShieldCheck },
+    { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance.", icon: Users },
+];
+
 
 const pagesSubItems = [
     { href: "/about", title: "About Us", description: "Learn more about our mission and team.", icon: Info },
@@ -128,6 +139,11 @@ export default function UserHeader() {
       subItems: publicationsSubItems,
     },
     {
+      label: "IPR Services",
+      href: "/ipr-services",
+      subItems: iprServicesSubItems,
+    },
+     {
       label: "Pages",
       href: "#",
       subItems: pagesSubItems,
@@ -189,8 +205,8 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", item.label === "Pages" ? "w-[500px]" : "w-[500px]")}>
-                    <div className={cn(item.label === "Pages" ? "grid grid-cols-2 gap-1" : "grid grid-cols-2 gap-1")}>
+                <PopoverContent className={cn("p-2", item.label === "Pages" || item.label === "IPR Services" ? "w-[250px]" : "w-[500px]")}>
+                    <div className={cn(item.label === "Conference" || item.label === "Publications" ? "grid grid-cols-2 gap-1" : "grid grid-cols-1 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
