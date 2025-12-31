@@ -47,7 +47,7 @@ export default function ResearchSupportPage() {
         <section className="relative bg-background overflow-hidden">
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1600&h=600&auto=format=fit=crop"
+                    src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1600&h=600&auto=format&fit=crop"
                     alt="Research Support background"
                     data-ai-hint="team collaboration"
                     fill
@@ -73,7 +73,7 @@ export default function ResearchSupportPage() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl transform transition-transform duration-500 hover:scale-105">
                          <Image
-                            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&h=600&auto=format=fit=crop"
+                            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&h=600&auto=format&fit=crop"
                             alt="Research collaboration"
                             data-ai-hint="team meeting"
                             fill
@@ -106,7 +106,7 @@ export default function ResearchSupportPage() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {supportServices.map((service, index) => (
-                     <Card key={index} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-gradient-to-br from-background via-background to-secondary/30 border-border/20 group">
+                     <Card key={index} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-gradient-to-br from-background via-background to-secondary/30 border-primary/10 group">
                         <CardHeader className="items-center">
                             <div className="p-4 bg-primary/10 rounded-full w-fit mb-4 border-2 border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:border-primary/40">
                                 <service.icon className="h-8 w-8 text-primary" />
