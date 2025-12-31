@@ -30,7 +30,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ComponentType } from "react";
 import { cn } from "@/lib/utils";
 import {
   Popover,
@@ -77,18 +77,23 @@ const DropdownNavLink = ({
   href,
   title,
   description,
+  icon: Icon,
   hideDescription = false,
 }: {
   href: string;
   title: string;
   description?: string;
+  icon?: ComponentType<{ className?: string }>;
   hideDescription?: boolean;
 }) => (
   <Link
     href={href}
-    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+    className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground"
   >
-    <div className="text-sm font-medium leading-none">{title}</div>
+    <div className="flex items-center gap-2 text-sm font-medium leading-none">
+      {Icon && <Icon className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />}
+      <span>{title}</span>
+    </div>
     {!hideDescription && description && (
         <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
             {description}
@@ -186,8 +191,8 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", item.label === "Pages" ? "w-[200px]" : "w-[500px] grid grid-cols-2 gap-1")}>
-                    <div className={cn(item.label !== "Pages" && "grid grid-cols-2 gap-1")}>
+                <PopoverContent className={cn("p-2", item.label === "Pages" ? "w-[200px]" : "w-[500px]")}>
+                    <div className={cn(item.label === "Pages" ? "flex flex-col" : "grid grid-cols-2 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
