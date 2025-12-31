@@ -73,41 +73,17 @@ const NavLink = ({
   href,
   children,
   className,
-  isButton = false,
   ...props
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
-  isButton?: boolean;
 }) => {
-  const pathname = usePathname();
-  const isActive = pathname === href;
-
-  if (isButton) {
-    return (
-      <Button
-        variant="ghost"
-        className={cn(
-          "text-sm font-medium",
-          isActive ? "text-primary" : "text-foreground",
-          className
-        )}
-        asChild
-      >
-        <Link href={href} {...props}>
-          {children}
-        </Link>
-      </Button>
-    );
-  }
-
   return (
     <Link
       href={href}
       className={cn(
         "text-sm font-medium transition-colors hover:text-primary",
-        isActive ? "text-primary" : "text-foreground",
         className
       )}
       {...props}
@@ -233,9 +209,9 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-              <NavLink key={item.label} href={item.href} isButton>
-                {item.label}
-              </NavLink>
+               <Button key={item.label} variant="ghost" asChild className={cn("text-sm font-medium", pathname === item.href ? "text-primary" : "text-foreground")}>
+                  <Link href={item.href}>{item.label}</Link>
+                </Button>
             )
           )}
         </nav>
@@ -288,7 +264,7 @@ export default function UserHeader() {
                                   key={subItem.href}
                                   href={subItem.href}
                                   onClick={() => setIsOpen(false)}
-                                  className="py-2 text-foreground"
+                                  className={cn("py-2", pathname === subItem.href ? "text-primary font-medium" : "text-foreground")}
                                 >
                                   {subItem.title}
                                 </NavLink>
@@ -302,7 +278,7 @@ export default function UserHeader() {
                         key={item.label}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="py-2 text-md font-medium"
+                        className={cn("py-2 text-md font-medium", pathname === item.href ? "text-primary" : "text-foreground")}
                       >
                         {item.label}
                       </NavLink>
