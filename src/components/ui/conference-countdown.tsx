@@ -14,7 +14,6 @@ const calculateTimeLeft = (targetDate: string) => {
     hours: 0,
     minutes: 0,
     seconds: 0,
-    isOver: true,
   };
 
   if (difference > 0) {
@@ -23,7 +22,6 @@ const calculateTimeLeft = (targetDate: string) => {
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       minutes: Math.floor((difference / 1000 / 60) % 60),
       seconds: Math.floor((difference / 1000) % 60),
-      isOver: false,
     };
   }
 
@@ -50,11 +48,14 @@ export default function ConferenceCountdown({ targetDate }: CountdownProps) {
   }, [targetDate]);
 
   if (!isClient) {
-    return null;
-  }
-  
-  if (timeLeft.isOver) {
-    return <div className="font-semibold text-lg bg-green-500/20 text-green-300 px-4 py-2 rounded-md inline-block">The conference has started!</div>;
+    return (
+        <div className="flex items-center gap-2">
+            <CountdownUnit value={0} label="Days" />
+            <CountdownUnit value={0} label="Hours" />
+            <CountdownUnit value={0} label="Minutes" />
+            <CountdownUnit value={0} label="Seconds" />
+        </div>
+    );
   }
 
   return (
