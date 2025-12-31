@@ -29,18 +29,18 @@ const ContactSection = () => {
                                 <CardContent className="px-0">
                                     <form className="space-y-6">
                                         <div className="grid sm:grid-cols-2 gap-6">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="name">Name</Label>
-                                                <Input id="name" placeholder="Please enter your name" />
+                                            <div className="relative">
+                                                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                                <Input id="name" placeholder="Please enter your name" className="pl-10"/>
                                             </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="email">Email</Label>
-                                                <Input id="email" type="email" placeholder="Please enter your email" />
+                                            <div className="relative">
+                                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                                <Input id="email" type="email" placeholder="Please enter your email" className="pl-10"/>
                                             </div>
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="message">Message</Label>
-                                            <Textarea id="message" placeholder="Write your message" />
+                                        <div className="relative">
+                                             <MessageSquare className="absolute left-3 top-5 h-5 w-5 text-muted-foreground" />
+                                            <Textarea id="message" placeholder="Write your message" className="pl-10 pt-4" />
                                         </div>
                                         <Button type="submit">Send <Send className="ml-2 h-4 w-4" /></Button>
                                     </form>
