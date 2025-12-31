@@ -62,11 +62,11 @@ const conferenceSubItems = [
 ];
 
 const publicationsSubItems = [
-    { href: "/publications/overview", title: "Publication Policies", description: "Ethics, plagiarism, and terms.", icon: FileText },
-    { href: "/publications/journal-support", title: "Journal Submission Support", description: "Get help with your paper.", icon: BookOpen },
-    { href: "/publications/conference-proceedings", title: "Conference Proceedings", description: "Publish your conference paper.", icon: Presentation },
-    { href: "/publications/peer-review", title: "Peer Review Process", description: "How we ensure quality.", icon: ShieldCheck },
-    { href: "/publications/digital-library", title: "Digital Library", description: "Browse our published journals.", icon: GalleryVertical },
+    { href: "/publications/overview", title: "Publication Policies", icon: FileText },
+    { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen },
+    { href: "/publications/conference-proceedings", title: "Conference Proceedings", icon: Presentation },
+    { href: "/publications/peer-review", title: "Peer Review Process", icon: ShieldCheck },
+    { href: "/publications/digital-library", title: "Digital Library", icon: GalleryVertical },
 ];
 
 const iprServicesSubItems = [
@@ -192,8 +192,8 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", (item.label === "Conference" || item.label === "Publications") ? "w-[500px]" : "w-[250px]")}>
-                    <div className={cn((item.label === "Conference" || item.label === "Publications") ? "grid grid-cols-2 gap-1" : "grid grid-cols-1 gap-1")}>
+                <PopoverContent className={cn("p-2", item.label === "Conference" ? "w-[500px]" : "w-[250px]")}>
+                    <div className={cn(item.label === "Conference" ? "grid grid-cols-2 gap-1" : "grid grid-cols-1 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
@@ -211,7 +211,7 @@ export default function UserHeader() {
                   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                   "hover:bg-accent hover:text-accent-foreground",
                   "h-10 px-4 py-2",
-                  pathname === item.href ? "text-primary" : "text-foreground"
+                   pathname === item.href ? "text-primary" : "text-foreground"
                 )}
               >
                 {item.label}
