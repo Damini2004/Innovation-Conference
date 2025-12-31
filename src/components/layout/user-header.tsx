@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, BookOpen, ChevronDown, FileText, Book, Presentation, MessageSquare, ThumbsUp, Library, Users, Award, DraftingCompass, TrendingUp, Globe, ArrowRight, User, Info, Handshake, PenTool, HelpCircle, Briefcase } from "lucide-react";
+import { Menu, BookOpen, ChevronDown, FileText, Book, Presentation, MessageSquare, ThumbsUp, Library, Users, Award, DraftingCompass, TrendingUp, Globe, ArrowRight, User, Info, Handshake, PenTool, HelpCircle, Briefcase, MapPin, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -121,11 +121,31 @@ export default function UserHeader() {
   ];
 
   return (
-    <header className={cn("sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300", isScrolled ? 'shadow-md' : '')}>
+    <header className={cn("sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300", isScrolled ? 'shadow-md' : '')}>
+       <div className="hidden md:block bg-primary text-primary-foreground text-xs py-1">
+          <div className="container flex justify-between items-center">
+            <div className="flex items-center gap-4">
+                 <div className="flex items-center gap-1.5">
+                    <MapPin className="h-3 w-3" />
+                    <span>Nagpur, MH, India</span>
+                 </div>
+            </div>
+            <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1.5">
+                    <Phone className="h-3 w-3" />
+                    <span>+91-7020095748</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                    <Mail className="h-3 w-3" />
+                    <a href="mailto:pureresearchinsights@gmail.com" className="hover:underline">pureresearchinsights@gmail.com</a>
+                </div>
+            </div>
+          </div>
+      </div>
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
           <Logo className="h-10 w-10" />
-          <span className="hidden font-bold sm:inline-block">Innovation Conferences</span>
+          <span className="hidden font-bold sm:inline-block text-lg">Innovation Conferences</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {menuItems.map((item) =>
@@ -200,9 +220,9 @@ export default function UserHeader() {
           </Popover>
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
-          <Button asChild className="hidden sm:flex">
+          <Button asChild className="hidden sm:flex animated bounceIn">
             <Link href="/submit-journal">
-              Submit Paper <ArrowRight className="ml-2 h-4 w-4" />
+              Submit Paper
             </Link>
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -278,3 +298,5 @@ export default function UserHeader() {
     </header>
   );
 }
+
+    
