@@ -1,127 +1,77 @@
 
 import Link from "next/link";
 import { Logo } from "@/components/icons";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Phone, Send, Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
 import Image from "next/image";
 
-const quickLinks = [
-    { href: "#", label: "Talk to an Expert" },
-    { href: "#", label: "Our Policies" },
-    { href: "/about", label: "Blog" },
-    { href: "/internship", label: "Internship" },
-]
-
-const exploreLinks = [
-    { href: "/about", label: "Careers" },
-    { href: "/research-support", label: "Research Support" },
+const supportLinks = [
+    { href: "#", label: "Support" },
+    { href: "#", label: "Docs" },
     { href: "/contact-us", label: "Contact Us" },
 ]
 
-const socialLinks = [
-    { href: "https://www.linkedin.com/company/pure-research-insights/", icon: Linkedin },
-    { href: "https://www.youtube.com/@PureResearchInsights", icon: Youtube },
-    { href: "https://www.facebook.com/profile.php?id=61580467397343", icon: Facebook },
-    { href: "https://www.instagram.com/pure_research_insights?igsh=ZjdqZXN5NHRtemhn", icon: Instagram },
+const learnMoreLinks = [
+    { href: "#", label: "How it Works" },
+    { href: "/about", label: "Blog" },
+    { href: "/login", label: "Log In" },
+    { href: "/submit-journal", label: "Sign Up" },
 ]
 
-const WhatsAppIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-)
+const quickLinks = [
+    { href: "#", label: "Schedule" },
+    { href: "/conference/scientific-gallery", label: "Gallery" },
+    { href: "#", label: "Team" },
+    { href: "/about", label: "Blog" },
+    { href: "#", label: "Pricing" },
+]
 
 
 const Footer = () => {
     return (
-        <footer className="bg-[#212121] text-white">
+        <footer className="section bg-gray-800 text-gray-400">
             <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Column 1: Info */}
                     <div className="space-y-4">
-                        <div className="space-y-2 text-sm text-gray-400">
-                            <p className="flex items-start gap-2">
-                                <MapPin className="h-4 w-4 mt-0.5 text-[#D32F2F] flex-shrink-0" />
-                                <span>202-Innovation Conferences, Planet Apartment, Jaywant Nagar, Omkar Nagar, Nagpur, Maharashtra 440027</span>
-                            </p>
-                            <p className="flex items-start gap-2">
-                                <Phone className="h-4 w-4 mt-0.5 text-[#D32F2F] flex-shrink-0" />
-                                <span>+91-7020095748</span>
-                            </p>
-                            <p className="flex items-start gap-2">
-                                <Mail className="h-4 w-4 mt-0.5 text-[#D32F2F] flex-shrink-0" />
-                                <Link href="mailto:pureresearchinsights@gmail.com" className="hover:text-[#D32F2F]">pureresearchinsights@gmail.com</Link>
-                            </p>
-                        </div>
+                        <h3 className="text-lg font-semibold text-white">
+                            <Image src="/footer-logo.png" alt="Innovation Conferences" width={150} height={40} data-ai-hint="logo white" />
+                        </h3>
+                        <p className="text-sm">
+                            If you think you have the passion,
+                            attitude and capability to join us
+                            the next big software company
+                            s so that we can get the convers.
+                        </p>
                     </div>
 
-                    {/* Column 2: Quick Links */}
+                    {/* Column 2: Support */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 relative">
-                            Quick Links
-                            <span className="absolute bottom-[-4px] left-0 h-0.5 w-12 bg-[#D32F2F]"></span>
-                        </h3>
-                        <ul className="space-y-2 text-sm text-gray-400">
+                        <h3 className="text-lg font-semibold mb-4 text-white">Support</h3>
+                        <ul className="space-y-2 text-sm">
+                            {supportLinks.map(link => (
+                                <li key={link.label}><Link href={link.href} className="hover:text-white transition-colors">{link.label}</Link></li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Column 3: Learn More */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4 text-white">Learn More</h3>
+                        <ul className="space-y-2 text-sm">
+                            {learnMoreLinks.map(link => (
+                                <li key={link.label}><Link href={link.href} className="hover:text-white transition-colors">{link.label}</Link></li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Column 4: Quick Link */}
+                     <div>
+                        <h3 className="text-lg font-semibold mb-4 text-white">Quick Link</h3>
+                        <ul className="space-y-2 text-sm">
                             {quickLinks.map(link => (
                                 <li key={link.label}><Link href={link.href} className="hover:text-white transition-colors">{link.label}</Link></li>
                             ))}
                         </ul>
                     </div>
-
-                    {/* Column 3: Explore */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4 relative">
-                            Explore
-                             <span className="absolute bottom-[-4px] left-0 h-0.5 w-12 bg-[#D32F2F]"></span>
-                        </h3>
-                        <ul className="space-y-2 text-sm text-gray-400">
-                            {exploreLinks.map(link => (
-                                <li key={link.label}><Link href={link.href} className="hover:text-white transition-colors">{link.label}</Link></li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Map Section */}
-                <div className="mt-10 pt-10 border-t border-gray-700">
-                     <div className="space-y-6">
-                        <div>
-                           <h3 className="text-lg font-semibold mb-4 relative text-center">
-                                Our Location
-                                <span className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-0.5 w-12 bg-[#D32F2F]"></span>
-                            </h3>
-                            <div className="overflow-hidden rounded-md mt-8 max-w-4xl mx-auto">
-                                <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.3424623913434!2d79.08999457549149!3d21.098908680568048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4bfc7aff3723f%3A0x3008e412fdbad687!2sPure%20Research%20Insights!5e0!3m2!1sen!2sin!4v1758197039783!5m2!1sen!2sin" 
-                                    width="100%" 
-                                    height="350" 
-                                    style={{ border:0 }} 
-                                    allowFullScreen
-                                    loading="lazy" 
-                                    referrerPolicy="no-referrer-when-downgrade">
-                                </iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="border-t border-gray-700 mt-10 pt-6">
-                    <div className="flex flex-col items-center">
-                        <h4 className="font-semibold mb-4">Follow us</h4>
-                        <div className="flex items-center space-x-3">
-                            {socialLinks.map((link, index) => (
-                                <Link key={index} href={link.href}>
-                                    <Button variant="outline" size="icon" className="bg-transparent border-white rounded-full text-white hover:bg-white hover:text-black transition-colors">
-                                        <link.icon className="h-5 w-5" />
-                                    </Button>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-black py-4">
-                <div className="container mx-auto px-4 text-center text-sm text-gray-500">
-                    <p>&copy; {new Date().getFullYear()} Innovation Conferences. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
