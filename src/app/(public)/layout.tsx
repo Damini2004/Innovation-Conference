@@ -13,6 +13,23 @@ import { Mail, MapPin, Phone, Twitter, Linkedin, Send, Pilcrow, MessageSquare, U
 import Image from "next/image";
 import Link from "next/link";
 
+const MapSection = () => {
+    return (
+        <section id="map" className="w-full h-[450px]">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.574639922967!2d79.05361567512449!3d21.129424784742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c053d61f031b%3A0x838c645c3c2b1896!2sInnovation%20Conferences!5e0!3m2!1sen!2sin!4v1722339343355!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+        </section>
+    );
+};
+
+
 const ContactSection = () => {
     return (
         <section id="contact" className="relative py-16 md:py-24 text-white">
@@ -21,13 +38,13 @@ const ContactSection = () => {
                 alt="Contact background"
                 data-ai-hint="blurry office"
                 fill
-                className="object-cover blur-sm"
+                className="object-cover"
             />
             <div className="absolute inset-0 bg-black/70" />
             <div className="container relative z-10 mx-auto px-4">
-                <Card className="bg-white/10 backdrop-blur-sm border border-white/20 text-white">
-                    <div className="grid md:grid-cols-12 items-start">
-                        <div className="md:col-span-8 p-6">
+                <Card className="max-w-4xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 text-white">
+                    <div className="grid md:grid-cols-2 items-stretch">
+                        <div className="p-8">
                             <CardHeader className="flex-row items-center justify-between px-0 pt-0">
                                 <CardTitle>Send us a message</CardTitle>
                                 <Mail className="h-6 w-6 text-white/70" />
@@ -46,40 +63,40 @@ const ContactSection = () => {
                                     </div>
                                     <div className="relative">
                                          <MessageSquare className="absolute left-3 top-5 h-5 w-5 text-white/50" />
-                                        <Textarea id="message" placeholder="Write your message" className="pl-10 pt-4 bg-white/10 border-white/20 placeholder:text-white/50" />
+                                        <Textarea id="message" placeholder="Write your message" rows={5} className="pl-10 pt-4 bg-white/10 border-white/20 placeholder:text-white/50" />
                                     </div>
                                     <Button type="submit">Send <Send className="ml-2 h-4 w-4" /></Button>
                                 </form>
                             </CardContent>
                         </div>
-                        <div className="md:col-span-4 bg-black/20 p-6 rounded-r-lg h-full">
+                        <div className="bg-black/20 p-8 rounded-r-lg h-full flex flex-col">
                             <CardHeader className="px-0 pt-0">
                                 <CardTitle>Contact Information</CardTitle>
                             </CardHeader>
-                            <CardContent className="space-y-4 px-0">
+                            <CardContent className="space-y-6 px-0 flex-grow">
                                  <div className="flex items-start gap-4">
-                                    <MapPin className="h-5 w-5 text-primary mt-1" />
+                                    <MapPin className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                                     <div className="text-sm">
-                                        <p>Marriott Marquis, San Francisco, CA<br/>United States</p>
+                                        <p>202-Innovation Conferences, Planet Apartment, Jaywant Nagar, Omkar Nagar, Nagpur</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <Phone className="h-5 w-5 text-primary mt-1" />
+                                    <Phone className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                                     <div className="text-sm">
-                                        <p>+123456789000</p>
+                                        <p>+91-7020095748</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <Mail className="h-5 w-5 text-primary mt-1" />
+                                    <Mail className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                                     <div className="text-sm">
-                                        <p>info@abcd.com</p>
+                                        <p>pureresearchinsights@gmail.com</p>
                                     </div>
-                                </div>
-                                <div className="flex justify-center gap-4 pt-4">
-                                    <Link href="#" className="text-white/70 hover:text-primary"><Twitter /></Link>
-                                    <Link href="#" className="text-white/70 hover:text-primary"><Linkedin /></Link>
                                 </div>
                             </CardContent>
+                            <div className="flex justify-center gap-4 pt-6">
+                                <Link href="#" className="text-white/70 hover:text-primary"><Twitter /></Link>
+                                <Link href="#" className="text-white/70 hover:text-primary"><Linkedin /></Link>
+                            </div>
                         </div>
                     </div>
                 </Card>
@@ -99,6 +116,7 @@ export default function PublicLayout({
       <main className="flex-1">
         {children}
       </main>
+      <MapSection />
       <ContactSection />
       <Footer />
       <WhatsappFab />
