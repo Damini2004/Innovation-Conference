@@ -161,6 +161,7 @@ const galleryImages = [
     { src: "/gallery/img-5.jpg", hint: "speaker presentation" },
     { src: "/gallery/img-6.jpg", hint: "workshop activity" },
     { src: "/gallery/img-7.jpg", hint: "panel discussion" },
+    { src: "/gallery/img-7.jpg", hint: "panel discussion" },
 ];
 
 const blogPosts = [
@@ -409,7 +410,7 @@ export default function HomePage() {
       <Hero />
       
       <section className="countdown-timer section py-12">
-          <div className="container flex flex-col md:flex-row items-center justify-around gap-8 text-center">
+          <div className="container flex flex-wrap items-center justify-around gap-8 text-center">
               <div className="wow fadeInLeft animated text-center md:text-left" data-wow-delay="0.2s">
                   <h2 className="text-3xl font-bold">Impression Startup Event</h2>
                   <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
@@ -494,12 +495,12 @@ export default function HomePage() {
             </div>  
             <div className="gallery-wrap wow fadeInDown animated grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8">
                 {galleryImages.map((image, index) => (
-                    <div key={index} className="gallery-item group relative overflow-hidden">
+                    <div key={index} className="gallery-item group relative overflow-hidden rounded-lg">
                         <Link href="#">
-                            <Image src={image.src} alt="Gallery image" width={400} height={300} data-ai-hint={image.hint} className='w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-110' />
+                            <Image src={`https://picsum.photos/seed/gallery${index}/400/300`} alt="Gallery image" width={400} height={300} data-ai-hint={image.hint} className='w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-110' />
                         </Link>
                         <div className="overlay absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                            <Link className="preview lightbox" href={image.src}><Eye className="h-8 w-8 p-1.5 border-2 rounded-full text-white border-white hover:bg-white hover:text-primary transition-colors" /></Link>
+                            <Link className="preview lightbox" href={`https://picsum.photos/seed/gallery${index}/800/600`}><Eye className="h-8 w-8 p-1.5 border-2 rounded-full text-white border-white hover:bg-white hover:text-primary transition-colors" /></Link>
                             <Link className="link" href="#"><LinkIcon className="h-8 w-8 p-1.5 border-2 rounded-full text-white border-white hover:bg-white hover:text-primary transition-colors" /></Link>
                         </div>
                     </div>
@@ -507,7 +508,7 @@ export default function HomePage() {
             </div>
             <div className="text-center mt-8">
                 <Button asChild className="wow fadeInUp animated" data-wow-delay="0.3s">
-                    <Link href="#">Show More</Link>
+                    <Link href="/conference/scientific-gallery">Show More</Link>
                 </Button>   
             </div>    
           </div>
