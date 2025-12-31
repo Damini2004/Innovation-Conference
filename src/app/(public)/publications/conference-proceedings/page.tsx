@@ -1,3 +1,4 @@
+
 // src/app/(public)/publications/conference-proceedings/page.tsx
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -57,11 +58,6 @@ export default function ConferenceProceedingsPage() {
                             Conference Proceedings
                         </h1>
                         
-                        <Button size="lg" className="mt-8" asChild>
-                            <a href="/conference">
-                                View Upcoming Conferences <ArrowRight className="ml-2 h-5 w-5" />
-                            </a>
-                        </Button>
                     </div>
                 </div>
             </section>
