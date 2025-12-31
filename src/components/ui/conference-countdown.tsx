@@ -29,9 +29,9 @@ const calculateTimeLeft = (targetDate: string) => {
 };
 
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center bg-white text-primary rounded-md p-2 w-16 h-16 justify-center shadow-lg">
-        <span className="text-2xl font-bold">{String(value).padStart(2, '0')}</span>
-        <span className="text-xs uppercase tracking-wider font-medium text-primary/80">{label}</span>
+    <div className="flex flex-col items-center bg-white text-primary rounded-lg p-4 w-24 h-24 justify-center shadow-lg">
+        <span className="text-3xl font-bold">{String(value).padStart(2, '0')}</span>
+        <span className="text-sm uppercase tracking-wider font-medium text-primary/80">{label}</span>
     </div>
 );
 
@@ -49,7 +49,7 @@ export default function ConferenceCountdown({ targetDate }: CountdownProps) {
 
   if (!isClient) {
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
             <CountdownUnit value={0} label="Days" />
             <CountdownUnit value={0} label="Hours" />
             <CountdownUnit value={0} label="Minutes" />
@@ -59,7 +59,7 @@ export default function ConferenceCountdown({ targetDate }: CountdownProps) {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-4">
         <CountdownUnit value={timeLeft.days} label="Days" />
         <CountdownUnit value={timeLeft.hours} label="Hours" />
         <CountdownUnit value={timeLeft.minutes} label="Minutes" />
