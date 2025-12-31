@@ -8,30 +8,25 @@ import {
   Menu,
   ChevronDown,
   BookOpen,
-  Briefcase,
   Users,
   Mail,
   ShieldCheck,
-  GraduationCap,
-  FileText,
   Presentation,
   MapPin,
   Phone,
   Info,
   GalleryVertical,
-  DollarSign,
   Heart,
-  File,
+  FileText,
   Award,
   Calendar,
-  HelpCircle,
   Video,
   Clapperboard,
   Home,
   Building,
   Library,
-  Handshake,
   Lightbulb,
+  Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -82,6 +77,34 @@ const iprServicesSubItems = [
     { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance.", icon: Users },
 ];
 
+const navItems = [
+    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
+    { href: "/about", label: "About", icon: Building, description: "Learn about our mission." },
+    {
+      label: "Conference",
+      href: "/conference",
+      icon: Presentation,
+      description: "Explore our events.",
+      subItems: conferenceSubItems,
+    },
+    {
+      label: "Publications",
+      href: "/publications",
+      icon: Library,
+      description: "Browse published work.",
+      subItems: publicationsSubItems,
+    },
+    {
+      label: "IPR Services",
+      href: "/ipr-services",
+      icon: ShieldCheck,
+      description: "Protect your IP.",
+      subItems: iprServicesSubItems,
+    },
+    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
+    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
+];
+
 
 const DropdownNavLink = ({
   href,
@@ -123,34 +146,6 @@ export default function UserHeader() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navItems = [
-    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
-    { href: "/about", label: "About", icon: Building, description: "Learn about our mission." },
-    {
-      label: "Conference",
-      href: "/conference",
-      icon: Presentation,
-      description: "Explore our events.",
-      subItems: conferenceSubItems,
-    },
-    {
-      label: "Publications",
-      href: "/publications",
-      icon: Library,
-      description: "Browse published work.",
-      subItems: publicationsSubItems,
-    },
-    {
-      label: "IPR Services",
-      href: "/ipr-services",
-      icon: ShieldCheck,
-      description: "Protect your IP.",
-      subItems: iprServicesSubItems,
-    },
-    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
-    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
-  ];
 
   return (
     <header
