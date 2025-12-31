@@ -1,9 +1,9 @@
-
 // src/app/(public)/publications/conference-proceedings/page.tsx
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, FileCheck2, Presentation, Globe, Database, Link as LinkIcon, BookLock } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const benefits = [
     {
@@ -53,8 +53,12 @@ export default function ConferenceProceedingsPage() {
                 </div>
                 <div className="relative container mx-auto px-4 md:px-6 text-center z-10 py-24 sm:py-32">
                     <div className="max-w-3xl mx-auto">
-                        <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary mb-4">Global Stage for Research</div>
-                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                        <ol className="breadcrumb wow fadeInDown flex justify-center items-center gap-2 mt-4 text-foreground/80" data-wow-delay="300ms">
+                          <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                          <li>/ <Link href="/publications" className="hover:text-primary">Publications</Link></li>
+                          <li className="text-primary">/ Conference Proceedings</li>
+                        </ol>
+                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4">
                             Conference Proceedings
                         </h1>
                         
