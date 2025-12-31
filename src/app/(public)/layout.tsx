@@ -41,7 +41,7 @@ const ContactSection = () => {
                 className="object-cover"
             />
             <div className="absolute inset-0 bg-black/70" />
-            <div className="container relative z-10 mx-auto px-4">
+            <div className="container relative z-10 mx-auto px-4 flex items-center justify-center h-full">
                 <Card className="max-w-4xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 text-white">
                     <div className="grid md:grid-cols-2 items-stretch">
                         <div className="p-8">
@@ -118,7 +118,7 @@ export default function PublicLayout({
       </main>
       <div className="relative">
         <MapSection />
-        <div className="relative -mt-48">
+        <div className="relative -mt-48 flex items-center justify-center">
             <ContactSection />
         </div>
       </div>
