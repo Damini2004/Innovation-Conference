@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { BookCopy, Edit, Shield, FileText, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const copyrightInfo = [
     {
@@ -24,21 +25,28 @@ const copyrightInfo = [
 export default function CopyrightPage() {
     return (
         <div>
-             <section className="relative w-full py-20 md:py-32 bg-primary/5 flex items-center justify-center text-center px-4">
-                <Image
-                    src="/copyright-registration.png"
-                    alt="Copyright Law"
-                    data-ai-hint="legal books"
-                    fill
-                    className="object-cover opacity-10"
-                />
-                <div className="relative z-10">
-                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                        Copyright Services
-                    </h1>
-                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                        We provide expert assistance to ensure your original literary, artistic, and musical works are legally protected from unauthorized use.
-                    </p>
+            <section className="relative bg-background overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1600&h=600&auto=format&fit=crop"
+                        alt="Copyright services background"
+                        data-ai-hint="legal books"
+                        fill
+                        className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60"></div>
+                </div>
+                <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+                    <div className="max-w-3xl">
+                        <ol className="flex items-center gap-2 text-white/80">
+                            <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                            <li>/ <Link href="/ipr-services" className="hover:text-primary">IPR Services</Link></li>
+                            <li className="text-primary">/ Copyright</li>
+                        </ol>
+                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                            Copyright Services
+                        </h1>
+                    </div>
                 </div>
             </section>
             <section className="w-full py-20 md:py-32 bg-background">

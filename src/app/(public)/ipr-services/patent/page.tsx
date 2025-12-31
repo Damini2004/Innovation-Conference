@@ -1,8 +1,8 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { FileText, Search, Edit, ShieldCheck, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const patentServices = [
     {
@@ -30,33 +30,42 @@ const patentServices = [
 export default function PatentPage() {
     return (
         <div className="bg-secondary/30">
-            <section className="relative w-full py-20 md:py-32 bg-primary/5 flex items-center justify-center text-center px-4">
-                <Image
-                    src="/patent-services.png"
-                    alt="Patent Law"
-                    data-ai-hint="legal documents"
-                    fill
-                    className="object-cover opacity-10"
-                />
-                <div className="relative z-10">
-                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                        Patent Services
-                    </h1>
-                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                        Secure exclusive rights to your inventions with our comprehensive patent services.
-                    </p>
+            <section className="relative bg-background overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/patent-services.png"
+                        alt="Patent services background"
+                        data-ai-hint="legal documents"
+                        fill
+                        className="object-cover opacity-10"
+                    />
+                    <div className="absolute inset-0 bg-black/60"></div>
+                </div>
+                <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+                    <div className="max-w-3xl">
+                        <ol className="flex items-center gap-2 text-white/80">
+                            <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                            <li>/ <Link href="/ipr-services" className="hover:text-primary">IPR Services</Link></li>
+                            <li className="text-primary">/ Patent</li>
+                        </ol>
+                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                            Patent Services
+                        </h1>
+                    </div>
                 </div>
             </section>
 
             <section className="container mx-auto px-4 py-16 md:py-24">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Patent Services</h1>
+                        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Secure Your Inventions</h2>
                         <p className="mt-6 text-lg text-muted-foreground">
                             Secure exclusive rights to your inventions with our comprehensive patent services. From initial search and drafting to filing and prosecution, our experienced team guides you through every step of the complex patenting process to protect your valuable intellectual property.
                         </p>
-                        <Button size="lg" className="mt-6">
-                            Consult a Patent Expert <ArrowRight className="ml-2 h-5 w-5" />
+                         <Button size="lg" className="mt-6" asChild>
+                            <Link href="/contact-us">
+                                Consult a Patent Expert <ArrowRight className="ml-2 h-5 w-5" />
+                            </Link>
                         </Button>
                     </div>
                     <div className="flex justify-center">

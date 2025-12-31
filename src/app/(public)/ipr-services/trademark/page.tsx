@@ -2,25 +2,33 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Search, Edit, ShieldCheck, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function TrademarkPage() {
     return (
         <div className="bg-background">
-            <section className="relative w-full py-20 md:py-32 bg-primary/5 flex items-center justify-center text-center px-4">
-                <Image
-                    src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1600&h=600&auto=format&fit=crop"
-                    alt="Trademark Registration"
-                    data-ai-hint="legal brand"
-                    fill
-                    className="object-cover opacity-10"
-                />
-                <div className="relative z-10">
-                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                        Trademark Registration
-                    </h1>
-                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-                        Secure your brand identity. A trademark protects your brand names, logos, and slogans, distinguishing your goods and services from the competition.
-                    </p>
+             <section className="relative bg-background overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1600&h=600&auto=format=fit=crop"
+                        alt="Trademark services background"
+                        data-ai-hint="legal brand"
+                        fill
+                        className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60"></div>
+                </div>
+                <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+                    <div className="max-w-3xl">
+                        <ol className="flex items-center gap-2 text-white/80">
+                            <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                            <li>/ <Link href="/ipr-services" className="hover:text-primary">IPR Services</Link></li>
+                            <li className="text-primary">/ Trademark</li>
+                        </ol>
+                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                            Trademark Registration
+                        </h1>
+                    </div>
                 </div>
             </section>
             <div className="container mx-auto px-4 py-12 md:py-20">
@@ -41,8 +49,10 @@ export default function TrademarkPage() {
                                 <span><span className="font-semibold text-foreground">Deters Others:</span> Discourages others from using confusingly similar marks and makes it easier to stop them if they do.</span>
                             </li>
                         </ul>
-                        <Button className="mt-6">
-                            Start Your Application <ArrowRight className="ml-2 h-4 w-4" />
+                         <Button className="mt-6" asChild>
+                           <Link href="/contact-us">
+                                Start Your Application <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
                         </Button>
                     </div>
                     <div className="relative h-full min-h-[300px] md:min-h-[400px] rounded-r-lg overflow-hidden">
