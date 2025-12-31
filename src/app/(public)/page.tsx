@@ -1,4 +1,5 @@
 
+
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "@/components/ui/card";
@@ -118,7 +119,7 @@ const speakers = [
         name: "Jon Doe",
         title: "CEO, Peloton Cycle",
         description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those intereste.",
-        imageSrc: "https://picsum.photos/seed/s1/300/300",
+        imageSrc: "/teacher/img-1.png",
         imageHint: "person portrait",
         social: { facebook: "#", twitter: "#", linkedin: "#", dribbble: "#", behance: "#" }
     },
@@ -126,7 +127,7 @@ const speakers = [
         name: "Natali Aero",
         title: "Co-founder, Hometeam",
         description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those intereste.",
-        imageSrc: "https://picsum.photos/seed/s2/300/300",
+        imageSrc: "/teacher/img-2.png",
         imageHint: "person portrait",
         social: { facebook: "#", twitter: "#", linkedin: "#", dribbble: "#", behance: "#" }
     },
@@ -134,7 +135,7 @@ const speakers = [
         name: "Leo Amber",
         title: "Director, Via",
         description: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those intereste.",
-        imageSrc: "https://picsum.photos/seed/s3/300/300",
+        imageSrc: "/teacher/img-3.png",
         imageHint: "person portrait",
         social: { facebook: "#", twitter: "#", linkedin: "#", dribbble: "#", behance: "#" }
     },
@@ -154,18 +155,18 @@ const whyJoinFeatures = [
 ]
 
 const galleryImages = [
-    { src: "https://picsum.photos/seed/g1/800/600", hint: "conference event" },
-    { src: "https://picsum.photos/seed/g2/800/600", hint: "team meeting" },
-    { src: "https://picsum.photos/seed/g3/800/600", hint: "audience listening" },
-    { src: "https://picsum.photos/seed/g4/800/600", hint: "networking session" },
-    { src: "https://picsum.photos/seed/g5/800/600", hint: "speaker presentation" },
-    { src: "https://picsum.photos/seed/g6/800/600", hint: "workshop activity" },
-    { src: "https://picsum.photos/seed/g7/800/600", hint: "panel discussion" },
+    { src: "/gallery/img-1.jpg", hint: "conference event" },
+    { src: "/gallery/img-2.jpg", hint: "team meeting" },
+    { src: "/gallery/img-3.jpg", hint: "audience listening" },
+    { src: "/gallery/img-4.jpg", hint: "networking session" },
+    { src: "/gallery/img-5.jpg", hint: "speaker presentation" },
+    { src: "/gallery/img-6.jpg", hint: "workshop activity" },
+    { src: "/gallery/img-7.jpg", hint: "panel discussion" },
 ];
 
 const blogPosts = [
     {
-        imageSrc: "https://picsum.photos/seed/b1/800/600",
+        imageSrc: "/blog/img1.jpg",
         imageHint: "city skyline",
         title: "We make beautiful days with older adults",
         views: 2500,
@@ -174,7 +175,7 @@ const blogPosts = [
         excerpt: "Lorem ipsum dolor sit amet  cons tetuer adipiscing elit. dolor sit..."
     },
     {
-        imageSrc: "https://picsum.photos/seed/b2/800/600",
+        imageSrc: "/blog/img2.jpg",
         imageHint: "business meeting",
         title: "Change-makers economic",
         views: 2500,
@@ -183,7 +184,7 @@ const blogPosts = [
         excerpt: "Lorem ipsum dolor sit amet  cons tetuer adipiscing elit. dolor sit..."
     },
     {
-        imageSrc: "https://picsum.photos/seed/b3/800/600",
+        imageSrc: "/blog/img3.jpg",
         imageHint: "virtual reality",
         title: "It’s no secret that virtual reality",
         views: 2500,
@@ -231,7 +232,7 @@ const heroSlides = [
   {
     title: "Impression - Startup Event",
     subtitle: "Join us be The First to Book Your Ticket",
-    imageSrc: "https://picsum.photos/seed/hero1/1920/1080",
+    imageSrc: "/slider/bg-1.jpg",
     imageHint: "startup event",
     buttons: [
       { text: "Registration", href: "/submit-journal", variant: "outline" as const }
@@ -240,7 +241,7 @@ const heroSlides = [
   {
     title: "Opportunity to showcase",
     subtitle: "your product and services to attendees",
-    imageSrc: "https://picsum.photos/seed/hero2/1920/1080",
+    imageSrc: "/slider/bg-2.jpg",
     imageHint: "product showcase",
     buttons: [
       { text: "Buy Tickets", href: "/#pricing", variant: "default" as const },
@@ -250,7 +251,7 @@ const heroSlides = [
   {
     title: "Expert and Love to Speak?",
     subtitle: "Apply as Speaker for Taking Session",
-    imageSrc: "https://picsum.photos/seed/hero3/1920/1080",
+    imageSrc: "/slider/bg-3.jpg",
     imageHint: "public speaking",
     buttons: [
       { text: "Apply Now", href: "/contact-us", variant: "default" as const }
