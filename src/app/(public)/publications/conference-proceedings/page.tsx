@@ -54,14 +54,13 @@ export default function ConferenceProceedingsPage() {
                         fill
                         className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-primary/10 opacity-50"></div>
                     <div
                         className="absolute inset-0 bg-black/40"
                     ></div>
                 </div>
-                <div className="relative container mx-auto px-4 md:px-6 text-center z-10 py-24 sm:py-32">
-                    <div className="max-w-3xl mx-auto">
-                        <ol className="breadcrumb wow fadeInDown flex justify-center items-center gap-2 mt-4 text-white/80" data-wow-delay="300ms">
+                <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+                    <div className="max-w-3xl">
+                        <ol className="breadcrumb wow fadeInDown flex items-center gap-2 text-white/80" data-wow-delay="300ms">
                           <li><Link href="/" className="hover:text-primary">Home</Link></li>
                           <li>/ <Link href="/publications" className="hover:text-primary">Publications</Link></li>
                           <li className="text-primary">/ Conference Proceedings</li>
