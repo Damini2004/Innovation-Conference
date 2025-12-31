@@ -16,6 +16,33 @@ export const metadata: Metadata = {
   keywords: ['research publication', 'academic publication', 'journal indexing', 'Scopus', 'Web of Science', 'conference management', 'publication support services', 'call for papers', 'Best publication in Nagpur', 'Top publication in Nagpur'],
 };
 
+const heroSlides = [
+    {
+      title: "Impression - Startup Event",
+      subtitle: "Join us, be the first to book your ticket",
+      imageSrc: "/slider/bg-1.jpg",
+      buttons: [
+        { text: "Registration", href: "/submit-journal", variant: "outline" as const },
+      ],
+    },
+    {
+      title: "Showcase Your Product",
+      subtitle: "An opportunity to showcase your product and services to attendees",
+      imageSrc: "/slider/bg-2.jpg",
+      buttons: [
+        { text: "Buy Tickets", href: "#pricing", variant: "default" as const },
+        { text: "Know More", href: "/about", variant: "outline" as const },
+      ],
+    },
+    {
+      title: "Expert and Love to Speak?",
+      subtitle: "Apply as a speaker for a session",
+      imageSrc: "/slider/bg-3.jpg",
+      buttons: [
+        { text: "Apply Now", href: "/contact-us", variant: "default" as const }
+      ],
+    },
+];
 
 const indexedJournalCategories = [
 
@@ -227,67 +254,31 @@ const pricingTiers = [
     }
 ];
 
-function HeroCarousel() {
-  return (
-    <div id="carousel-area" className="pure-css-carousel">
-      <input type="radio" name="carousel" id="c1" defaultChecked />
-      <input type="radio" name="carousel" id="c2" />
-      <input type="radio" name="carousel" id="c3" />
-
-      <div className="carousel-inner">
-        <div className="item">
-          <Image src="/slider/bg-1.jpg" alt="Startup Event" fill className="object-cover" />
-          <div className="carousel-caption">
-            <h2>
-              Impression - Startup Event <br />
-              Join us be The First to Book Your Ticket
-            </h2>
-            <div className="buttons">
-              <a className="btn btn-border" href="/submit-journal">Registration</a>
+function HeroSection() {
+    return (
+        <section className="relative h-[600px] w-full flex items-center justify-center text-center text-white">
+            <Image
+                src="/slider/bg-1.jpg"
+                alt="Startup Event"
+                fill
+                priority
+                className="object-cover z-0"
+            />
+            <div className="absolute inset-0 bg-black/60 z-10" />
+            <div className="relative z-20 px-4">
+                <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+                    Impression - Startup Event
+                </h1>
+                <p className="text-lg md:text-xl text-white/90 mb-8">
+                    Join us, be the first to book your ticket
+                </p>
+                <Button asChild size="lg" className="animated bounceIn">
+                    <Link href="/submit-journal">Register Now</Link>
+                </Button>
             </div>
-          </div>
-        </div>
-
-        <div className="item">
-          <Image src="/slider/bg-2.jpg" alt="Product Showcase" fill className="object-cover" />
-          <div className="carousel-caption">
-            <h2>
-              Opportunity to showcase <br />
-              your product and services to attendees
-            </h2>
-            <div className="buttons">
-              <a className="btn btn-common" href="/#pricing">Buy Tickets</a>
-              <a className="btn btn-border" href="/about">Know More</a>
-            </div>
-          </div>
-        </div>
-
-        <div className="item">
-          <Image src="/slider/bg-3.jpg" alt="Apply as Speaker" fill className="object-cover" />
-          <div className="carousel-caption">
-            <h2>
-              Expert and Love to Speak? <br />
-              Apply as Speaker for Taking Session
-            </h2>
-            <a className="btn btn-common" href="/contact-us">Apply Now</a>
-          </div>
-        </div>
-      </div>
-
-      <div className="controls">
-        <label htmlFor="c3" className="control prev">❮</label>
-        <label htmlFor="c2" className="control next">❯</label>
-
-        <label htmlFor="c1" className="control prev">❮</label>
-        <label htmlFor="c3" className="control next">❯</label>
-
-        <label htmlFor="c2" className="control prev">❮</label>
-        <label htmlFor="c1" className="control next">❯</label>
-      </div>
-    </div>
-  );
+        </section>
+    );
 }
-
 
 function IndexedJournalsSection() {
   return (
@@ -403,7 +394,7 @@ function WhyJoinSection() {
 export default function HomePage() {
   return (
     <>
-      <HeroCarousel />
+      <HeroSection />
       
       <section className="countdown-timer section py-12">
         <div className="container">
@@ -585,7 +576,3 @@ export default function HomePage() {
     </>
   );
 }
-
-    
-
-    
