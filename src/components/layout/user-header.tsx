@@ -76,14 +76,6 @@ const iprServicesSubItems = [
     { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance.", icon: Users },
 ];
 
-
-const pagesSubItems = [
-    { href: "/about", title: "About Us", description: "Learn more about our mission and team.", icon: Info },
-    { href: "/conference/scientific-gallery", title: "Gallery", description: "Explore photos from our events.", icon: GalleryVertical },
-    { href: "/#pricing", title: "Pricing", description: "View our pricing plans.", icon: DollarSign },
-    { href: "/#sponsors", title: "Sponsors", description: "Our valued partners and sponsors.", icon: Heart },
-];
-
 const DropdownNavLink = ({
   href,
   title,
@@ -143,11 +135,6 @@ export default function UserHeader() {
       href: "/ipr-services",
       subItems: iprServicesSubItems,
     },
-     {
-      label: "Pages",
-      href: "#",
-      subItems: pagesSubItems,
-    },
     { href: "/internship", label: "Internship" },
     { href: "/research-support", label: "Research Support" },
     { href: "/contact-us", label: "Contact Us" },
@@ -205,8 +192,8 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", item.label === "Pages" || item.label === "IPR Services" ? "w-[250px]" : "w-[500px]")}>
-                    <div className={cn(item.label === "Conference" || item.label === "Publications" ? "grid grid-cols-2 gap-1" : "grid grid-cols-1 gap-1")}>
+                <PopoverContent className={cn("p-2", (item.label === "Conference" || item.label === "Publications") ? "w-[500px]" : "w-[250px]")}>
+                    <div className={cn((item.label === "Conference" || item.label === "Publications") ? "grid grid-cols-2 gap-1" : "grid grid-cols-1 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
@@ -217,7 +204,7 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-               <Link
+              <Link
                 key={item.label}
                 href={item.href}
                 className={cn(
