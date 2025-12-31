@@ -27,7 +27,12 @@ import {
   Calendar,
   HelpCircle,
   Video,
-  Clapperboard
+  Clapperboard,
+  Home,
+  Building,
+  Library,
+  Handshake,
+  Lightbulb,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,25 +58,24 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const conferenceSubItems = [
-  { href: "/conference/about-conference", title: "About Conferences", icon: Info },
-  { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", icon: Calendar },
-  { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart },
-  { href: "/conference/plan-conference", title: "Plan a Conference", icon: Briefcase },
-  { href: "/conference/awards", title: "Awards", icon: Award },
-  { href: "/conference/faq", title: "FAQs", icon: HelpCircle },
-  { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video },
-  { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard },
-  { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical },
-  { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation },
+  { href: "/conference/about-conference", title: "About Conferences", icon: Info, description: "Our mission in conferencing." },
+  { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", icon: Calendar, description: "Find our next events." },
+  { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart, description: "Explore our event archive." },
+  { href: "/conference/plan-conference", title: "Plan a Conference", icon: Briefcase, description: "Partner with us for your event." },
+  { href: "/conference/awards", title: "Awards", icon: Award, description: "Recognizing academic excellence." },
+  { href: "/conference/faq", title: "FAQs", icon: HelpCircle, description: "Answers to common questions." },
+  { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
+  { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
+  { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
+  { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
 ];
 
-
 const publicationsSubItems = [
-    { href: "/publications/overview", title: "Publication Policies", icon: FileText },
-    { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen },
-    { href: "/publications/conference-proceedings", title: "Conference Proceedings", icon: Presentation },
-    { href: "/publications/peer-review", title: "Peer Review Process", icon: ShieldCheck },
-    { href: "/publications/digital-library", title: "Digital Library", icon: GalleryVertical },
+    { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
+    { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
+    { href: "/publications/conference-proceedings", title: "Conference Proceedings", icon: Presentation, description: "Publish your conference paper." },
+    { href: "/publications/peer-review", title: "Peer Review Process", icon: ShieldCheck, description: "How we ensure quality." },
+    { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
 ];
 
 const iprServicesSubItems = [
@@ -80,6 +84,7 @@ const iprServicesSubItems = [
     { href: "/ipr-services/copyright", title: "Copyright", description: "Safeguard your creative works.", icon: ShieldCheck },
     { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance.", icon: Users },
 ];
+
 
 const DropdownNavLink = ({
   href,
@@ -123,26 +128,32 @@ export default function UserHeader() {
   }, []);
 
   const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
+    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
+    { href: "/about", label: "About", icon: Building, description: "Learn about our mission." },
     {
       label: "Conference",
       href: "/conference",
+      icon: Presentation,
+      description: "Explore our events.",
       subItems: conferenceSubItems,
     },
     {
       label: "Publications",
       href: "/publications",
+      icon: Library,
+      description: "Browse published work.",
       subItems: publicationsSubItems,
     },
     {
       label: "IPR Services",
       href: "/ipr-services",
+      icon: ShieldCheck,
+      description: "Protect your IP.",
       subItems: iprServicesSubItems,
     },
-    { href: "/internship", label: "Internship" },
-    { href: "/research-support", label: "Research Support" },
-    { href: "/contact-us", label: "Contact Us" },
+    { href: "/internship", label: "Internship", icon: Briefcase, description: "Start your career with us." },
+    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
+    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
   ];
 
   return (
@@ -179,7 +190,7 @@ export default function UserHeader() {
         <Link href="/" className="mr-6 flex items-center gap-2">
            <Image src="/logo1.png" alt="Impression Logo" width={110} height={30} />
         </Link>
-        <nav className="hidden items-center gap-0 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
             item.subItems ? (
               <Popover key={item.label}>
@@ -197,8 +208,8 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", (item.label === 'IPR Services' || item.label === 'Conference') ? "w-[250px]" : "w-[250px]")}>
-                    <div className={cn((item.label === 'IPR Services' || item.label === 'Conference') ? "grid grid-cols-1 gap-1" : "grid grid-cols-1 gap-1")}>
+                <PopoverContent className={cn("p-2 w-[250px]")}>
+                    <div className={cn("grid grid-cols-1 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
@@ -209,18 +220,9 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-               <Link
-                key={item.label}
-                href={item.href}
-                className={cn(
-                  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-                  "hover:bg-accent hover:text-accent-foreground",
-                  "h-10 px-4 py-2",
-                  pathname === item.href ? "text-primary" : "text-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
+              <Button key={item.label} variant="ghost" asChild>
+                  <Link href={item.href} className="text-sm font-medium text-foreground">{item.label}</Link>
+              </Button>
             )
           )}
         </nav>
@@ -235,7 +237,7 @@ export default function UserHeader() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="pr-0">
+            <SheetContent side="left">
               <SheetHeader>
                 <SheetTitle>
                   <Link
@@ -247,8 +249,8 @@ export default function UserHeader() {
                   </Link>
                 </SheetTitle>
               </SheetHeader>
-              <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-                <div className="flex flex-col space-y-3">
+              <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10">
+                <div className="flex flex-col space-y-1 pr-4">
                   {navItems.map((item) =>
                     item.subItems ? (
                       <Accordion
@@ -260,42 +262,45 @@ export default function UserHeader() {
                         <AccordionItem value="item-1" className="border-b-0">
                           <AccordionTrigger
                             className={cn(
-                              "py-2 text-md font-medium hover:no-underline",
+                              "py-3 font-medium hover:no-underline rounded-md p-3",
                                pathname.startsWith(item.href) && item.href !== "/" ? "text-primary" : "text-foreground"
                             )}
                           >
-                            {item.label}
+                             <div className="flex items-center gap-3 text-md font-medium leading-none">
+                                <item.icon className="h-5 w-5 text-primary/80" />
+                                <span>{item.label}</span>
+                            </div>
                           </AccordionTrigger>
-                          <AccordionContent className="pb-0 pl-4">
+                          <AccordionContent className="pb-0 pl-8">
                             <div className="flex flex-col space-y-1">
                               {item.subItems.map((subItem) => (
-                                <Link
-                                  key={subItem.href}
-                                  href={subItem.href}
-                                  onClick={() => setIsOpen(false)}
-                                  className={cn("py-2 block", pathname === subItem.href ? "text-primary font-medium" : "text-foreground")}
-                                >
-                                  {subItem.title}
-                                </Link>
+                                <DropdownNavLink 
+                                    key={subItem.href}
+                                    href={subItem.href}
+                                    title={subItem.title}
+                                    icon={subItem.icon}
+                                    description={subItem.description}
+                                />
                               ))}
                             </div>
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
                     ) : (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className={cn("py-2 text-md font-medium", pathname === item.href ? "text-primary" : "text-foreground")}
-                      >
-                        {item.label}
-                      </Link>
+                       <DropdownNavLink 
+                          key={item.href}
+                          href={item.href}
+                          title={item.label}
+                          icon={item.icon}
+                          description={item.description}
+                      />
                     )
                   )}
-                  <Button asChild>
-                    <Link href="/submit-journal">Submit Paper</Link>
-                  </Button>
+                  <div className="pt-4">
+                    <Button asChild className="w-full">
+                      <Link href="/submit-journal">Submit Paper</Link>
+                    </Button>
+                  </div>
                 </div>
               </ScrollArea>
             </SheetContent>
