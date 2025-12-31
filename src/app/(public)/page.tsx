@@ -276,7 +276,7 @@ function HeroCarousel() {
                   alt={slide.title}
                   data-ai-hint={slide.imageHint}
                   fill
-                  className="object-cover z-0"
+                  className="object-cover"
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-black/60 z-10" />
