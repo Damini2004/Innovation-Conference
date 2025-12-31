@@ -73,14 +73,35 @@ const NavLink = ({
   href,
   children,
   className,
+  isButton = false,
   ...props
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
+  isButton?: boolean;
 }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
+
+  if (isButton) {
+    return (
+      <Button
+        variant="ghost"
+        className={cn(
+          "text-sm font-medium",
+          isActive ? "text-primary" : "text-foreground",
+          className
+        )}
+        asChild
+      >
+        <Link href={href} {...props}>
+          {children}
+        </Link>
+      </Button>
+    );
+  }
+
   return (
     <Link
       href={href}
@@ -187,7 +208,7 @@ export default function UserHeader() {
         <Link href="/" className="mr-6 flex items-center gap-2">
            <Image src="/logo1.png" alt="Impression Logo" width={110} height={30} />
         </Link>
-        <nav className="hidden items-center gap-3 lg:flex">
+        <nav className="hidden items-center gap-0 lg:flex">
           {navItems.map((item) =>
             item.subItems ? (
               <Popover key={item.label}>
@@ -212,7 +233,7 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-              <NavLink key={item.label} href={item.href}>
+              <NavLink key={item.label} href={item.href} isButton>
                 {item.label}
               </NavLink>
             )
