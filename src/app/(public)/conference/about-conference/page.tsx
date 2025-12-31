@@ -1,13 +1,30 @@
+// src/app/(public)/conference/about-conference/page.tsx
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { CheckCircle, Presentation, BookOpen, Users, Award } from "lucide-react";
+import { Globe, Lightbulb, CheckCircle, Presentation, BookOpen, Users, Award, Handshake, Target, Group } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
 
 const corePrinciples = [
-    "Fostering Collaboration: We create environments that encourage networking and interdisciplinary collaboration among academics, researchers, and industry professionals.",
-    "Promoting Innovation: Our conferences are platforms for showcasing cutting-edge research and innovative ideas that have the potential to shape the future.",
-    "Ensuring Quality: Through a rigorous peer-review process, we maintain the highest standards of academic integrity and quality for all presented work.",
-    "Global Reach: We aim to bring together diverse perspectives from around the world to enrich discussions and broaden the impact of research."
+    {
+        icon: Handshake,
+        title: "Fostering Collaboration",
+        description: "We create environments that encourage networking and interdisciplinary collaboration among academics, researchers, and industry professionals."
+    },
+    {
+        icon: Lightbulb,
+        title: "Promoting Innovation",
+        description: "Our conferences are platforms for showcasing cutting-edge research and innovative ideas that have the potential to shape the future."
+    },
+    {
+        icon: CheckCircle,
+        title: "Ensuring Quality",
+        description: "Through a rigorous peer-review process, we maintain the highest standards of academic integrity and quality for all presented work."
+    },
+    {
+        icon: Globe,
+        title: "Global Reach",
+        description: "We aim to bring together diverse perspectives from around the world to enrich discussions and broaden the impact of research."
+    }
 ];
 
 const conferenceServices = [
@@ -61,44 +78,53 @@ export default function AboutConferencePage() {
           </div>
       </section>
         
-        <section className="w-full py-12 md:py-24">
+        <section className="w-full py-16 md:py-24 bg-background">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="max-w-5xl mx-auto">
-                    <Card className="shadow-xl overflow-hidden border-primary/10">
-                        <div className="grid md:grid-cols-2 items-center">
-                            <div className="relative h-64 md:h-full min-h-[400px]">
-                                <Image
-                                    src="https://fourwaves.com/media/jjtaaupz/conference-speaker.jpg?quality=100&rnd=132864618244570000"
-                                    alt="Conference collaboration"
-                                    data-ai-hint="team meeting"
-                                    fill
-                                    className="object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                            </div>
-                            <div className="p-8 md:p-12">
-                                <CardHeader className="p-0">
-                                    <CardTitle>Our Mission in Conferencing</CardTitle>
-                                    <CardDescription className="pt-2">
-                                        At Innovation Conferences, our mission is to provide a premier platform for researchers, academics, and industry professionals to present and discuss the most recent innovations, trends, and concerns in various fields of engineering and technology.
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent className="p-0 mt-8">
-                                    <h3 className="font-semibold mb-4">Core Principles</h3>
-                                    <ul className="space-y-4">
-                                        {corePrinciples.map((principle, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                                                <span className="text-muted-foreground text-sm">{principle}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </CardContent>
-                            </div>
-                        </div>
-                    </Card>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl transform transition-transform duration-500 hover:scale-105">
+                         <Image
+                            src="https://fourwaves.com/media/jjtaaupz/conference-speaker.jpg?quality=100&rnd=132864618244570000"
+                            alt="Conference collaboration"
+                            data-ai-hint="team meeting"
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+                    <div className="space-y-6">
+                        <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary">Our Mission</div>
+                        <h2 className="text-3xl font-bold tracking-tighter">Advancing Knowledge Through Connection</h2>
+                        <p className="text-muted-foreground text-justify">
+                            At Innovation Conferences, our mission is to provide a premier platform for researchers, academics, and industry professionals to present and discuss the most recent innovations, trends, and concerns in various fields of engineering and technology. We believe in the power of collaboration to drive progress and shape the future.
+                        </p>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <section className="w-full py-16 md:py-24">
+             <div className="container mx-auto px-4 md:px-6">
+                 <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold tracking-tighter">Our Core Principles</h2>
+                    <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
+                        These four pillars guide every event we organize and every paper we publish.
+                    </p>
+                </div>
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+                     {corePrinciples.map((principle) => (
+                         <Card key={principle.title} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-gradient-to-br from-background via-background to-secondary/30 border-primary/10 group">
+                            <CardHeader className="items-center">
+                                <div className="p-4 bg-primary/10 rounded-full w-fit mb-4 border-2 border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:border-primary/40">
+                                    <principle.icon className="h-8 w-8 text-primary" />
+                                </div>
+                                <CardTitle>{principle.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex-grow">
+                                <p className="text-muted-foreground text-sm">{principle.description}</p>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+             </div>
         </section>
         
         <section className="pb-12 md:pb-24">
