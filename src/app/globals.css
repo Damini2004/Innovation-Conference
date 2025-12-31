@@ -123,4 +123,123 @@
       transform: translateX(-50%);
     }
   }
+
+  .pure-css-carousel {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .pure-css-carousel input {
+    display: none;
+  }
+
+  .carousel-inner {
+    display: flex;
+    width: 300%; /* 100% * number of slides */
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+  }
+
+  .item {
+    width: calc(100% / 3); /* 100% / number of slides */
+    position: relative;
+  }
+  
+  .item img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .btn {
+    padding: 12px 28px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+  
+  .btn-common {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  
+  .btn-border {
+    border: 2px solid #fff;
+    color: #fff;
+  }
+
+  .btn-border:hover {
+    background-color: #fff;
+    color: hsl(var(--primary));
+  }
+  
+  #c1:checked ~ .carousel-inner {
+    transform: translateX(0%);
+  }
+  
+  #c2:checked ~ .carousel-inner {
+    transform: translateX(-100%);
+  }
+  
+  #c3:checked ~ .carousel-inner {
+    transform: translateX(-200%);
+  }
+  
+  .controls {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .control {
+    pointer-events: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    display: none;
+  }
+  
+  .prev { left: 20px; }
+  .next { right: 20px; }
+
+  #c1:checked ~ .controls label[for="c3"].prev,
+  #c1:checked ~ .controls label[for="c2"].next { display: block; }
+
+  #c2:checked ~ .controls label[for="c1"].prev,
+  #c2:checked ~ .controls label[for="c3"].next { display: block; }
+  
+  #c3:checked ~ .controls label[for="c2"].prev,
+  #c3:checked ~ .controls label[for="c1"].next { display: block; }
 }
+

@@ -227,80 +227,64 @@ const pricingTiers = [
     }
 ];
 
-const heroSlides = [
-  {
-    title: "Impression - Startup Event",
-    subtitle: "Join us be The First to Book Your Ticket",
-    imageSrc: "/slider/bg-1.jpg",
-    imageHint: "startup event",
-    buttons: [
-      { text: "Registration", href: "/submit-journal", variant: "outline" as const }
-    ]
-  },
-  {
-    title: "Opportunity to showcase",
-    subtitle: "your product and services to attendees",
-    imageSrc: "/slider/bg-2.jpg",
-    imageHint: "product showcase",
-    buttons: [
-      { text: "Buy Tickets", href: "/#pricing", variant: "default" as const },
-      { text: "Know More", href: "/about", variant: "outline" as const }
-    ]
-  },
-  {
-    title: "Expert and Love to Speak?",
-    subtitle: "Apply as Speaker for Taking Session",
-    imageSrc: "/slider/bg-3.jpg",
-    imageHint: "public speaking",
-    buttons: [
-      { text: "Apply Now", href: "/contact-us", variant: "default" as const }
-    ]
-  }
-];
-
 function HeroCarousel() {
   return (
-    <section className="relative h-[600px] w-full overflow-hidden">
-      <div className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar">
+    <div id="carousel-area" className="pure-css-carousel">
+      <input type="radio" name="carousel" id="c1" defaultChecked />
+      <input type="radio" name="carousel" id="c2" />
+      <input type="radio" name="carousel" id="c3" />
 
-        {heroSlides.map((slide, index) => (
-          <div
-            key={index}
-            className="relative h-full w-full flex-shrink-0 snap-center"
-          >
-            <Image
-              src={slide.imageSrc}
-              alt={slide.title}
-              fill
-              priority={index === 0}
-              className="object-cover"
-            />
-
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/60" />
-
-            {/* Content */}
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white px-4">
-              <h1 className="text-4xl md:text-5xl font-extrabold">
-                {slide.title}
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg text-white/90">
-                {slide.subtitle}
-              </p>
-
-              <div className="mt-8 flex gap-4">
-                {slide.buttons.map(btn => (
-                  <Button key={btn.text} variant={btn.variant} asChild>
-                    <Link href={btn.href}>{btn.text}</Link>
-                  </Button>
-                ))}
-              </div>
+      <div className="carousel-inner">
+        <div className="item">
+          <img src="/slider/bg-1.jpg" alt="Startup Event" />
+          <div className="carousel-caption">
+            <h2>
+              Impression - Startup Event <br />
+              Join us be The First to Book Your Ticket
+            </h2>
+            <div className="buttons">
+              <a className="btn btn-border" href="/submit-journal">Registration</a>
             </div>
           </div>
-        ))}
+        </div>
 
+        <div className="item">
+          <img src="/slider/bg-2.jpg" alt="Product Showcase" />
+          <div className="carousel-caption">
+            <h2>
+              Opportunity to showcase <br />
+              your product and services to attendees
+            </h2>
+            <div className="buttons">
+              <a className="btn btn-common" href="/#pricing">Buy Tickets</a>
+              <a className="btn btn-border" href="/about">Know More</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="item">
+          <img src="/slider/bg-3.jpg" alt="Apply as Speaker" />
+          <div className="carousel-caption">
+            <h2>
+              Expert and Love to Speak? <br />
+              Apply as Speaker for Taking Session
+            </h2>
+            <a className="btn btn-common" href="/contact-us">Apply Now</a>
+          </div>
+        </div>
       </div>
-    </section>
+
+      <div className="controls">
+        <label htmlFor="c1" className="control prev">❮</label>
+        <label htmlFor="c2" className="control next">❯</label>
+
+        <label htmlFor="c2" className="control prev">❮</label>
+        <label htmlFor="c3" className="control next">❯</label>
+
+        <label htmlFor="c3" className="control prev">❮</label>
+        <label htmlFor="c1" className="control next">❯</label>
+      </div>
+    </div>
   );
 }
 
