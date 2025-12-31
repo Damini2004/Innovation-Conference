@@ -273,10 +273,10 @@ function Hero() {
            <div className="pt-4">
             <div className="flex justify-center gap-4">
                 <Button asChild size="lg" variant="secondary">
-                    <Link href="#highlights">View Highlights</Link>
+                    <Link href="#preamble">View Highlights</Link>
                 </Button>
                 <Button asChild size="lg">
-                    <Link href="/submit-journal">Buy Ticket</Link>
+                    <Link href="/registration">Buy Ticket</Link>
                 </Button>
             </div>
           </div>
@@ -410,11 +410,11 @@ export default function HomePage() {
       
       <section className="countdown-timer section py-12">
           <div className="container flex flex-col md:flex-row items-center justify-around gap-8 text-center">
-            <div className="wow fadeInLeft animated" data-wow-delay="0.2s">
-              <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
-              <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
-              <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
-            </div>
+              <div className="wow fadeInLeft animated text-center md:text-left" data-wow-delay="0.2s">
+                  <h2 className="text-3xl font-bold">Impression Startup Event</h2>
+                  <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
+                  <Link href="#pricing" className="btn-common inline-block mt-4">Buy Tickets</Link>
+              </div>
             <div className="wow fadeInRight animated" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
             </div>
@@ -427,7 +427,7 @@ export default function HomePage() {
             alt="Event background"
             data-ai-hint="conference stage"
             fill
-            className="object-cover"
+            className="object-cover blur-sm"
         />
         <div className="absolute inset-0 bg-black/70" />
         <div className="container relative z-10">
@@ -439,7 +439,7 @@ export default function HomePage() {
                                 <feature.icon className="h-10 w-10 text-primary" />
                             </div>
                             <div className="desc">
-                                <h4 className='font-bold text-lg'>{feature.title}</h4>
+                                <h4 className='font-bold text-lg text-white'>{feature.title}</h4>
                                 <p className='text-white/80 mt-2'>{feature.description}</p>
                             </div>
                         </Card>
