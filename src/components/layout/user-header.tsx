@@ -69,30 +69,6 @@ const iprSubItems = [
     { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance." },
 ];
 
-const NavLink = ({
-  href,
-  children,
-  className,
-  ...props
-}: {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "text-sm font-medium transition-colors hover:text-primary",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </Link>
-  );
-};
-
 const DropdownNavLink = ({
   href,
   title,
@@ -210,7 +186,7 @@ export default function UserHeader() {
               </Popover>
             ) : (
                <Button key={item.label} variant="ghost" asChild>
-                  <Link href={item.href} className={cn("text-sm font-medium", pathname === item.href ? "text-primary" : "text-foreground")}>{item.label}</Link>
+                  <Link href={item.href} className="text-sm font-medium text-foreground">{item.label}</Link>
                 </Button>
             )
           )}
@@ -260,28 +236,28 @@ export default function UserHeader() {
                           <AccordionContent className="pb-0 pl-4">
                             <div className="flex flex-col space-y-1">
                               {item.subItems.map((subItem) => (
-                                <NavLink
+                                <Link
                                   key={subItem.href}
                                   href={subItem.href}
                                   onClick={() => setIsOpen(false)}
-                                  className={cn("py-2", pathname === subItem.href ? "text-primary font-medium" : "text-foreground")}
+                                  className={cn("py-2 block", pathname === subItem.href ? "text-primary font-medium" : "text-foreground")}
                                 >
                                   {subItem.title}
-                                </NavLink>
+                                </Link>
                               ))}
                             </div>
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
                     ) : (
-                      <NavLink
+                      <Link
                         key={item.label}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={cn("py-2 text-md font-medium", pathname === item.href ? "text-primary" : "text-foreground")}
                       >
                         {item.label}
-                      </NavLink>
+                      </Link>
                     )
                   )}
                   <Button asChild>
