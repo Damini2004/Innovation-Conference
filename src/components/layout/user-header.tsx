@@ -17,6 +17,10 @@ import {
   Presentation,
   MapPin,
   Phone,
+  Info,
+  GalleryVertical,
+  DollarSign,
+  Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,11 +66,11 @@ const publicationsSubItems = [
     { href: "/publications/digital-library", title: "Digital Library", description: "Browse our published journals." },
 ];
 
-const iprSubItems = [
-    { href: "/ipr-services/patent", title: "Patent Services", description: "Protect your inventions." },
-    { href: "/ipr-services/trademark", title: "Trademark Services", description: "Secure your brand identity." },
-    { href: "/ipr-services/copyright", title: "Copyright Services", description: "Safeguard your creative works." },
-    { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance." },
+const pagesSubItems = [
+    { href: "/about", title: "About Us", description: "Learn more about our mission and team.", icon: Info },
+    { href: "/conference/scientific-gallery", title: "Gallery", description: "Explore photos from our events.", icon: GalleryVertical },
+    { href: "/#pricing", title: "Pricing", description: "View our pricing plans.", icon: DollarSign },
+    { href: "/#sponsors", title: "Sponsors", description: "Our valued partners and sponsors.", icon: Heart },
 ];
 
 const DropdownNavLink = ({
@@ -117,9 +121,9 @@ export default function UserHeader() {
       subItems: publicationsSubItems,
     },
     {
-      label: "IPR Services",
-      href: "/ipr-services",
-      subItems: iprSubItems,
+      label: "Pages",
+      href: "#",
+      subItems: pagesSubItems,
     },
     { href: "/internship", label: "Internship" },
     { href: "/research-support", label: "Research Support" },
@@ -169,7 +173,7 @@ export default function UserHeader() {
                     variant="ghost"
                     className={cn(
                       "flex items-center gap-1 text-sm font-medium",
-                      pathname.startsWith(item.href)
+                      pathname.startsWith(item.href) && item.href !== "/"
                         ? "text-primary"
                         : "text-foreground"
                     )}
@@ -185,7 +189,7 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-              <Link
+               <Link
                 key={item.label}
                 href={item.href}
                 className={cn(
@@ -237,7 +241,7 @@ export default function UserHeader() {
                           <AccordionTrigger
                             className={cn(
                               "py-2 text-md font-medium hover:no-underline",
-                               pathname.startsWith(item.href) ? "text-primary" : "text-foreground"
+                               pathname.startsWith(item.href) && item.href !== "/" ? "text-primary" : "text-foreground"
                             )}
                           >
                             {item.label}
