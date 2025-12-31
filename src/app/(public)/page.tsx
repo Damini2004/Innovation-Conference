@@ -236,7 +236,7 @@ function HeroCarousel() {
 
       <div className="carousel-inner">
         <div className="item">
-          <img src="/slider/bg-1.jpg" alt="Startup Event" />
+          <Image src="/slider/bg-1.jpg" alt="Startup Event" fill className="object-cover" />
           <div className="carousel-caption">
             <h2>
               Impression - Startup Event <br />
@@ -249,7 +249,7 @@ function HeroCarousel() {
         </div>
 
         <div className="item">
-          <img src="/slider/bg-2.jpg" alt="Product Showcase" />
+          <Image src="/slider/bg-2.jpg" alt="Product Showcase" fill className="object-cover" />
           <div className="carousel-caption">
             <h2>
               Opportunity to showcase <br />
@@ -263,7 +263,7 @@ function HeroCarousel() {
         </div>
 
         <div className="item">
-          <img src="/slider/bg-3.jpg" alt="Apply as Speaker" />
+          <Image src="/slider/bg-3.jpg" alt="Apply as Speaker" fill className="object-cover" />
           <div className="carousel-caption">
             <h2>
               Expert and Love to Speak? <br />
@@ -275,13 +275,13 @@ function HeroCarousel() {
       </div>
 
       <div className="controls">
-        <label htmlFor="c1" className="control prev">❮</label>
+        <label htmlFor="c3" className="control prev">❮</label>
         <label htmlFor="c2" className="control next">❯</label>
 
-        <label htmlFor="c2" className="control prev">❮</label>
+        <label htmlFor="c1" className="control prev">❮</label>
         <label htmlFor="c3" className="control next">❯</label>
 
-        <label htmlFor="c3" className="control prev">❮</label>
+        <label htmlFor="c2" className="control prev">❮</label>
         <label htmlFor="c1" className="control next">❯</label>
       </div>
     </div>
