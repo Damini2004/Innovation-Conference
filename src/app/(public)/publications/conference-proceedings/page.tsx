@@ -43,26 +43,20 @@ const services = [
 export default function ConferenceProceedingsPage() {
     return (
         <div>
-             <section className="relative bg-primary/5 py-24 sm:py-32">
-                <div className="absolute inset-0">
-                    <Image 
-                        src="/photo3.jpg"
-                        alt="Abstract background"
-                        data-ai-hint="abstract texture"
-                        fill
-                        className="object-cover opacity-10"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+             <section className="relative bg-background overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-primary/10 opacity-50"></div>
+                    <div
+                        className="absolute inset-0 bg-grid-slate-100/50 [mask-image:linear-gradient(to_bottom,white,transparent)]"
+                    ></div>
                 </div>
-                <div className="relative container mx-auto px-4 md:px-6 text-center z-10">
+                <div className="relative container mx-auto px-4 md:px-6 text-center z-10 py-24 sm:py-32">
                     <div className="max-w-3xl mx-auto">
                         <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-semibold text-primary mb-4">Global Stage for Research</div>
                         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
                             Conference Proceedings
                         </h1>
-                        <p className="mt-6 text-lg text-muted-foreground">
-                            Share your research on a global stage. All accepted abstracts from our conferences are published in our prestigious, indexed Conference Proceedings.
-                        </p>
+                        
                         <Button size="lg" className="mt-8" asChild>
                             <a href="/conference">
                                 View Upcoming Conferences <ArrowRight className="ml-2 h-5 w-5" />
