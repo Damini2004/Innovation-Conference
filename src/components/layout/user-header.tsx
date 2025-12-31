@@ -67,10 +67,10 @@ const publicationsSubItems = [
 ];
 
 const pagesSubItems = [
-    { href: "/about", title: "About Us", icon: Info },
-    { href: "/conference/scientific-gallery", title: "Gallery", icon: GalleryVertical },
-    { href: "/#pricing", title: "Pricing", icon: DollarSign },
-    { href: "/#sponsors", title: "Sponsors", icon: Heart },
+    { href: "/about", title: "About Us", description: "Learn more about our mission and team.", icon: Info },
+    { href: "/conference/scientific-gallery", title: "Gallery", description: "Explore photos from our events.", icon: GalleryVertical },
+    { href: "/#pricing", title: "Pricing", description: "View our pricing plans.", icon: DollarSign },
+    { href: "/#sponsors", title: "Sponsors", description: "Our valued partners and sponsors.", icon: Heart },
 ];
 
 const DropdownNavLink = ({
@@ -78,13 +78,11 @@ const DropdownNavLink = ({
   title,
   description,
   icon: Icon,
-  hideDescription = false,
 }: {
   href: string;
   title: string;
   description?: string;
   icon?: ComponentType<{ className?: string }>;
-  hideDescription?: boolean;
 }) => (
   <Link
     href={href}
@@ -94,7 +92,7 @@ const DropdownNavLink = ({
       {Icon && <Icon className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />}
       <span>{title}</span>
     </div>
-    {!hideDescription && description && (
+    {description && (
         <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
             {description}
         </p>
@@ -191,13 +189,12 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", item.label === "Pages" ? "w-[200px]" : "w-[500px]")}>
-                    <div className={cn(item.label === "Pages" ? "flex flex-col" : "grid grid-cols-2 gap-1")}>
+                <PopoverContent className={cn("p-2", item.label === "Pages" ? "w-[500px]" : "w-[500px]")}>
+                    <div className={cn(item.label === "Pages" ? "grid grid-cols-2 gap-1" : "grid grid-cols-2 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
                             {...subItem} 
-                            hideDescription={item.label === 'Pages'}
                         />
                       ))}
                     </div>
