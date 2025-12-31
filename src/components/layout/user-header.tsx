@@ -24,6 +24,10 @@ import {
   Heart,
   File,
   Award,
+  Calendar,
+  HelpCircle,
+  Video,
+  Clapperboard
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,17 +53,18 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const conferenceSubItems = [
-  { href: "/conference/about-conference", title: "About Conferences", description: "Our mission in conferencing." },
-  { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", description: "Find our next events." },
-  { href: "/conference/past-conferences", title: "Past Conferences", description: "Explore our event archive." },
-  { href: "/conference/plan-conference", title: "Plan a Conference", description: "Partner with us for your event." },
-  { href: "/conference/awards", title: "Awards", description: "Recognizing academic excellence." },
-  { href: "/conference/faq", title: "FAQs", description: "Answers to common questions." },
-  { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", description: "Join our live online sessions." },
-  { href: "/conference/past-webinars", title: "Past Webinars", description: "Watch recordings of past webinars." },
-  { href: "/conference/scientific-gallery", title: "Scientific Gallery", description: "A showcase of research visuals." },
-  { href: "/conference/conference-videos", title: "Conference Videos", description: "Watch sessions from our events." },
+  { href: "/conference/about-conference", title: "About Conferences", icon: Info },
+  { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", icon: Calendar },
+  { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart },
+  { href: "/conference/plan-conference", title: "Plan a Conference", icon: Briefcase },
+  { href: "/conference/awards", title: "Awards", icon: Award },
+  { href: "/conference/faq", title: "FAQs", icon: HelpCircle },
+  { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video },
+  { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard },
+  { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical },
+  { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation },
 ];
+
 
 const publicationsSubItems = [
     { href: "/publications/overview", title: "Publication Policies", icon: FileText },
@@ -192,8 +197,8 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2", item.label === "Conference" ? "w-[500px]" : "w-[250px]")}>
-                    <div className={cn(item.label === "Conference" ? "grid grid-cols-2 gap-1" : "grid grid-cols-1 gap-1")}>
+                <PopoverContent className={cn("p-2", (item.label === 'IPR Services' || item.label === 'Conference') ? "w-[250px]" : "w-[250px]")}>
+                    <div className={cn((item.label === 'IPR Services' || item.label === 'Conference') ? "grid grid-cols-1 gap-1" : "grid grid-cols-1 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
                             key={subItem.href} 
@@ -211,7 +216,7 @@ export default function UserHeader() {
                   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                   "hover:bg-accent hover:text-accent-foreground",
                   "h-10 px-4 py-2",
-                   pathname === item.href ? "text-primary" : "text-foreground"
+                  pathname === item.href ? "text-primary" : "text-foreground"
                 )}
               >
                 {item.label}
