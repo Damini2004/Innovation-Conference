@@ -112,17 +112,17 @@ export default function ConferenceProceedingsPage() {
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
                         {services.map((service) => (
-                            <Card key={service.title} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <CardHeader className="items-center">
-                                    <div className="p-4 bg-primary/10 rounded-full w-fit mb-3">
-                                        <service.icon className="h-8 w-8 text-primary" />
+                            <div key={service.title} className="featured-box">
+                                <Card className="p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
+                                    <div className="icon inline-block p-4 mb-4 bg-primary/10 rounded-full">
+                                        <service.icon className="h-10 w-10 text-primary" />
                                     </div>
-                                    <CardTitle>{service.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex-grow">
-                                    <p className="text-muted-foreground">{service.description}</p>
-                                </CardContent>
-                            </Card>
+                                    <div className="featured-content">
+                                        <h4 className="text-xl font-semibold mb-2">{service.title}</h4>
+                                        <p className="text-muted-foreground">{service.description}</p>
+                                    </div>
+                                </Card>
+                            </div>
                         ))}
                     </div>
                 </div>
