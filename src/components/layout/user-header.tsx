@@ -67,29 +67,33 @@ const publicationsSubItems = [
 ];
 
 const pagesSubItems = [
-    { href: "/about", title: "About Us", description: "Learn more about our mission and team.", icon: Info },
-    { href: "/conference/scientific-gallery", title: "Gallery", description: "Explore photos from our events.", icon: GalleryVertical },
-    { href: "/#pricing", title: "Pricing", description: "View our pricing plans.", icon: DollarSign },
-    { href: "/#sponsors", title: "Sponsors", description: "Our valued partners and sponsors.", icon: Heart },
+    { href: "/about", title: "About Us", icon: Info },
+    { href: "/conference/scientific-gallery", title: "Gallery", icon: GalleryVertical },
+    { href: "/#pricing", title: "Pricing", icon: DollarSign },
+    { href: "/#sponsors", title: "Sponsors", icon: Heart },
 ];
 
 const DropdownNavLink = ({
   href,
   title,
   description,
+  hideDescription = false,
 }: {
   href: string;
   title: string;
-  description: string;
+  description?: string;
+  hideDescription?: boolean;
 }) => (
   <Link
     href={href}
     className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
   >
     <div className="text-sm font-medium leading-none">{title}</div>
-    <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-      {description}
-    </p>
+    {!hideDescription && description && (
+        <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
+            {description}
+        </p>
+    )}
   </Link>
 );
 
@@ -182,10 +186,16 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[500px] p-2 grid grid-cols-2 gap-1">
-                  {item.subItems.map((subItem) => (
-                    <DropdownNavLink key={subItem.href} {...subItem} />
-                  ))}
+                <PopoverContent className={cn("p-2", item.label === "Pages" ? "w-[200px]" : "w-[500px] grid grid-cols-2 gap-1")}>
+                    <div className={cn(item.label !== "Pages" && "grid grid-cols-2 gap-1")}>
+                      {item.subItems.map((subItem) => (
+                        <DropdownNavLink 
+                            key={subItem.href} 
+                            {...subItem} 
+                            hideDescription={item.label === 'Pages'}
+                        />
+                      ))}
+                    </div>
                 </PopoverContent>
               </Popover>
             ) : (
