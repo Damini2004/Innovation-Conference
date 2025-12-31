@@ -22,7 +22,7 @@ const heroSlides = [
       subtitle: "Join us, be the first to book your ticket",
       imageSrc: "/slider/bg-1.jpg",
       buttons: [
-        { text: "Registration", href: "/submit-journal", variant: "outline" as const },
+        { text: "Registration", href: "/submit-journal", variant: "default" as const },
       ],
     },
     {
@@ -255,29 +255,43 @@ const pricingTiers = [
 ];
 
 function HeroSection() {
-    return (
-        <section className="relative h-[600px] w-full flex items-center justify-center text-center text-white">
-            <Image
-                src="/slider/bg-1.jpg"
-                alt="Startup Event"
+  return (
+    <section className="relative h-[600px] w-full">
+      <Carousel className="w-full h-full" opts={{ loop: true }}>
+        <CarouselContent>
+          {heroSlides.map((slide, index) => (
+            <CarouselItem key={index} className="relative w-full h-full">
+              <Image
+                src={slide.imageSrc}
+                alt={slide.title}
                 fill
-                priority
-                className="object-cover z-0"
-            />
-            <div className="absolute inset-0 bg-black/60 z-10" />
-            <div className="relative z-20 px-4">
-                <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-                    Impression - Startup Event
+                priority={index === 0}
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60" />
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white px-4">
+                <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+                  {slide.title}
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-8">
-                    Join us, be the first to book your ticket
+                <p className="mt-4 max-w-2xl text-lg text-white/90">
+                  {slide.subtitle}
                 </p>
-                <Button asChild size="lg" className="animated bounceIn">
-                    <Link href="/submit-journal">Register Now</Link>
-                </Button>
-            </div>
-        </section>
-    );
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                  {slide.buttons.map((btn) => (
+                    <Button key={btn.text} variant={btn.variant} size="lg" asChild>
+                      <Link href={btn.href}>{btn.text}</Link>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
+      </Carousel>
+    </section>
+  );
 }
 
 function IndexedJournalsSection() {
