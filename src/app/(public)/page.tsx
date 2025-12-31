@@ -335,44 +335,46 @@ export default function HomePage() {
           </div>
       </section>
 
-      <section className="countdown-timer section">
+      <section className="countdown-timer section py-12">
         <div className="container">
-            <div className="row grid md:grid-cols-2 gap-8 items-center">
-            <div className="wow fadeInLeft" data-wow-delay="0.2s">
-                <div className="text">
-                <h2 className="text-3xl font-bold">Innovation Conferences <br/>Startup Event</h2>
-                <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
-                <Button asChild size="lg" className="mt-4">
-                    <Link href="#">Buy Tickets</Link>
-                </Button>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="wow fadeInLeft" data-wow-delay="0.2s">
+                    <div className="text-left">
+                        <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
+                        <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2018 - Jan 28, 2018 </h4>
+                        <Button asChild size="lg" className="mt-4">
+                            <Link href="#">Buy Tickets</Link>
+                        </Button>
+                    </div>
                 </div>
-            </div>
-            <div className="wow fadeInRight" data-wow-delay="0.2s">
-                <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
-            </div>
+                <div className="wow fadeInRight flex justify-center" data-wow-delay="0.2s">
+                    <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
+                </div>
             </div>
         </div>
       </section>
 
-      <section id="event" className="section bg-primary text-white">
+      <section id="event" className="section py-12 bg-secondary/30">
         <div className="container">
             <div className="grid md:grid-cols-4 gap-8">
                 {welcomeFeatures.map((feature, index) => (
                     <div key={feature.title} className="tab-block wow fadeInDown" data-wow-delay={`${index * 0.2}s`}>
-                        <div className="icon">
-                            <feature.icon className="h-10 w-10" />
-                        </div>
-                        <div className="desc">
-                            <h4 className='font-bold'>{feature.title}</h4>
-                            <p className='text-white/80'>{feature.description}</p>
-                        </div>
+                        <Card className="text-center p-6">
+                            <div className="icon inline-block mb-4">
+                                <feature.icon className="h-10 w-10 text-primary" />
+                            </div>
+                            <div className="desc">
+                                <h4 className='font-bold text-lg'>{feature.title}</h4>
+                                <p className='text-muted-foreground mt-2'>{feature.description}</p>
+                            </div>
+                        </Card>
                     </div>
                 ))}
             </div>
             <div className="col-md-12 text-center mt-12">
                 <div className="content-text">
-                <h3 className="wow fadeInUp text-2xl" data-wow-delay="0.8s">Get fresh insights into the world of tech and startups</h3>
-                <p className="wow fadeInUp text-white/80 max-w-3xl mx-auto" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    <h3 className="wow fadeInUp text-2xl font-bold" data-wow-delay="0.8s">Get fresh insights into the world of tech and startups</h3>
+                    <p className="wow fadeInUp text-muted-foreground max-w-3xl mx-auto mt-4" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
                 </div>
             </div>
         </div>
