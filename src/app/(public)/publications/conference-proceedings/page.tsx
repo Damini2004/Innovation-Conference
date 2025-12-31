@@ -45,31 +45,21 @@ const services = [
 export default function ConferenceProceedingsPage() {
     return (
         <div>
-             <section className="relative bg-background overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1600&h=600&auto=format&fit=crop"
-                        alt="Conference proceedings background"
-                        data-ai-hint="team collaboration"
-                        fill
-                        className="object-cover"
-                    />
-                    <div
-                        className="absolute inset-0 bg-black/60"
-                    ></div>
-                </div>
-                <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
-                    <div className="max-w-3xl">
-                        <ol className="breadcrumb wow fadeInDown flex items-center gap-2 text-white/80" data-wow-delay="300ms">
-                          <li><Link href="/" className="hover:text-primary">Home</Link></li>
-                          <li>/ <Link href="/publications" className="hover:text-primary">Publications</Link></li>
-                          <li className="text-primary">/ Conference Proceedings</li>
-                        </ol>
-                        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
-                            Conference Proceedings
-                        </h1>
-                        
-                    </div>
+             <section className="relative w-full h-[400px] bg-primary/10 flex items-center justify-center text-center px-4">
+                <Image
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1600&h=400&auto=format&fit=crop"
+                    alt="Team working on a project"
+                    data-ai-hint="team collaboration"
+                    fill
+                    className="object-cover opacity-10"
+                />
+                <div className="relative z-10">
+                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                        Conference Proceedings
+                    </h1>
+                    <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+                        From presentation to publication, we provide a seamless pathway to ensure your research makes a lasting impact.
+                    </p>
                 </div>
             </section>
             
