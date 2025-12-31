@@ -227,7 +227,7 @@ const pricingTiers = [
     }
 ];
 
-export function Hero() {
+function Hero() {
   return (
     <section
       id="home"
@@ -409,8 +409,7 @@ export default function HomePage() {
       <Hero />
       
       <section className="countdown-timer section py-12">
-        <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-end gap-8 text-center">
+        <div className="container flex justify-around items-center">
             <div className="wow fadeInLeft animated text-center md:text-left" data-wow-delay="0.2s">
               <h2 className="text-3xl font-bold">Impression <br/>Startup Event</h2>
               <h4 className="text-muted-foreground mt-2">Marriott Marquis, San Francisco, CA <br/> Jan 25, 2025 - Jan 28, 2025 </h4>
@@ -419,7 +418,6 @@ export default function HomePage() {
             <div className="wow fadeInRight animated" data-wow-delay="0.2s">
                 <ConferenceCountdown targetDate="2025-01-25T09:00:00" />
             </div>
-          </div>
         </div>
       </section>
       
@@ -440,7 +438,7 @@ export default function HomePage() {
                     </div>
                 ))}
             </div>
-            <div className="col-md-12 text-center mt-12">
+            <div className="text-center mt-12">
                 <div className="content-text">
                     <h3 className="wow fadeInUp animated text-2xl font-bold" data-wow-delay="0.8s">Get fresh insights into the world of tech and startups</h3>
                     <p className="wow fadeInUp animated text-muted-foreground max-w-3xl mx-auto mt-4" data-wow-delay="1s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. A enean massa. Cum sociis natoque penatibus et magnis dis parturient montes Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
