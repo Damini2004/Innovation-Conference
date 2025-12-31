@@ -62,11 +62,11 @@ const conferenceSubItems = [
 ];
 
 const publicationsSubItems = [
-    { href: "/publications/overview", title: "Publication Policies", description: "Ethics, plagiarism, and terms." },
-    { href: "/publications/journal-support", title: "Journal Submission Support", description: "Get help with your paper." },
-    { href: "/publications/conference-proceedings", title: "Conference Proceedings", description: "Publish your conference paper." },
-    { href: "/publications/peer-review", title: "Peer Review Process", description: "How we ensure quality." },
-    { href: "/publications/digital-library", title: "Digital Library", description: "Browse our published journals." },
+    { href: "/publications/overview", title: "Publication Policies", description: "Ethics, plagiarism, and terms.", icon: FileText },
+    { href: "/publications/journal-support", title: "Journal Submission Support", description: "Get help with your paper.", icon: BookOpen },
+    { href: "/publications/conference-proceedings", title: "Conference Proceedings", description: "Publish your conference paper.", icon: Presentation },
+    { href: "/publications/peer-review", title: "Peer Review Process", description: "How we ensure quality.", icon: ShieldCheck },
+    { href: "/publications/digital-library", title: "Digital Library", description: "Browse our published journals.", icon: GalleryVertical },
 ];
 
 const iprServicesSubItems = [
@@ -204,7 +204,7 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-              <Link
+               <Link
                 key={item.label}
                 href={item.href}
                 className={cn(
