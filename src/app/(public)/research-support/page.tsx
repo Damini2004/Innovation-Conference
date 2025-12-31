@@ -106,16 +106,16 @@ export default function ResearchSupportPage() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {supportServices.map((service, index) => (
-                    <Card key={index} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-primary/10">
-                    <CardHeader className="items-center">
-                        <div className="p-4 bg-primary/10 rounded-full w-fit mb-3">
-                        <service.icon className="h-8 w-8 text-primary" />
-                        </div>
-                        <CardTitle>{service.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                        <p className="text-muted-foreground">{service.description}</p>
-                    </CardContent>
+                     <Card key={index} className="text-center flex flex-col transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-gradient-to-br from-background via-background to-secondary/30 border-border/20 group">
+                        <CardHeader className="items-center">
+                            <div className="p-4 bg-primary/10 rounded-full w-fit mb-4 border-2 border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:border-primary/40">
+                                <service.icon className="h-8 w-8 text-primary" />
+                            </div>
+                            <CardTitle className="text-lg">{service.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex-grow">
+                            <p className="text-muted-foreground text-sm">{service.description}</p>
+                        </CardContent>
                     </Card>
                 ))}
                 </div>
