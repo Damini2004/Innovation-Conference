@@ -298,6 +298,26 @@ export default function UserHeader() {
                                     description={subItem.description}
                                 />
                               ))}
+                               {item.label === "Conference" && lifeScienceConferences.length > 0 && (
+                                <>
+                                  <Separator className="my-2" />
+                                  <p className="px-3 py-1 text-xs font-semibold text-muted-foreground">Special Life Science Events</p>
+                                  {lifeScienceConferences.slice(0, 2).map((conf) => (
+                                    <a
+                                        key={conf.id}
+                                        href={conf.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground"
+                                      >
+                                        <div className="flex items-center gap-2 text-sm font-medium leading-none">
+                                          <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
+                                          <span className="truncate">{conf.heading}</span>
+                                        </div>
+                                      </a>
+                                  ))}
+                                </>
+                              )}
                             </div>
                           </AccordionContent>
                         </AccordionItem>
