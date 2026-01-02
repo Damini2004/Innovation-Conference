@@ -27,6 +27,7 @@ import {
   Library,
   Lightbulb,
   ImageIcon,
+  FlaskConical,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -100,6 +101,7 @@ export default function UserHeader() {
         { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
         { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
         { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
+        { href: "/super-admin/life-science-conferences", title: "Life Science Conferences", icon: FlaskConical, description: "View our special life science events." },
       ],
     },
     {
