@@ -60,7 +60,7 @@ export default function LoginForm() {
 
         const result = await response.json();
 
-        if (response.ok) {
+        if (response.ok && result.success) {
             if (values.role === 'sub-admin' && typeof window !== 'undefined') {
               localStorage.setItem('currentUserEmail', values.email);
             }
@@ -69,9 +69,11 @@ export default function LoginForm() {
                 description: `Redirecting to ${values.role} dashboard...`,
             });
             
-            const redirectTo = searchParams.get('redirect_to') || `/${values.role}`;
-            // Use window.location.href for a full page reload to ensure the new cookie is read
-            window.location.href = redirectTo;
+            // Use the redirect_to param if it exists, otherwise use the path from the API response
+            const finalRedirectPath = searchParams.get('redirect_to') || result.redirectTo;
+            
+            // Perform a full page reload to ensure the new cookie is read correctly by the server.
+            window.location.href = finalRedirectPath;
         } else {
             toast({
                 title: "Login Failed",

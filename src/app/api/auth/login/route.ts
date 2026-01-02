@@ -32,8 +32,16 @@ export async function POST(request: Request) {
     // Encrypt the session payload into a JWT
     const sessionToken = await encrypt(sessionPayload);
     
-    // Set the token in an HTTP-only cookie
-    const response = NextResponse.json({ success: true, message: 'Login successful' });
+    // Determine the redirect path
+    const redirectTo = `/${role}`;
+
+    // Set the token in an HTTP-only cookie and send response
+    const response = NextResponse.json({ 
+      success: true, 
+      message: 'Login successful',
+      redirectTo: redirectTo,
+    });
+
     response.cookies.set('session-token', sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

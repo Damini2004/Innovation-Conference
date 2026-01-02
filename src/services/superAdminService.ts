@@ -76,8 +76,9 @@ export async function verifySuperAdminCredentials(email: string, password_provid
     if (!adminCredentials) {
       return { success: false, message: 'Super admin configuration not found.' };
     }
-
-    if (adminCredentials.email === email && adminCredentials.password === password_provided) {
+    
+    // Explicitly check that adminCredentials.password is not undefined before comparing
+    if (adminCredentials.email === email && typeof adminCredentials.password !== 'undefined' && adminCredentials.password === password_provided) {
       return { success: true, message: 'Login successful!' };
     } else {
       return { success: false, message: 'Invalid credentials for super admin.' };
