@@ -11,23 +11,31 @@ export default function SessionProvider({ children }: { children: React.ReactNod
     const router = useRouter();
     const { toast } = useToast();
 
-    React.useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const res = await fetch('/api/auth/revalidate');
-                if (!res.ok) {
-                    toast({
-                        title: "Session Expired",
-                        description: "You have been logged out due to inactivity.",
-                        variant: "destructive"
-                    });
-                    router.push('/login');
-                }
-            } catch (error) {
-                console.error("Session check failed", error);
+    const checkSession = React.useCallback(async () => {
+        try {
+            const res = await fetch('/api/auth/revalidate');
+            if (!res.ok) {
+                toast({
+                    title: "Session Expired",
+                    description: "You have been logged out due to inactivity.",
+                    variant: "destructive"
+                });
+                router.push('/login');
             }
-        };
+        } catch (error) {
+            console.error("Session check failed", error);
+            // Optional: redirect even on network error
+            toast({
+                title: "Connection Error",
+                description: "Could not verify session. Please log in again.",
+                variant: "destructive"
+            });
+            router.push('/login');
+        }
+    }, [router, toast]);
 
+
+    React.useEffect(() => {
         // Check session immediately on mount
         checkSession();
         
@@ -35,7 +43,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         const intervalId = setInterval(checkSession, SESSION_CHECK_INTERVAL);
 
         return () => clearInterval(intervalId);
-    }, [router, toast]);
+    }, [checkSession]);
 
     return <>{children}</>;
 }

@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import * as React from "react";
@@ -37,6 +37,7 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -67,8 +68,9 @@ export default function LoginForm() {
                 title: "Login Successful",
                 description: `Redirecting to ${values.role} dashboard...`,
             });
-            // Use window.location.href for a full page reload to ensure the new cookie is picked up by the server/middleware
-            window.location.href = `/${values.role}`;
+            
+            const redirectTo = searchParams.get('redirect_to') || `/${values.role}`;
+            window.location.href = redirectTo;
         } else {
             toast({
                 title: "Login Failed",
