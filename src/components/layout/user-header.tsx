@@ -233,8 +233,6 @@ export default function UserHeader() {
                                             </div>
                                         </a>
                                     ))}
-                                    <Separator className="my-2" />
-                                    <DropdownNavLink href="/conference/life-science" title="All Life Science Conferences" icon={FlaskConical} description="View all special life science events." />
                                 </div>
                             </PopoverContent>
                         </Popover>
