@@ -234,7 +234,7 @@ export default function UserHeader() {
                                <button className="group relative flex w-full select-none items-center justify-between rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
                                     <div className="flex items-center gap-2 text-sm font-medium">
                                         <FlaskConical className="h-4 w-4 text-primary/80" />
-                                        <span>Life Science Conferences</span>
+                                        <span>Upcoming Conferences</span>
                                     </div>
                                     <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:-rotate-90" />
                                </button>
@@ -353,7 +353,7 @@ export default function UserHeader() {
                                {item.label === "Conference" && lifeScienceConferences.length > 0 && (
                                 <>
                                   <Separator className="my-2" />
-                                  <DropdownNavLink href="/conference/life-science" title="Life Science Conferences" icon={FlaskConical} description="View all special life science events." />
+                                  <DropdownNavLink href="/conference/life-science" title="Upcoming Conferences" icon={FlaskConical} description="View all special life science events." />
                                 </>
                               )}
                             </div>
