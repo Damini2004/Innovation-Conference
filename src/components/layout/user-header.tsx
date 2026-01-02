@@ -1,4 +1,3 @@
-
 // src/components/layout/user-header.tsx
 "use client";
 
@@ -90,7 +89,6 @@ export default function UserHeader() {
   const pathname = usePathname();
   const [lifeScienceConferences, setLifeScienceConferences] = useState<LifeScienceConference[]>([]);
   const [upcomingConferences, setUpcomingConferences] = useState<Conference[]>([]);
-  const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
   const navItems = useMemo(() => [
     { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
@@ -139,32 +137,30 @@ export default function UserHeader() {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
-    setCurrentDate(getCurrentDateInIndia());
-    
+
     async function fetchHeaderData() {
         try {
+            const today = getCurrentDateInIndia();
             const [lifeScienceData, allConferencesData] = await Promise.all([
                 getLifeScienceConferences(),
                 getConferences()
             ]);
             setLifeScienceConferences(lifeScienceData);
 
-            if (currentDate) {
-              const upcoming = allConferencesData
-                .filter(conf => conf.dateObject && conf.dateObject.getTime() >= currentDate.getTime())
+            const upcoming = allConferencesData
+                .filter(conf => conf.dateObject && conf.dateObject.getTime() >= today.getTime())
                 .sort((a, b) => a.dateObject.getTime() - b.dateObject.getTime());
-              setUpcomingConferences(upcoming);
-            }
+            setUpcomingConferences(upcoming);
             
         } catch (error) {
-            console.error("Failed to fetch header data.");
+            console.error("Failed to fetch header data:", error);
         }
     }
     
     fetchHeaderData();
     
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [currentDate]);
+  }, []);
 
   return (
     <header
@@ -296,9 +292,9 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-              <Button key={item.label} variant="ghost" asChild>
-                  <Link href={item.href} className="text-sm font-medium text-foreground">{item.label}</Link>
-              </Button>
+              <Link key={item.label} href={item.href} className="text-sm font-medium text-foreground">
+                <Button variant="ghost">{item.label}</Button>
+              </Link>
             )
           )}
         </nav>
