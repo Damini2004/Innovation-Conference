@@ -25,7 +25,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import ConferenceSidebarForm from "@/components/forms/conference-sidebar-form";
 import { countries } from "@/lib/countries";
 
 
@@ -234,7 +233,6 @@ export default function ConferencesPage() {
                         <h3 className="text-xl font-bold">Life Science Conferences</h3>
                         <Button variant="outline" className="mt-4 bg-white text-red-600 hover:bg-white/90">Visit Now</Button>
                     </Card>
-                    <ConferenceSidebarForm />
                 </aside>
             </div>
         </div>

@@ -25,7 +25,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import ConferenceSidebarForm from "@/components/forms/conference-sidebar-form";
 import { countries } from "@/lib/countries";
 
 
@@ -96,7 +95,7 @@ export default function UpcomingConferencesPage() {
         
          <section className="relative w-full py-16 md:py-20 bg-gray-800 text-white overflow-hidden">
             <Image
-                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1600&auto=format=fit=crop"
                 alt="Conference background"
                 fill
                 className="object-cover opacity-20"
@@ -250,7 +249,6 @@ export default function UpcomingConferencesPage() {
                         <h3 className="text-xl font-bold">Life Science Conferences</h3>
                         <Button variant="outline" className="mt-4 bg-white text-red-600 hover:bg-white/90">Visit Now</Button>
                     </Card>
-                    <ConferenceSidebarForm />
                 </aside>
             </div>
         </div>
