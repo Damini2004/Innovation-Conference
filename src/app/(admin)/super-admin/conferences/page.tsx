@@ -1,4 +1,4 @@
-
+// src/app/(admin)/super-admin/conferences/page.tsx
 "use client";
 
 import { Button } from "@/components/ui/button";
