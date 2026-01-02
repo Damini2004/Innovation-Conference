@@ -71,6 +71,8 @@ const LifeScienceConferenceForm = ({
         },
     });
 
+    const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -103,7 +105,7 @@ const LifeScienceConferenceForm = ({
                  <FormField control={form.control} name="assignedSubAdminId" render={({ field }) => ( 
                     <FormItem className="flex flex-col">
                         <FormLabel>Assign Sub-Admin (Optional)</FormLabel>
-                        <Popover>
+                        <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                             <PopoverTrigger asChild>
                                 <FormControl>
                                     <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value && "text-muted-foreground")} >
@@ -118,11 +120,11 @@ const LifeScienceConferenceForm = ({
                                     <CommandList>
                                         <CommandEmpty>No approved sub-admins found.</CommandEmpty>
                                         <CommandGroup>
-                                            <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", "none"); }} >
+                                            <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", "none"); setIsPopoverOpen(false); }} >
                                                 None
                                             </CommandItem>
                                             {subAdmins.map((admin) => (
-                                                <CommandItem value={admin.name} key={admin.id} onSelect={() => { form.setValue("assignedSubAdminId", admin.id); }} >
+                                                <CommandItem value={admin.name} key={admin.id} onSelect={() => { form.setValue("assignedSubAdminId", admin.id); setIsPopoverOpen(false); }} >
                                                     <Check className={cn("mr-2 h-4 w-4", admin.id === field.value ? "opacity-100" : "opacity-0" )}/>
                                                     {admin.name}
                                                 </CommandItem>
