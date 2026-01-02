@@ -65,8 +65,6 @@ const conferenceSubItems = [
 const publicationsSubItems = [
     { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
     { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
-    { href: "/publications/conference-proceedings", title: "Conference Proceedings", icon: Presentation, description: "Publish your conference paper." },
-    { href: "/publications/peer-review", title: "Peer Review Process", icon: ShieldCheck, description: "How we ensure quality." },
     { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
 ];
 
@@ -93,13 +91,6 @@ const navItems = [
       icon: Library,
       description: "Browse published work.",
       subItems: publicationsSubItems,
-    },
-    {
-      label: "IPR Services",
-      href: "/ipr-services",
-      icon: ShieldCheck,
-      description: "Protect your IP.",
-      subItems: iprServicesSubItems,
     },
     { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
     { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
