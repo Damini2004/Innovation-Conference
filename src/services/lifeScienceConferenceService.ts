@@ -1,3 +1,4 @@
+
 // src/services/lifeScienceConferenceService.ts
 'use server';
 
@@ -10,13 +11,13 @@ export interface LifeScienceConference {
     heading: string;
     link: string;
     createdAt: string; // Changed to string to be serializable
-    assignedSubAdminId?: string;
+    assignedSubAdminIds?: string[];
 }
 
 const schema = z.object({
   heading: z.string().min(5, "Heading must be at least 5 characters."),
   link: z.string().url("Please enter a valid URL."),
-  assignedSubAdminId: z.string().optional(),
+  assignedSubAdminIds: z.array(z.string()).optional(),
 });
 
 export type LifeScienceConferenceData = z.infer<typeof schema>;
@@ -30,7 +31,7 @@ export async function addLifeScienceConference(data: LifeScienceConferenceData):
     
     const dataToSave = {
         ...validationResult.data,
-        assignedSubAdminId: validationResult.data.assignedSubAdminId || null,
+        assignedSubAdminIds: validationResult.data.assignedSubAdminIds || [],
         createdAt: serverTimestamp(),
     }
 
@@ -55,7 +56,7 @@ export async function getLifeScienceConferences(): Promise<LifeScienceConference
                 heading: data.heading,
                 link: data.link,
                 createdAt: createdAtTimestamp?.toDate().toISOString() || new Date().toISOString(),
-                assignedSubAdminId: data.assignedSubAdminId,
+                assignedSubAdminIds: data.assignedSubAdminIds || [],
             } as LifeScienceConference;
         });
     } catch (error) {
@@ -73,7 +74,7 @@ export async function updateLifeScienceConference(id: string, data: LifeScienceC
         
         const dataToSave = {
             ...validationResult.data,
-            assignedSubAdminId: validationResult.data.assignedSubAdminId || null,
+            assignedSubAdminIds: validationResult.data.assignedSubAdminIds || [],
             updatedAt: serverTimestamp()
         };
 

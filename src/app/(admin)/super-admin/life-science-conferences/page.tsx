@@ -29,7 +29,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { PlusCircle, Edit, Trash2, ChevronsUpDown, Check } from "lucide-react";
+import { PlusCircle, Edit, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   getLifeScienceConferences,
@@ -52,23 +52,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { getSubAdmins, SubAdmin } from "@/services/subAdminService";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 /* ---------------------------- FORM SCHEMA ---------------------------- */
 
 const formSchema = z.object({
   heading: z.string().min(5, "Heading must be at least 5 characters."),
   link: z.string().url("Please enter a valid URL."),
-  assignedSubAdminId: z.string().optional(),
+  assignedSubAdminIds: z.array(z.string()).optional(),
 });
 
 /* ---------------------------- FORM COMPONENT ---------------------------- */
@@ -91,17 +83,19 @@ function LifeScienceConferenceForm({
     defaultValues: {
       heading: "",
       link: "",
-      assignedSubAdminId: undefined,
+      assignedSubAdminIds: [],
     },
   });
 
   React.useEffect(() => {
     if (defaultValues) {
-      form.reset(defaultValues);
+      form.reset({
+        heading: defaultValues.heading || "",
+        link: defaultValues.link || "",
+        assignedSubAdminIds: defaultValues.assignedSubAdminIds || [],
+      });
     }
   }, [defaultValues, form]);
-
-  const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
 
   return (
     <Form {...form}>
@@ -136,68 +130,52 @@ function LifeScienceConferenceForm({
 
         <FormField
           control={form.control}
-          name="assignedSubAdminId"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Assign Sub-Admin (Optional)</FormLabel>
-              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={isPopoverOpen}
-                    className="justify-between"
-                  >
-                    {field.value
-                      ? subAdmins.find((a) => a.id === field.value)?.name
-                      : "Select Sub-Admin"}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="p-0">
-                  <Command>
-                    <CommandInput placeholder="Search sub-admins..." />
-                    <CommandList>
-                      <CommandEmpty>No sub-admins found.</CommandEmpty>
-                      <CommandGroup>
-                        <CommandItem
-                          value="none"
-                          onSelect={(e) => {
-                            form.setValue("assignedSubAdminId", undefined, {
-                              shouldDirty: true,
-                            });
-                            setIsPopoverOpen(false);
-                          }}
-                        >
-                          None
-                        </CommandItem>
-                        {subAdmins.map((admin) => (
-                          <CommandItem
-                            key={admin.id}
-                            value={admin.id}
-                            onSelect={(currentValue) => {
-                              form.setValue("assignedSubAdminId", currentValue === field.value ? undefined : currentValue, {
-                                shouldDirty: true,
-                              });
-                              setIsPopoverOpen(false);
-                            }}
+          name="assignedSubAdminIds"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Assign Sub-Admins</FormLabel>
+                <p className="text-sm text-muted-foreground">
+                  Select sub-admins to assign to this conference.
+                </p>
+              </div>
+              <ScrollArea className="h-40 w-full rounded-md border">
+                <div className="p-4 space-y-2">
+                    {subAdmins.map((item) => (
+                    <FormField
+                      key={item.id}
+                      control={form.control}
+                      name="assignedSubAdminIds"
+                      render={({ field }) => {
+                        return (
+                          <FormItem
+                            key={item.id}
+                            className="flex flex-row items-center space-x-3 space-y-0"
                           >
-                            <Check
-                              className={cn(
-                                "mr-2 h-4 w-4",
-                                field.value === admin.id
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              )}
-                            />
-                            {admin.name}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...(field.value || []), item.id])
+                                    : field.onChange(
+                                        (field.value || [])?.filter(
+                                          (value) => value !== item.id
+                                        )
+                                      )
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {item.name}
+                            </FormLabel>
+                          </FormItem>
+                        )
+                      }}
+                    />
+                    ))}
+                </div>
+              </ScrollArea>
               <FormMessage />
             </FormItem>
           )}
@@ -322,8 +300,9 @@ export default function ManageLifeScienceConferencesPage() {
                     <TableCell>{c.heading}</TableCell>
                     <TableCell>{c.link}</TableCell>
                     <TableCell>
-                      {subAdmins.find((a) => a.id === c.assignedSubAdminId)?.name ||
-                        "Unassigned"}
+                      {c.assignedSubAdminIds && c.assignedSubAdminIds.length > 0
+                        ? c.assignedSubAdminIds.map(id => subAdmins.find(a => a.id === id)?.name).filter(Boolean).join(', ')
+                        : "Unassigned"}
                     </TableCell>
                     <TableCell className="flex gap-2">
                       <Button
