@@ -90,47 +90,6 @@ export default function UserHeader() {
   const [lifeScienceConferences, setLifeScienceConferences] = useState<LifeScienceConference[]>([]);
   const [upcomingConferences, setUpcomingConferences] = useState<Conference[]>([]);
 
-  const navItems = useMemo(() => [
-    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
-    {
-      label: "Conference",
-      href: "/conference",
-      icon: Presentation,
-      description: "Explore our events.",
-      subItems: [
-        { href: "/conference/about-conference", title: "About Conferences", icon: Info, description: "Our mission in conferencing." },
-        { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
-        { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart, description: "Explore our event archive." },
-        { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
-        { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
-        // The Life Science Conferences section will be handled separately
-      ],
-    },
-    {
-      label: "Publications",
-      href: "/publications",
-      icon: Library,
-      description: "Browse published work.",
-      subItems: [
-        { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
-        { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
-        { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
-      ],
-    },
-     {
-      label: "Gallery",
-      href: "/gallery",
-      icon: ImageIcon,
-      description: "View our galleries.",
-      subItems: [
-        { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
-        { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
-      ],
-    },
-    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
-    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
-], []);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -160,6 +119,46 @@ export default function UserHeader() {
     
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navItems = useMemo(() => [
+    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
+    {
+      label: "Conference",
+      href: "/conference",
+      icon: Presentation,
+      description: "Explore our events.",
+      subItems: [
+        { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
+        { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart, description: "Explore our event archive." },
+        { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
+        { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
+      ],
+    },
+    {
+      label: "Publications",
+      href: "/publications",
+      icon: Library,
+      description: "Browse published work.",
+      subItems: [
+        { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
+        { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
+        { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
+      ],
+    },
+     {
+      label: "About",
+      href: "/about",
+      icon: ImageIcon,
+      description: "Learn more about us.",
+      subItems: [
+        { href: "/conference/about-conference", title: "About Conference", icon: Info, description: "Our mission in conferencing." },
+        { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
+        { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
+      ],
+    },
+    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
+    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
+], [upcomingConferences, lifeScienceConferences]);
 
   return (
     <header
@@ -217,12 +216,6 @@ export default function UserHeader() {
                     <div className={cn("grid grid-cols-1 gap-1")}>
                        {item.label === "Conference" && (
                          <>
-                            <DropdownNavLink 
-                                href="/conference/about-conference"
-                                title="About Conferences"
-                                icon={Info} 
-                                description="Our mission in conferencing."
-                            />
                              {upcomingConferences.length > 0 && (
                               <Popover>
                                   <PopoverTrigger asChild>
@@ -259,7 +252,7 @@ export default function UserHeader() {
                                     <button className="group relative flex w-full select-none items-center justify-between rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
                                             <div className="flex items-center gap-2 text-sm font-medium">
                                                 <FlaskConical className="h-4 w-4 text-primary/80" />
-                                                <span>Upcoming Conferences</span>
+                                                <span>Life Science Conferences</span>
                                             </div>
                                             <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:-rotate-90" />
                                     </button>
@@ -291,9 +284,9 @@ export default function UserHeader() {
                 </PopoverContent>
               </Popover>
             ) : (
-              <Link key={item.label} href={item.href} className="text-sm font-medium text-foreground">
-                <Button variant="ghost">{item.label}</Button>
-              </Link>
+              <Button asChild variant="ghost" key={item.label}>
+                <Link href={item.href} className="text-sm font-medium text-foreground">{item.label}</Link>
+              </Button>
             )
           )}
         </nav>
@@ -356,7 +349,7 @@ export default function UserHeader() {
                                {item.label === "Conference" && lifeScienceConferences.length > 0 && (
                                 <>
                                   <Separator className="my-2" />
-                                  <DropdownNavLink href="/conference/life-science" title="Upcoming Conferences" icon={FlaskConical} description="View all special life science events." />
+                                  <DropdownNavLink href="/conference/life-science" title="Life Science Conferences" icon={FlaskConical} description="View all special life science events." />
                                 </>
                               )}
                             </div>
