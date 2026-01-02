@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAD7HC9rZerF1dSpZzeiNylfCVJFMTlV08",
-  authDomain: "pure-research-insights.firebaseapp.com",
-  projectId: "pure-research-insights",
-  storageBucket: "pure-research-insights.firebasestorage.app",
-  messagingSenderId: "633801776834",
-  appId: "1:633801776834:web:7c944b51a6daded1b9a55b",
-  measurementId: "G-TJR558GW98"
+  apiKey: "AIzaSyCIR2DnldfINHfNfayPLAFAcpYA76oypsk",
+  authDomain: "innovation-conference.firebaseapp.com",
+  projectId: "innovation-conference",
+  storageBucket: "innovation-conference.firebasestorage.app",
+  messagingSenderId: "138936852972",
+  appId: "1:138936852972:web:efe695e3562443062fe0c9",
+  measurementId: "G-72LM52DNE4"
 };
 
 // Initialize Firebase
