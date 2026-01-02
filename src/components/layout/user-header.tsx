@@ -104,7 +104,7 @@ export default function UserHeader() {
         { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
         { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
         { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
-        { href: "/conference/life-science", title: "Life Science Conferences", icon: FlaskConical, description: "View our special life science events." },
+        // The Life Science Conferences section will be handled separately
       ],
     },
     {
@@ -213,24 +213,31 @@ export default function UserHeader() {
                         />
                       ))}
                        {item.label === "Conference" && lifeScienceConferences.length > 0 && (
-                        <>
-                          <Separator className="my-2" />
-                          <p className="px-3 py-1 text-xs font-semibold text-muted-foreground">Special Life Science Events</p>
-                          {lifeScienceConferences.slice(0, 2).map((conf) => (
-                             <a
-                                key={conf.id}
-                                href={conf.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground"
-                              >
-                                <div className="flex items-center gap-2 text-sm font-medium leading-none">
-                                  <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
-                                  <span className="truncate">{conf.heading}</span>
+                        <Popover>
+                            <PopoverTrigger asChild>
+                               <button className="group relative flex w-full select-none items-center justify-between rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
+                                    <div className="flex items-center gap-2 text-sm font-medium">
+                                        <FlaskConical className="h-4 w-4 text-primary/80" />
+                                        <span>Life Science Conferences</span>
+                                    </div>
+                                    <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:-rotate-90" />
+                               </button>
+                            </PopoverTrigger>
+                            <PopoverContent side="right" align="start" className="p-2 w-[300px]">
+                                <div className="grid grid-cols-1 gap-1">
+                                    {lifeScienceConferences.slice(0, 4).map(conf => (
+                                        <a key={conf.id} href={conf.link} target="_blank" rel="noopener noreferrer" className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
+                                            <div className="flex items-center gap-2 text-sm font-medium leading-none">
+                                                <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
+                                                <span className="truncate">{conf.heading}</span>
+                                            </div>
+                                        </a>
+                                    ))}
+                                    <Separator className="my-2" />
+                                    <DropdownNavLink href="/conference/life-science" title="All Life Science Conferences" icon={FlaskConical} description="View all special life science events." />
                                 </div>
-                              </a>
-                          ))}
-                        </>
+                            </PopoverContent>
+                        </Popover>
                       )}
                     </div>
                 </PopoverContent>
@@ -301,21 +308,7 @@ export default function UserHeader() {
                                {item.label === "Conference" && lifeScienceConferences.length > 0 && (
                                 <>
                                   <Separator className="my-2" />
-                                  <p className="px-3 py-1 text-xs font-semibold text-muted-foreground">Special Life Science Events</p>
-                                  {lifeScienceConferences.slice(0, 2).map((conf) => (
-                                    <a
-                                        key={conf.id}
-                                        href={conf.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground"
-                                      >
-                                        <div className="flex items-center gap-2 text-sm font-medium leading-none">
-                                          <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
-                                          <span className="truncate">{conf.heading}</span>
-                                        </div>
-                                      </a>
-                                  ))}
+                                  <DropdownNavLink href="/conference/life-science" title="Life Science Conferences" icon={FlaskConical} description="View all special life science events." />
                                 </>
                               )}
                             </div>
