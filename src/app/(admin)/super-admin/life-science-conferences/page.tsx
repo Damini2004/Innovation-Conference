@@ -1,4 +1,4 @@
-// src/app/(admin)/super-admin/life-science-conferences/page.tsx
+
 "use client";
 
 import * as React from "react";
@@ -17,7 +17,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   AlertDialog,
@@ -29,19 +28,42 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { PlusCircle, Edit, Trash2, ChevronsUpDown, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { getLifeScienceConferences, addLifeScienceConference, updateLifeScienceConference, deleteLifeScienceConference, LifeScienceConference, LifeScienceConferenceData } from "@/services/lifeScienceConferenceService";
+import {
+  getLifeScienceConferences,
+  addLifeScienceConference,
+  updateLifeScienceConference,
+  deleteLifeScienceConference,
+  LifeScienceConference,
+  LifeScienceConferenceData,
+} from "@/services/lifeScienceConferenceService";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { getSubAdmins, SubAdmin } from "@/services/subAdminService";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+
+/* ---------------------------- FORM SCHEMA ---------------------------- */
 
 const formSchema = z.object({
   heading: z.string().min(5, "Heading must be at least 5 characters."),
@@ -49,204 +71,236 @@ const formSchema = z.object({
   assignedSubAdminId: z.string().optional(),
 });
 
-const LifeScienceConferenceForm = ({
-    onSubmit,
-    defaultValues,
-    isSubmitting,
-    buttonText,
-    subAdmins,
+/* ---------------------------- FORM COMPONENT ---------------------------- */
+
+function LifeScienceConferenceForm({
+  onSubmit,
+  defaultValues,
+  isSubmitting,
+  buttonText,
+  subAdmins,
 }: {
-    onSubmit: (values: LifeScienceConferenceData) => void;
-    defaultValues?: Partial<LifeScienceConferenceData>;
-    isSubmitting: boolean;
-    buttonText: string;
-    subAdmins: SubAdmin[];
-}) => {
-    const form = useForm<LifeScienceConferenceData>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            heading: defaultValues?.heading || "",
-            link: defaultValues?.link || "",
-            assignedSubAdminId: defaultValues?.assignedSubAdminId || undefined,
-        },
-    });
+  onSubmit: (values: LifeScienceConferenceData) => void;
+  defaultValues?: Partial<LifeScienceConferenceData>;
+  isSubmitting: boolean;
+  buttonText: string;
+  subAdmins: SubAdmin[];
+}) {
+  const form = useForm<LifeScienceConferenceData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      heading: "",
+      link: "",
+      assignedSubAdminId: undefined,
+    },
+  });
 
-    const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+  React.useEffect(() => {
+    if (defaultValues) {
+      form.reset(defaultValues);
+    }
+  }, [defaultValues, form]);
 
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                    control={form.control}
-                    name="heading"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Heading</FormLabel>
-                            <FormControl>
-                                <Input placeholder="e.g., International Conference on Genomics" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="link"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Link</FormLabel>
-                            <FormControl>
-                                <Input type="url" placeholder="https://example.com/conference" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                 <FormField control={form.control} name="assignedSubAdminId" render={({ field }) => ( 
-                    <FormItem className="flex flex-col">
-                        <FormLabel>Assign Sub-Admin (Optional)</FormLabel>
-                        <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                            <PopoverTrigger asChild>
-                                <FormControl>
-                                    <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value && "text-muted-foreground")} >
-                                        {field.value ? subAdmins.find( (admin) => admin.id === field.value )?.name : "Select Sub-Admin"}
-                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                    </Button>
-                                </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
-                                <Command>
-                                    <CommandInput placeholder="Search sub-admins..." />
-                                    <CommandList>
-                                        <CommandEmpty>No approved sub-admins found.</CommandEmpty>
-                                        <CommandGroup>
-                                            <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", undefined); setIsPopoverOpen(false); }} >
-                                                None
-                                            </CommandItem>
-                                            {subAdmins.map((admin) => (
-                                                <CommandItem value={admin.name} key={admin.id} onSelect={() => { form.setValue("assignedSubAdminId", admin.id); setIsPopoverOpen(false); }} >
-                                                    <Check className={cn("mr-2 h-4 w-4", admin.id === field.value ? "opacity-100" : "opacity-0" )}/>
-                                                    {admin.name}
-                                                </CommandItem>
-                                            ))}
-                                        </CommandGroup>
-                                    </CommandList>
-                                </Command>
-                            </PopoverContent>
-                        </Popover>
-                        <FormMessage />
-                    </FormItem>
-                )} />
-                <Button type="submit" disabled={isSubmitting} className="w-full">
-                    {isSubmitting ? "Saving..." : buttonText}
-                </Button>
-            </form>
-        </Form>
-    );
-};
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="heading"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Heading</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Conference heading" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="link"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Link</FormLabel>
+              <FormControl>
+                <Input {...field} type="url" placeholder="https://example.com" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="assignedSubAdminId"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Assign Sub-Admin (Optional)</FormLabel>
+
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className="justify-between"
+                  >
+                    {field.value
+                      ? subAdmins.find((a) => a.id === field.value)?.name
+                      : "Select Sub-Admin"}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+
+                <PopoverContent className="p-0">
+                  <Command>
+                    <CommandInput placeholder="Search sub-admins..." />
+                    <CommandList>
+                      <CommandEmpty>No sub-admins found.</CommandEmpty>
+
+                      <CommandGroup>
+                        <CommandItem
+                          value="none"
+                          onSelect={() => {
+                            form.setValue("assignedSubAdminId", undefined, {
+                              shouldDirty: true,
+                            });
+                            setOpen(false);
+                          }}
+                        >
+                          None
+                        </CommandItem>
+
+                        {subAdmins.map((admin) => (
+                          <CommandItem
+                            key={admin.id}
+                            value={admin.id}
+                            onSelect={(value) => {
+                              form.setValue("assignedSubAdminId", value, {
+                                shouldDirty: true,
+                              });
+                              setOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                field.value === admin.id
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {admin.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit" disabled={isSubmitting} className="w-full">
+          {isSubmitting ? "Saving..." : buttonText}
+        </Button>
+      </form>
+    </Form>
+  );
+}
+
+/* ---------------------------- PAGE ---------------------------- */
 
 export default function ManageLifeScienceConferencesPage() {
   const [conferences, setConferences] = React.useState<LifeScienceConference[]>([]);
   const [subAdmins, setSubAdmins] = React.useState<SubAdmin[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [submitting, setSubmitting] = React.useState(false);
 
-  const [isAddDialogOpen, setIsAddDialogOpen] = React.useState(false);
-  const [isEditDialogOpen, setIsEditDialogOpen] = React.useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
+  const [addOpen, setAddOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
 
-  const [selectedConference, setSelectedConference] = React.useState<LifeScienceConference | null>(null);
+  const [selected, setSelected] = React.useState<LifeScienceConference | null>(null);
   const { toast } = useToast();
 
-  const fetchData = React.useCallback(async () => {
-    setIsLoading(true);
+  const fetchData = async () => {
+    setLoading(true);
     try {
-      const [confData, adminData] = await Promise.all([
+      const [c, a] = await Promise.all([
         getLifeScienceConferences(),
         getSubAdmins({ approvedOnly: true }),
       ]);
-      setConferences(confData);
-      setSubAdmins(adminData);
-    } catch (error) {
-      toast({ title: "Error", description: "Could not fetch necessary data.", variant: "destructive" });
+      setConferences(c);
+      setSubAdmins(a);
+    } catch {
+      toast({ title: "Error loading data", variant: "destructive" });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  }, [toast]);
+  };
 
   React.useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
-  const handleAddSubmit = async (values: LifeScienceConferenceData) => {
-    setIsSubmitting(true);
-    const result = await addLifeScienceConference(values);
-    if (result.success) {
-      toast({ title: "Success!", description: "Conference listing added." });
-      setIsAddDialogOpen(false);
+  /* ---------------------------- ACTIONS ---------------------------- */
+
+  const add = async (v: LifeScienceConferenceData) => {
+    setSubmitting(true);
+    const r = await addLifeScienceConference(v);
+    setSubmitting(false);
+
+    if (r.success) {
+      toast({ title: "Conference added" });
+      setAddOpen(false);
       fetchData();
-    } else {
-      toast({ title: "Error", description: result.message, variant: "destructive" });
-    }
-    setIsSubmitting(false);
-  };
-  
-  const handleEditSubmit = async (values: LifeScienceConferenceData) => {
-      if (!selectedConference) return;
-      setIsSubmitting(true);
-      const result = await updateLifeScienceConference(selectedConference.id, values);
-      if (result.success) {
-          toast({ title: "Success!", description: "Conference listing updated." });
-          setIsEditDialogOpen(false);
-          fetchData();
-      } else {
-          toast({ title: "Error", description: result.message, variant: "destructive" });
-      }
-      setIsSubmitting(false);
-  };
-  
-  const handleDeleteConfirm = async () => {
-    if (!selectedConference) return;
-    const result = await deleteLifeScienceConference(selectedConference.id);
-    if (result.success) {
-        toast({ title: "Success!", description: "Conference listing deleted."});
-        setIsDeleteDialogOpen(false);
-        fetchData();
-    } else {
-        toast({ title: "Error", description: result.message, variant: "destructive" });
     }
   };
 
-  const getAdminNameById = (adminId?: string): string => {
-    if (!adminId) return 'Unassigned';
-    return subAdmins.find(admin => admin.id === adminId)?.name || 'Unknown Admin';
+  const edit = async (v: LifeScienceConferenceData) => {
+    if (!selected) return;
+    setSubmitting(true);
+    const r = await updateLifeScienceConference(selected.id, v);
+    setSubmitting(false);
+
+    if (r.success) {
+      toast({ title: "Conference updated" });
+      setEditOpen(false);
+      fetchData();
+    }
   };
 
+  const remove = async () => {
+    if (!selected) return;
+    const r = await deleteLifeScienceConference(selected.id);
+
+    if (r.success) {
+      toast({ title: "Conference deleted" });
+      setDeleteOpen(false);
+      fetchData();
+    }
+  };
+
+  /* ---------------------------- UI ---------------------------- */
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Life Science Conferences</h1>
-          <p className="text-muted-foreground">Manage the special conference listings for the sidebar.</p>
+          <h1 className="text-2xl font-bold">Life Science Conferences</h1>
+          <p className="text-muted-foreground">Manage conference listings</p>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-            <DialogTrigger asChild>
-                <Button><PlusCircle className="mr-2 h-4 w-4" /> Add Listing</Button>
-            </DialogTrigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>Add New Listing</DialogTitle>
-                    <DialogDescription>Enter the heading and link for the new conference.</DialogDescription>
-                </DialogHeader>
-                <LifeScienceConferenceForm 
-                    onSubmit={handleAddSubmit} 
-                    isSubmitting={isSubmitting} 
-                    buttonText="Add Conference"
-                    subAdmins={subAdmins}
-                />
-            </DialogContent>
-        </Dialog>
+        <Button onClick={() => setAddOpen(true)}>
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Add Listing
+        </Button>
       </div>
 
       <Card>
@@ -257,27 +311,46 @@ export default function ManageLifeScienceConferencesPage() {
                 <TableHead>Heading</TableHead>
                 <TableHead>Link</TableHead>
                 <TableHead>Assigned To</TableHead>
-                <TableHead className="w-[100px]">Actions</TableHead>
+                <TableHead />
               </TableRow>
             </TableHeader>
             <TableBody>
-              {isLoading ? (
-                <TableRow><TableCell colSpan={4} className="h-24 text-center">Loading...</TableCell></TableRow>
-              ) : conferences.length === 0 ? (
-                <TableRow><TableCell colSpan={4} className="h-24 text-center">No listings found.</TableCell></TableRow>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={4} className="text-center">
+                    Loading...
+                  </TableCell>
+                </TableRow>
               ) : (
-                conferences.map((conf) => (
-                  <TableRow key={conf.id}>
-                    <TableCell className="font-medium">{conf.heading}</TableCell>
-                    <TableCell><a href={conf.link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate">{conf.link}</a></TableCell>
-                    <TableCell>{getAdminNameById(conf.assignedSubAdminId)}</TableCell>
+                conferences.map((c) => (
+                  <TableRow key={c.id}>
+                    <TableCell>{c.heading}</TableCell>
+                    <TableCell>{c.link}</TableCell>
+                    <TableCell>
+                      {subAdmins.find((a) => a.id === c.assignedSubAdminId)?.name ||
+                        "Unassigned"}
+                    </TableCell>
                     <TableCell className="flex gap-2">
-                        <Button variant="outline" size="icon" onClick={() => { setSelectedConference(conf); setIsEditDialogOpen(true); }}>
-                            <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button variant="destructive" size="icon" onClick={() => { setSelectedConference(conf); setIsDeleteDialogOpen(true); }}>
-                            <Trash2 className="h-4 w-4" />
-                        </Button>
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={() => {
+                          setSelected(c);
+                          setEditOpen(true);
+                        }}
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="destructive"
+                        onClick={() => {
+                          setSelected(c);
+                          setDeleteOpen(true);
+                        }}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))
@@ -286,36 +359,51 @@ export default function ManageLifeScienceConferencesPage() {
           </Table>
         </CardContent>
       </Card>
-      
-      {/* Edit Dialog */}
-      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-          <DialogContent>
-              <DialogHeader>
-                  <DialogTitle>Edit Listing</DialogTitle>
-                  <DialogDescription>Update the details for this conference listing.</DialogDescription>
-              </DialogHeader>
-              <LifeScienceConferenceForm 
-                onSubmit={handleEditSubmit} 
-                isSubmitting={isSubmitting} 
-                buttonText="Save Changes"
-                defaultValues={selectedConference || {}}
-                subAdmins={subAdmins}
-              />
-          </DialogContent>
+
+      {/* ADD */}
+      <Dialog open={addOpen} onOpenChange={setAddOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Conference</DialogTitle>
+            <DialogDescription>Create a new listing</DialogDescription>
+          </DialogHeader>
+          <LifeScienceConferenceForm
+            onSubmit={add}
+            isSubmitting={submitting}
+            buttonText="Add"
+            subAdmins={subAdmins}
+          />
+        </DialogContent>
       </Dialog>
-      
-      {/* Delete Confirmation */}
-      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+
+      {/* EDIT */}
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Conference</DialogTitle>
+          </DialogHeader>
+          <LifeScienceConferenceForm
+            onSubmit={edit}
+            isSubmitting={submitting}
+            buttonText="Save"
+            defaultValues={selected || {}}
+            subAdmins={subAdmins}
+          />
+        </DialogContent>
+      </Dialog>
+
+      {/* DELETE */}
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>Delete listing?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the listing for "{selectedConference?.heading}".
+              This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteConfirm}>Delete</AlertDialogAction>
+            <AlertDialogAction onClick={remove}>Delete</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
