@@ -62,7 +62,6 @@ const LifeScienceConferenceForm = ({
     buttonText: string;
     subAdmins: SubAdmin[];
 }) => {
-    const [openCombobox, setOpenCombobox] = React.useState(false);
     const form = useForm<LifeScienceConferenceData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -104,35 +103,35 @@ const LifeScienceConferenceForm = ({
                  <FormField control={form.control} name="assignedSubAdminId" render={({ field }) => ( 
                     <FormItem className="flex flex-col">
                         <FormLabel>Assign Sub-Admin (Optional)</FormLabel>
-                        <FormControl>
-                            <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
-                                <PopoverTrigger asChild>
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <FormControl>
                                     <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value && "text-muted-foreground")} >
                                         {field.value && field.value !== "none" ? subAdmins.find( (admin) => admin.id === field.value )?.name : "Select Sub-Admin"}
                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                     </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
-                                    <Command>
-                                        <CommandInput placeholder="Search sub-admins..." />
-                                        <CommandList>
-                                            <CommandEmpty>No approved sub-admins found.</CommandEmpty>
-                                            <CommandGroup>
-                                                <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", "none"); setOpenCombobox(false); }} >
-                                                    None
+                                </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+                                <Command>
+                                    <CommandInput placeholder="Search sub-admins..." />
+                                    <CommandList>
+                                        <CommandEmpty>No approved sub-admins found.</CommandEmpty>
+                                        <CommandGroup>
+                                            <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", "none"); }} >
+                                                None
+                                            </CommandItem>
+                                            {subAdmins.map((admin) => (
+                                                <CommandItem value={admin.name} key={admin.id} onSelect={() => { form.setValue("assignedSubAdminId", admin.id); }} >
+                                                    <Check className={cn("mr-2 h-4 w-4", admin.id === field.value ? "opacity-100" : "opacity-0" )}/>
+                                                    {admin.name}
                                                 </CommandItem>
-                                                {subAdmins.map((admin) => (
-                                                    <CommandItem value={admin.name} key={admin.id} onSelect={() => { form.setValue("assignedSubAdminId", admin.id); setOpenCombobox(false); }} >
-                                                        <Check className={cn("mr-2 h-4 w-4", admin.id === field.value ? "opacity-100" : "opacity-0" )}/>
-                                                        {admin.name}
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
-                        </FormControl>
+                                            ))}
+                                        </CommandGroup>
+                                    </CommandList>
+                                </Command>
+                            </PopoverContent>
+                        </Popover>
                         <FormMessage />
                     </FormItem>
                 )} />
