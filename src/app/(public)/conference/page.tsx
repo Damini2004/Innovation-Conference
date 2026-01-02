@@ -15,7 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Search as SearchIcon, Eye } from "lucide-react";
+import { Calendar, Search as SearchIcon, Eye, MapPin, ArrowRight } from "lucide-react";
 import { getCurrentDateInIndia } from "@/lib/utils";
 import {
   Carousel,
@@ -118,122 +118,116 @@ export default function ConferencesPage() {
       </section>
 
         <div className="py-12 md:py-16">
-           <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Main Content */}
-                <div className="lg:col-span-8">
-                    <section>
-                        <div className="space-y-6">
-                            {isLoading ? (
-                                [...Array(5)].map((_, i) => (
-                                    <Card key={i} className="p-4"><Skeleton className="h-24 w-full" /></Card>
-                                ))
-                            ) : paginatedConferences.length > 0 ? (
-                                paginatedConferences.map(conference => (
-                                    <Card key={conference.id} className="overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="p-4 flex flex-col md:flex-row items-center gap-4">
-                                            <Image src={conference.imageSrc || 'https://placehold.co/120x120.png'} alt={conference.shortTitle} width={120} height={120} className="w-28 h-28 object-contain" data-ai-hint="logo brand"/>
-                                            <div className="text-center md:text-left flex-1 space-y-2">
-                                                <h4 className="font-bold text-base hover:text-primary"><Link href={`/conference/${conference.id}`}>{conference.title}</Link></h4>
-                                                <p className="text-sm text-primary font-semibold flex items-center justify-center md:justify-start gap-2"><Calendar className="h-4 w-4"/>{conference.date}</p>
-                                            </div>
-                                            <div className="text-center md:text-right space-y-2">
-                                                 <p className="text-sm font-bold flex items-center justify-center md:justify-end gap-2 text-primary hover:underline">
-                                                    <Image src="/gps-tracker.gif" alt="Location" width={24} height={24} unoptimized />
-                                                    {conference.location}
-                                                 </p>
-                                                 <Link href={`/conference/${conference.id}`} className="text-sm text-muted-foreground hover:text-primary flex items-center justify-center md:justify-end gap-1">
-                                                    <Eye className="h-4 w-4"/> View Details
-                                                 </Link>
+           <div className="container mx-auto px-4">
+                <section>
+                    <div className="space-y-8">
+                        {isLoading ? (
+                            [...Array(3)].map((_, i) => (
+                                <Card key={i} className="p-4"><Skeleton className="h-40 w-full" /></Card>
+                            ))
+                        ) : paginatedConferences.length > 0 ? (
+                            paginatedConferences.map(conference => (
+                                <Card key={conference.id} className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-transparent hover:border-primary">
+                                    <div className="grid grid-cols-1 md:grid-cols-12 items-center">
+                                        <div className="md:col-span-3 lg:col-span-2 p-6 flex justify-center items-center bg-muted/30 h-full">
+                                            <Image 
+                                                src={conference.imageSrc || 'https://placehold.co/150x150.png'} 
+                                                alt={conference.shortTitle} 
+                                                width={150} 
+                                                height={150} 
+                                                className="w-32 h-32 object-contain group-hover:scale-105 transition-transform" 
+                                                data-ai-hint="logo brand"
+                                            />
+                                        </div>
+                                        <div className="md:col-span-6 lg:col-span-7 p-6">
+                                            <h3 className="text-xl font-bold text-primary group-hover:text-primary/90 transition-colors">
+                                                <Link href={`/conference/${conference.id}`}>{conference.title}</Link>
+                                            </h3>
+                                            <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{conference.tagline || conference.shortTitle}</p>
+                                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm mt-4">
+                                                <div className="flex items-center gap-2 font-medium">
+                                                    <Calendar className="h-4 w-4 text-primary/80"/>
+                                                    <span>{conference.date}</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 font-medium">
+                                                    <MapPin className="h-4 w-4 text-primary/80"/>
+                                                    <span>{conference.location}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </Card>
-                                ))
-                            ) : (
-                                <div className="text-center py-16">
-                                    <p className="text-muted-foreground">
-                                        No upcoming conferences found. Please check back later.
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                         {upcomingConferences.length > 0 && (
-                             <div className="flex items-center justify-between mt-8">
-                                <div className="text-sm text-muted-foreground">
-                                    Showing {paginatedConferences.length} of {upcomingConferences.length} conferences.
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="flex items-center gap-2">
-                                        <p className="text-sm font-medium">Rows per page</p>
-                                        <Select
-                                            value={`${rowsPerPage}`}
-                                            onValueChange={(value) => {
-                                                setRowsPerPage(Number(value))
-                                                setCurrentPage(1)
-                                            }}
-                                        >
-                                            <SelectTrigger className="h-8 w-[70px]">
-                                                <SelectValue placeholder={`${rowsPerPage}`} />
-                                            </SelectTrigger>
-                                            <SelectContent side="top">
-                                                {[5, 10, 20, 30].map((pageSize) => (
-                                                    <SelectItem key={pageSize} value={`${pageSize}`}>
-                                                        {pageSize}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
+                                        <div className="md:col-span-3 lg:col-span-3 p-6 flex flex-col items-center justify-center md:items-end h-full border-t md:border-t-0 md:border-l">
+                                            <Button asChild className="w-full md:w-auto">
+                                                <Link href={`/conference/${conference.id}`}>
+                                                    View Details <ArrowRight className="ml-2 h-4 w-4"/>
+                                                </Link>
+                                            </Button>
+                                            <Link href="/submit-journal" className="mt-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                                                Submit Abstract
+                                            </Link>
+                                        </div>
                                     </div>
-                                    <div className="text-sm font-medium">
-                                        Page {currentPage} of {totalPages}
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                                            disabled={currentPage === 1}
-                                        >
-                                            Previous
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                                            disabled={currentPage === totalPages}
-                                        >
-                                            Next
-                                        </Button>
-                                    </div>
-                                </div>
+                                </Card>
+                            ))
+                        ) : (
+                            <div className="text-center py-16">
+                                <p className="text-muted-foreground">
+                                    No upcoming conferences found. Please check back later.
+                                </p>
                             </div>
                         )}
-                    </section>
-                </div>
-                {/* Sidebar */}
-                <aside className="lg:col-span-4 space-y-6">
-                     <Card>
-                        <CardHeader className="text-center bg-muted/50">
-                            <CardTitle>Indexed By</CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-4">
-                             <div className="grid grid-cols-2 gap-4">
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (1).png" width={120} height={50} alt="DOAJ" data-ai-hint="logo brand" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (2).png" width={120} height={50} alt="Scopus" data-ai-hint="logo company" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (3).png" width={120} height={50} alt="EBSCO" data-ai-hint="logo tech" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (4).png" width={120} height={50} alt="Crossref" data-ai-hint="logo business" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (5).png" width={120} height={50} alt="DOAJ" data-ai-hint="logo brand" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (6).png" width={120} height={50} alt="Scopus" data-ai-hint="logo company" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (7).png" width={120} height={50} alt="EBSCO" data-ai-hint="logo tech" className="object-contain" /></div>
-                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (8).png" width={120} height={50} alt="Crossref" data-ai-hint="logo business" className="object-contain" /></div>
-                           
-                           </div>
-                        </CardContent>
-                    </Card>
-                    <Card className="bg-red-600 text-white text-center p-6 animated bounceIn">
-                        <h3 className="text-xl font-bold">Life Science Conferences</h3>
-                        <Button variant="outline" className="mt-4 bg-white text-red-600 hover:bg-white/90">Visit Now</Button>
-                    </Card>
-                </aside>
+                    </div>
+                     {upcomingConferences.length > 0 && (
+                         <div className="flex items-center justify-between mt-8">
+                            <div className="text-sm text-muted-foreground">
+                                Showing {paginatedConferences.length} of {upcomingConferences.length} conferences.
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-2">
+                                    <p className="text-sm font-medium">Rows per page</p>
+                                    <Select
+                                        value={`${rowsPerPage}`}
+                                        onValueChange={(value) => {
+                                            setRowsPerPage(Number(value))
+                                            setCurrentPage(1)
+                                        }}
+                                    >
+                                        <SelectTrigger className="h-8 w-[70px]">
+                                            <SelectValue placeholder={`${rowsPerPage}`} />
+                                        </SelectTrigger>
+                                        <SelectContent side="top">
+                                            {[5, 10, 20, 30].map((pageSize) => (
+                                                <SelectItem key={pageSize} value={`${pageSize}`}>
+                                                    {pageSize}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="text-sm font-medium">
+                                    Page {currentPage} of {totalPages}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                        disabled={currentPage === 1}
+                                    >
+                                        Previous
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        Next
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </section>
             </div>
         </div>
     </div>
