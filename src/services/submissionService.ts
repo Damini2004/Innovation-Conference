@@ -1,9 +1,8 @@
-
 // src/services/submissionService.ts
 'use server';
 
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDocs, DocumentData, QueryDocumentSnapshot, orderBy, query, doc, updateDoc, getDoc, deleteDoc, where, writeBatch, runTransaction, increment } from 'firebase/firestore';
+import { collection, addDoc, getDocs, DocumentData, QueryDocumentSnapshot, orderBy, query, doc, updateDoc, getDoc, deleteDoc, where, writeBatch, runTransaction, increment, setDoc } from 'firebase/firestore';
 import { z } from 'zod';
 import { getConferenceById } from './conferenceService';
 import { sendEmail } from './emailService';
@@ -54,15 +53,15 @@ async function getNextSubmissionId(targetAcronym: string): Promise<string> {
             return 1;
         }
         const newCount = counterDoc.data().currentCount + 1;
-        if (newCount > 1000) {
-             throw new Error("Submission count for this target has exceeded the limit of 1000.");
+        if (newCount > 10000) {
+             throw new Error("Submission count for this target has exceeded the limit of 10,000.");
         }
         transaction.update(counterRef, { currentCount: newCount });
         return newCount;
     });
 
     // Format the ID with leading zeros
-    const formattedCount = String(newCount).padStart(3, '0');
+    const formattedCount = String(newCount).padStart(4, '0');
     return `${targetAcronym.toUpperCase()}-${formattedCount}`;
 }
 
