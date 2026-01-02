@@ -1,3 +1,4 @@
+
 // src/components/layout/user-header.tsx
 "use client";
 
@@ -50,6 +51,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { LifeScienceConference, getLifeScienceConferences } from "@/services/lifeScienceConferenceService";
+import { Separator } from "../ui/separator";
 
 
 const DropdownNavLink = ({
@@ -84,6 +87,7 @@ export default function UserHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const [lifeScienceConferences, setLifeScienceConferences] = useState<LifeScienceConference[]>([]);
 
   const navItems = useMemo(() => [
     { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
@@ -100,7 +104,7 @@ export default function UserHeader() {
         { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
         { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
         { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
-        { href: "/conference/life-science", title: "Life Science Conferences", icon: FlaskConical, description: "View our special life science events." },
+        { href: "/conference/life-science", title: "All Life Science Conferences", icon: FlaskConical, description: "View all special life science events." },
       ],
     },
     {
@@ -133,6 +137,18 @@ export default function UserHeader() {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
+    
+    async function fetchLifeScienceConferences() {
+        try {
+            const data = await getLifeScienceConferences();
+            setLifeScienceConferences(data);
+        } catch (error) {
+            console.error("Failed to fetch life science conferences for header.");
+        }
+    }
+    
+    fetchLifeScienceConferences();
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -188,7 +204,7 @@ export default function UserHeader() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("p-2 w-[250px]")}>
+                <PopoverContent className={cn("p-2 w-[300px]")}>
                     <div className={cn("grid grid-cols-1 gap-1")}>
                       {item.subItems.map((subItem) => (
                         <DropdownNavLink 
@@ -196,6 +212,26 @@ export default function UserHeader() {
                             {...subItem} 
                         />
                       ))}
+                       {item.label === "Conference" && lifeScienceConferences.length > 0 && (
+                        <>
+                          <Separator className="my-2" />
+                          <p className="px-3 py-1 text-xs font-semibold text-muted-foreground">Special Life Science Events</p>
+                          {lifeScienceConferences.slice(0, 2).map((conf) => (
+                             <a
+                                key={conf.id}
+                                href={conf.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground"
+                              >
+                                <div className="flex items-center gap-2 text-sm font-medium leading-none">
+                                  <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
+                                  <span className="truncate">{conf.heading}</span>
+                                </div>
+                              </a>
+                          ))}
+                        </>
+                      )}
                     </div>
                 </PopoverContent>
               </Popover>
