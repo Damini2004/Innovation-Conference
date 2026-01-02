@@ -67,14 +67,15 @@ export default function LoginForm() {
                 title: "Login Successful",
                 description: `Redirecting to ${values.role} dashboard...`,
             });
-            router.push(`/${values.role}`);
-            router.refresh(); // Refresh to ensure layout gets new cookie state
+            // Use window.location.href for a full page reload to ensure the new cookie is picked up by the server/middleware
+            window.location.href = `/${values.role}`;
         } else {
             toast({
                 title: "Login Failed",
                 description: result.message || "An unknown error occurred.",
                 variant: "destructive",
             });
+            setIsSubmitting(false);
         }
     } catch (error) {
         toast({
@@ -82,9 +83,8 @@ export default function LoginForm() {
             description: "Could not connect to the server. Please try again.",
             variant: "destructive",
         });
+        setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   }
 
   return (
