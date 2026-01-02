@@ -247,7 +247,7 @@ function Hero() {
         <div className="container mx-auto px-4 md:px-6 max-w-4xl space-y-8">
             <div className="flex justify-center mb-4">
                 <Image
-                src="/reframed_logo-preview.png"
+                src="/InnovationConference.png"
                 alt="SustainTechCon Logo"
                 width={100}
                 height={100}

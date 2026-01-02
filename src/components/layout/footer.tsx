@@ -33,7 +33,7 @@ const Footer = () => {
                     {/* Column 1: Info */}
                     <div className="space-y-4">
                         <h3 className="text-lg font-semibold text-white">
-                            <Image src="/footer-logo.png" alt="Innovation Conferences" width={150} height={40} data-ai-hint="logo white" />
+                            <Image src="/InnovationConference.png" alt="Innovation Conferences" width={150} height={40} data-ai-hint="logo white" />
                         </h3>
                         <p className="text-sm">
                             If you think you have the passion,

@@ -170,7 +170,7 @@ export default function UserHeader() {
       </div>
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
-           <Image src="/logo1.png" alt="Impression Logo" width={110} height={30} />
+           <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={30} />
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
@@ -227,7 +227,7 @@ export default function UserHeader() {
                     className="flex items-center gap-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    <Image src="/logo1.png" alt="Impression Logo" width={110} height={30} />
+                    <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={30} />
                   </Link>
                 </SheetTitle>
               </SheetHeader>
