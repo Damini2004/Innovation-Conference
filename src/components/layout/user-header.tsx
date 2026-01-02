@@ -18,7 +18,6 @@ import {
   GalleryVertical,
   Heart,
   FileText,
-  Award,
   Calendar,
   Video,
   Clapperboard,
@@ -26,7 +25,6 @@ import {
   Building,
   Library,
   Lightbulb,
-  Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +34,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState, useEffect, ComponentType } from "react";
+import { useState, useEffect, ComponentType, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import {
   Popover,
@@ -50,51 +48,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-const conferenceSubItems = [
-  { href: "/conference/about-conference", title: "About Conferences", icon: Info, description: "Our mission in conferencing." },
-  { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", icon: Calendar, description: "Find our next events." },
-  { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart, description: "Explore our event archive." },
-  { href: "/conference/plan-conference", title: "Plan a Conference", icon: Briefcase, description: "Partner with us for your event." },
-  { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
-  { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
-  { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
-  { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
-];
-
-const publicationsSubItems = [
-    { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
-    { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
-    { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
-];
-
-const iprServicesSubItems = [
-    { href: "/ipr-services/patent", title: "Patent", description: "Secure your inventions.", icon: FileText },
-    { href: "/ipr-services/trademark", title: "Trademark", description: "Protect your brand identity.", icon: Award },
-    { href: "/ipr-services/copyright", title: "Copyright", description: "Safeguard your creative works.", icon: ShieldCheck },
-    { href: "/ipr-services/eb1-consultancy", title: "EB-1 Consultancy", description: "Expert visa assistance.", icon: Users },
-];
-
-const navItems = [
-    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
-    { href: "/about", label: "About", icon: Building, description: "Learn about our mission." },
-    {
-      label: "Conference",
-      href: "/conference",
-      icon: Presentation,
-      description: "Explore our events.",
-      subItems: conferenceSubItems,
-    },
-    {
-      label: "Publications",
-      href: "/publications",
-      icon: Library,
-      description: "Browse published work.",
-      subItems: publicationsSubItems,
-    },
-    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
-    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
-];
 
 
 const DropdownNavLink = ({
@@ -129,6 +82,40 @@ export default function UserHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  const navItems = useMemo(() => [
+    { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
+    { href: "/about", label: "About", icon: Building, description: "Learn about our mission." },
+    {
+      label: "Conference",
+      href: "/conference",
+      icon: Presentation,
+      description: "Explore our events.",
+      subItems: [
+        { href: "/conference/about-conference", title: "About Conferences", icon: Info, description: "Our mission in conferencing." },
+        { href: "/conference/upcoming-conferences", title: "Upcoming Conferences", icon: Calendar, description: "Find our next events." },
+        { href: "/conference/past-conferences", title: "Past Conferences", icon: Heart, description: "Explore our event archive." },
+        { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
+        { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
+        { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
+        { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
+        { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
+      ],
+    },
+    {
+      label: "Publications",
+      href: "/publications",
+      icon: Library,
+      description: "Browse published work.",
+      subItems: [
+        { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
+        { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
+        { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
+      ],
+    },
+    { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
+    { href: "/contact-us", label: "Contact Us", icon: Mail, description: "Get in touch with our team." },
+], []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -170,7 +157,7 @@ export default function UserHeader() {
       </div>
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
-           <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={30} />
+           <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={20} />
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
