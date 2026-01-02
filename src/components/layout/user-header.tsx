@@ -104,7 +104,7 @@ export default function UserHeader() {
         { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
         { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
         { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
-        { href: "/conference/life-science", title: "All Life Science Conferences", icon: FlaskConical, description: "View all special life science events." },
+        { href: "/conference/life-science", title: "Life Science Conferences", icon: FlaskConical, description: "View our special life science events." },
       ],
     },
     {
