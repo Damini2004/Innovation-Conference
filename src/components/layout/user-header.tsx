@@ -38,7 +38,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState, useEffect, ComponentType, useMemo } from "react";
-import { cn } from "@/lib/utils";
+import { cn, getCurrentDateInIndia } from "@/lib/utils";
 import {
   Popover,
   PopoverContent,
@@ -53,6 +53,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { LifeScienceConference, getLifeScienceConferences } from "@/services/lifeScienceConferenceService";
 import { Separator } from "../ui/separator";
+import { Conference, getConferences } from "@/services/conferenceService";
 
 
 const DropdownNavLink = ({
@@ -88,6 +89,8 @@ export default function UserHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const [lifeScienceConferences, setLifeScienceConferences] = useState<LifeScienceConference[]>([]);
+  const [upcomingConferences, setUpcomingConferences] = useState<Conference[]>([]);
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
   const navItems = useMemo(() => [
     { href: "/", label: "Home", icon: Home, description: "Return to the homepage." },
@@ -137,20 +140,32 @@ export default function UserHeader() {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
+    setCurrentDate(getCurrentDateInIndia());
     
-    async function fetchLifeScienceConferences() {
+    async function fetchHeaderData() {
         try {
-            const data = await getLifeScienceConferences();
-            setLifeScienceConferences(data);
+            const [lifeScienceData, allConferencesData] = await Promise.all([
+                getLifeScienceConferences(),
+                getConferences()
+            ]);
+            setLifeScienceConferences(lifeScienceData);
+
+            if (currentDate) {
+              const upcoming = allConferencesData
+                .filter(conf => conf.dateObject && conf.dateObject.getTime() >= currentDate.getTime())
+                .sort((a, b) => a.dateObject.getTime() - b.dateObject.getTime());
+              setUpcomingConferences(upcoming);
+            }
+            
         } catch (error) {
-            console.error("Failed to fetch life science conferences for header.");
+            console.error("Failed to fetch header data.");
         }
     }
     
-    fetchLifeScienceConferences();
+    fetchHeaderData();
     
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [currentDate]);
 
   return (
     <header
@@ -212,6 +227,37 @@ export default function UserHeader() {
                             {...subItem} 
                         />
                       ))}
+                       {item.label === "Conference" && (lifeScienceConferences.length > 0 || upcomingConferences.length > 0) && <Separator className="my-2" />}
+
+                       {item.label === "Conference" && upcomingConferences.length > 0 && (
+                        <Popover>
+                            <PopoverTrigger asChild>
+                               <button className="group relative flex w-full select-none items-center justify-between rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
+                                    <div className="flex items-center gap-2 text-sm font-medium">
+                                        <Calendar className="h-4 w-4 text-primary/80" />
+                                        <span>Upcoming Conferences</span>
+                                    </div>
+                                    <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:-rotate-90" />
+                               </button>
+                            </PopoverTrigger>
+                            <PopoverContent side="right" align="start" className="p-2 w-[300px]">
+                                <div className="grid grid-cols-1 gap-1">
+                                    {upcomingConferences.slice(0, 4).map(conf => (
+                                        <a key={conf.id} href={`/conference/${conf.id}`} className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
+                                            <div className="flex items-center gap-2 text-sm font-medium leading-none">
+                                                <Calendar className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
+                                                <span className="truncate">{conf.shortTitle}</span>
+                                            </div>
+                                             <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
+                                                {conf.title}
+                                            </p>
+                                        </a>
+                                    ))}
+                                </div>
+                            </PopoverContent>
+                        </Popover>
+                      )}
+
                        {item.label === "Conference" && lifeScienceConferences.length > 0 && (
                         <Popover>
                             <PopoverTrigger asChild>
@@ -337,3 +383,5 @@ export default function UserHeader() {
     </header>
   );
 }
+
+    
