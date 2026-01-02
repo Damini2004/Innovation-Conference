@@ -70,6 +70,7 @@ export default function LoginForm() {
             });
             
             const redirectTo = searchParams.get('redirect_to') || `/${values.role}`;
+            // Use window.location.href for a full page reload to ensure the new cookie is read
             window.location.href = redirectTo;
         } else {
             toast({
