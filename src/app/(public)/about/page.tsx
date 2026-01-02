@@ -55,28 +55,29 @@ const features = [
 export default async function AboutPage() {
   return (
     <>
-      <div className="page-header relative bg-gray-800 text-white py-16">
-        <div className="absolute inset-0">
-             <Image
-                src="https://picsum.photos/seed/header/1600/400"
-                alt="Abstract background"
-                data-ai-hint="abstract background"
-                fill
-                className="object-cover opacity-20"
-            />
-        </div>
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="page-header-inner text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl wow fadeInRight animated" data-wow-delay="300ms">
-              About Us
-            </h1>
-            <ol className="breadcrumb wow fadeInDown flex justify-center items-center gap-2 mt-4 text-white/80" data-wow-delay="300ms">
-              <li><Link href="/" className="hover:text-primary">Home</Link></li>
-              <li className="text-primary">/ About Us</li>
-            </ol>
+      <section className="relative bg-background overflow-hidden">
+          <div className="absolute inset-0 z-0">
+              <Image
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&h=600&auto=format=fit=crop"
+                  alt="About us background"
+                  data-ai-hint="team collaboration"
+                  fill
+                  className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60"></div>
           </div>
-        </div>
-      </div>
+          <div className="relative container mx-auto px-4 md:px-6 z-10 py-24 sm:py-32">
+              <div className="max-w-3xl">
+                  <ol className="flex items-center gap-2 text-white/80">
+                      <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                      <li className="text-primary">/ About Us</li>
+                  </ol>
+                  <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
+                      About Us
+                  </h1>
+              </div>
+          </div>
+      </section>
       
       <section id="about" className="section py-16 md:py-24">
         <div className="container mx-auto px-4">
