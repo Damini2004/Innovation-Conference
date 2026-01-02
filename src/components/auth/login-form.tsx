@@ -69,10 +69,10 @@ export default function LoginForm() {
                 description: `Redirecting to ${values.role} dashboard...`,
             });
             
+            // This is the definitive fix. Forcing a full page reload to the correct dashboard.
             const finalRedirectPath = searchParams.get('redirect_to') || result.redirectTo;
-            
-            // Perform a full page reload to ensure the new cookie is read correctly by the server.
             window.location.href = finalRedirectPath;
+
         } else {
             toast({
                 title: "Login Failed",
