@@ -25,6 +25,7 @@ import {
   Building,
   Library,
   Lightbulb,
+  Image as ImageIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -98,8 +99,6 @@ export default function UserHeader() {
         { href: "/conference/plan-conference", title: "Plan a Conference", icon: FileText, description: "Partner with us for your event." },
         { href: "/conference/upcoming-webinars", title: "Upcoming Webinars", icon: Video, description: "Join our live online sessions." },
         { href: "/conference/past-webinars", title: "Past Webinars", icon: Clapperboard, description: "Watch recordings of past webinars." },
-        { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
-        { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
       ],
     },
     {
@@ -111,6 +110,16 @@ export default function UserHeader() {
         { href: "/publications/overview", title: "Publication Policies", icon: FileText, description: "Ethics, plagiarism, and terms." },
         { href: "/publications/journal-support", title: "Journal Submission Support", icon: BookOpen, description: "Get help with your paper." },
         { href: "/publications/digital-library", title: "Digital Library", icon: Library, description: "Browse our published journals." },
+      ],
+    },
+     {
+      label: "Gallery",
+      href: "/gallery",
+      icon: ImageIcon,
+      description: "View our galleries.",
+      subItems: [
+        { href: "/conference/scientific-gallery", title: "Scientific Gallery", icon: GalleryVertical, description: "A showcase of research visuals." },
+        { href: "/conference/conference-videos", title: "Conference Videos", icon: Presentation, description: "Watch sessions from our events." },
       ],
     },
     { href: "/research-support", label: "Research Support", icon: Lightbulb, description: "Get expert assistance." },
@@ -155,9 +164,9 @@ export default function UserHeader() {
           </div>
         </div>
       </div>
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-14 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
-           <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={20} />
+           <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={20} className="h-auto w-28"/>
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
