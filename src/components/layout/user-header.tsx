@@ -106,7 +106,6 @@ export default function UserHeader() {
         // The Life Science Conferences section will be handled separately
       ],
     },
-    { href: "/about", label: "About", icon: Building, description: "Learn about our mission." },
     {
       label: "Publications",
       href: "/publications",
