@@ -2,14 +2,14 @@
 'use server';
 
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, orderBy, query } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, orderBy, query, Timestamp } from 'firebase/firestore';
 import { z } from 'zod';
 
 export interface LifeScienceConference {
     id: string;
     heading: string;
     link: string;
-    createdAt: any;
+    createdAt: string; // Changed to string to be serializable
 }
 
 const schema = z.object({
@@ -42,10 +42,16 @@ export async function getLifeScienceConferences(): Promise<LifeScienceConference
     try {
         const q = query(collection(db, "lifeScienceConferences"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
-        return querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-        } as LifeScienceConference));
+        return querySnapshot.docs.map(doc => {
+            const data = doc.data();
+            const createdAtTimestamp = data.createdAt as Timestamp;
+            return {
+                id: doc.id,
+                heading: data.heading,
+                link: data.link,
+                createdAt: createdAtTimestamp?.toDate().toISOString() || new Date().toISOString(),
+            } as LifeScienceConference;
+        });
     } catch (error) {
         console.error("Error fetching life science conferences: ", error);
         return [];
