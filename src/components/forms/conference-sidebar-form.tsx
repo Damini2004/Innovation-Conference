@@ -25,27 +25,27 @@ export default function ConferenceSidebarForm() {
   return (
     <Card>
       <CardHeader className="text-center bg-muted/50">
-        <CardTitle>Get Know More Details About</CardTitle>
-        <CardDescription>Conferences, Journal & Publication</CardDescription>
+        <CardTitle>Quick Inquiry</CardTitle>
+        <CardDescription>Conferences, Journals & Publications</CardDescription>
       </CardHeader>
       <CardContent className="pt-6">
         <form className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="Enter your name" />
+            <Label htmlFor="name-sidebar">Name</Label>
+            <Input id="name-sidebar" placeholder="Enter your name" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
+            <Label htmlFor="email-sidebar">Email Address</Label>
+            <Input id="email-sidebar" type="email" placeholder="Enter your email" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input id="phone" type="tel" placeholder="Enter your phone number" />
+            <Label htmlFor="phone-sidebar">Phone Number</Label>
+            <Input id="phone-sidebar" type="tel" placeholder="Enter your phone number" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="category">Category</Label>
+            <Label htmlFor="category-sidebar">Category</Label>
             <Select>
-              <SelectTrigger id="category">
+              <SelectTrigger id="category-sidebar">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>
@@ -54,12 +54,6 @@ export default function ConferenceSidebarForm() {
                 <SelectItem value="publication">Publication</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <div className="flex items-center space-x-2 pt-2">
-            <Checkbox id="captcha" />
-            <Label htmlFor="captcha" className="text-sm">
-              I'm not a robot
-            </Label>
           </div>
           <Button className="w-full">
             <Send className="mr-2 h-4 w-4" />
@@ -70,3 +64,5 @@ export default function ConferenceSidebarForm() {
     </Card>
   );
 }
+
+    

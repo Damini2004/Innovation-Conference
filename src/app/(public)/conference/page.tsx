@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/carousel";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { countries } from "@/lib/countries";
+import ConferenceSidebarForm from "@/components/forms/conference-sidebar-form";
 
 
 const months = [
@@ -118,8 +119,8 @@ export default function ConferencesPage() {
       </section>
 
         <div className="py-12 md:py-16">
-           <div className="container mx-auto px-4">
-                <section>
+           <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <section className="lg:col-span-8">
                     <div className="space-y-8">
                         {isLoading ? (
                             [...Array(3)].map((_, i) => (
@@ -228,8 +229,30 @@ export default function ConferencesPage() {
                         </div>
                     )}
                 </section>
+                <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
+                    <ConferenceSidebarForm />
+                     <Card>
+                        <CardHeader className="text-center bg-muted/50">
+                            <CardTitle>Indexed By</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (1).png" width={120} height={50} alt="DOAJ" data-ai-hint="logo brand" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (2).png" width={120} height={50} alt="Scopus" data-ai-hint="logo company" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (3).png" width={120} height={50} alt="EBSCO" data-ai-hint="logo tech" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (4).png" width={120} height={50} alt="Crossref" data-ai-hint="logo business" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (5).png" width={120} height={50} alt="DOAJ" data-ai-hint="logo brand" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (6).png" width={120} height={50} alt="Scopus" data-ai-hint="logo company" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (7).png" width={120} height={50} alt="EBSCO" data-ai-hint="logo tech" className="object-contain" /></div>
+                                <div className="p-2 border rounded-md flex items-center justify-center"><Image src="/photo (8).png" width={120} height={50} alt="Crossref" data-ai-hint="logo business" className="object-contain" /></div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </aside>
             </div>
         </div>
     </div>
   );
 }
+
+    
