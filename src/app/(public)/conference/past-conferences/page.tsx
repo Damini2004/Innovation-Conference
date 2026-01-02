@@ -16,7 +16,6 @@ import type { Conference } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
 import { getCurrentDateInIndia } from "@/lib/utils";
 import Image from "next/image";
-import Link from "next/link";
 import { Logo } from "@/components/icons";
 
 export default function PastConferencesPage() {
