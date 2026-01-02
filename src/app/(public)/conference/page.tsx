@@ -27,6 +27,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { countries } from "@/lib/countries";
 import ConferenceSidebarForm from "@/components/forms/conference-sidebar-form";
+import LifeScienceConferenceList from "@/components/ui/life-science-conference-list";
 
 
 const months = [
@@ -231,6 +232,7 @@ export default function ConferencesPage() {
                 </section>
                 <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
                     <ConferenceSidebarForm />
+                    <LifeScienceConferenceList />
                      <Card>
                         <CardHeader className="text-center bg-muted/50">
                             <CardTitle>Indexed By</CardTitle>
