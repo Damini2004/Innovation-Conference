@@ -1,6 +1,15 @@
 // src/app/(admin)/super-admin/conferences/page.tsx
 "use client";
 
+import * as React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,148 +17,365 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { PlusCircle } from "lucide-react";
-import AddConferenceForm from "@/components/forms/add-conference-form";
-import ConferencesTable from "@/components/tables/conferences-table";
-import { useState, useEffect, useCallback } from "react";
-import { getConferences, Conference } from "@/services/conferenceService";
+import { Card, CardContent } from "@/components/ui/card";
+import { PlusCircle, Edit, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import EditConferenceForm from "@/components/forms/edit-conference-form";
+import {
+  getLifeScienceConferences,
+  addLifeScienceConference,
+  updateLifeScienceConference,
+  deleteLifeScienceConference,
+  LifeScienceConference,
+  LifeScienceConferenceData,
+} from "@/services/lifeScienceConferenceService";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { getSubAdmins, SubAdmin } from "@/services/subAdminService";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+/* ---------------------------- FORM SCHEMA ---------------------------- */
+
+const formSchema = z.object({
+  heading: z.string().min(5, "Heading must be at least 5 characters."),
+  link: z.string().url("Please enter a valid URL."),
+  assignedSubAdminIds: z.array(z.string()).optional(),
+});
+
+/* ---------------------------- FORM COMPONENT ---------------------------- */
+
+function ConferenceForm({
+  onSubmit,
+  defaultValues,
+  isSubmitting,
+  buttonText,
+  subAdmins,
+}: {
+  onSubmit: (values: LifeScienceConferenceData) => void;
+  defaultValues?: Partial<LifeScienceConferenceData>;
+  isSubmitting: boolean;
+  buttonText: string;
+  subAdmins: SubAdmin[];
+}) {
+  const form = useForm<LifeScienceConferenceData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      heading: "",
+      link: "",
+      assignedSubAdminIds: [],
+    },
+  });
+
+  React.useEffect(() => {
+    if (defaultValues) {
+      form.reset({
+        heading: defaultValues.heading || "",
+        link: defaultValues.link || "",
+        assignedSubAdminIds: defaultValues.assignedSubAdminIds || [],
+      });
+    }
+  }, [defaultValues, form]);
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="heading"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Conference Name</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="e.g., International Conference on Genomics" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="link"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Link</FormLabel>
+              <FormControl>
+                <Input {...field} type="url" placeholder="https://example.com/conference" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="assignedSubAdminIds"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Assign Sub-Admin</FormLabel>
+                <p className="text-sm text-muted-foreground">
+                  Select a sub-admin to assign to this conference.
+                </p>
+              </div>
+              <ScrollArea className="h-40 w-full rounded-md border">
+                <div className="p-4 space-y-2">
+                    {subAdmins.map((item) => (
+                    <FormField
+                      key={item.id}
+                      control={form.control}
+                      name="assignedSubAdminIds"
+                      render={({ field }) => {
+                        return (
+                          <FormItem
+                            key={item.id}
+                            className="flex flex-row items-center space-x-3 space-y-0"
+                          >
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                  // For single selection, this logic works fine.
+                                  // If you want multi-select, this is already set up.
+                                  // For single select radio-button like behavior:
+                                  const newSelection = checked ? [item.id] : [];
+                                  field.onChange(newSelection);
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {item.name}
+                            </FormLabel>
+                          </FormItem>
+                        )
+                      }}
+                    />
+                    ))}
+                </div>
+              </ScrollArea>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" disabled={isSubmitting} className="w-full">
+          {isSubmitting ? "Saving..." : buttonText}
+        </Button>
+      </form>
+    </Form>
+  );
+}
+
+/* ---------------------------- PAGE ---------------------------- */
 
 export default function ManageConferencesPage() {
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
-  const [selectedConference, setSelectedConference] = useState<Conference | null>(null);
-  const [conferences, setConferences] = useState<Conference[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [conferences, setConferences] = React.useState<LifeScienceConference[]>([]);
+  const [subAdmins, setSubAdmins] = React.useState<SubAdmin[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [submitting, setSubmitting] = React.useState(false);
+
+  const [addOpen, setAddOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
+
+  const [selected, setSelected] = React.useState<LifeScienceConference | null>(null);
   const { toast } = useToast();
 
-  const fetchConferences = useCallback(async () => {
-    setIsLoading(true);
+  const fetchData = async () => {
+    setLoading(true);
     try {
-      const data = await getConferences();
-      setConferences(data);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Could not fetch conferences.",
-        variant: "destructive",
-      });
+      const [c, a] = await Promise.all([
+        getLifeScienceConferences(),
+        getSubAdmins({ approvedOnly: true }),
+      ]);
+      setConferences(c);
+      setSubAdmins(a);
+    } catch {
+      toast({ title: "Error loading data", variant: "destructive" });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  }, [toast]);
-
-  useEffect(() => {
-    fetchConferences();
-  }, [fetchConferences]);
-  
-  const handleConferenceAdded = () => {
-    setIsAddDialogOpen(false);
-    setIsSuccessAlertOpen(true);
-    fetchConferences(); // Re-fetch the data
   };
 
-  const handleConferenceUpdated = () => {
-    setIsEditDialogOpen(false);
-    setSelectedConference(null);
-    toast({
-      title: "Conference Updated!",
-      description: "The conference details have been saved.",
-    });
-    fetchConferences();
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  /* ---------------------------- ACTIONS ---------------------------- */
+
+  const add = async (v: LifeScienceConferenceData) => {
+    setSubmitting(true);
+    const r = await addLifeScienceConference(v);
+    setSubmitting(false);
+
+    if (r.success) {
+      toast({ title: "Conference added" });
+      setAddOpen(false);
+      fetchData();
+    }
   };
 
-  const handleConferenceDeleted = () => {
-    toast({
-      title: "Conference Deleted",
-      description: "The conference has been removed from the list.",
-    });
-    fetchConferences(); // Re-fetch the data
-  }
+  const edit = async (v: LifeScienceConferenceData) => {
+    if (!selected) return;
+    setSubmitting(true);
+    const r = await updateLifeScienceConference(selected.id, v);
+    setSubmitting(false);
 
-  const handleEditClick = (conference: Conference) => {
-    setSelectedConference(conference);
-    setIsEditDialogOpen(true);
+    if (r.success) {
+      toast({ title: "Conference updated" });
+      setEditOpen(false);
+      fetchData();
+    }
   };
 
+  const remove = async () => {
+    if (!selected) return;
+    const r = await deleteLifeScienceConference(selected.id);
+
+    if (r.success) {
+      toast({ title: "Conference deleted" });
+      setDeleteOpen(false);
+      fetchData();
+    }
+  };
+
+  /* ---------------------------- UI ---------------------------- */
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="flex justify-between">
         <div>
-            <h1 className="text-2xl font-bold tracking-tight">Conference Management</h1>
-            <p className="text-muted-foreground">Add, edit, or remove conference listings.</p>
+          <h1 className="text-2xl font-bold">Conference Management</h1>
+          <p className="text-muted-foreground">Add, edit, or remove conference listings.</p>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Add Conference
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-4xl max-h-[90vh] flex flex-col">
-            <DialogHeader>
-              <DialogTitle>Add New Conference</DialogTitle>
-              <DialogDescription>
-                Fill out the form below to add a new conference.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex-grow overflow-y-auto">
-              <AddConferenceForm onConferenceAdded={handleConferenceAdded} />
-            </div>
-          </DialogContent>
-        </Dialog>
+        <Button onClick={() => setAddOpen(true)}>
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Add Conference
+        </Button>
       </div>
 
-      <ConferencesTable 
-        conferences={conferences}
-        isLoading={isLoading}
-        onEdit={handleEditClick}
-        onConferenceDeleted={handleConferenceDeleted}
-      />
-      
-       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="sm:max-w-4xl max-h-[90vh] flex flex-col">
+      <Card>
+        <CardContent className="pt-6">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Conference Name</TableHead>
+                <TableHead>Link</TableHead>
+                <TableHead>Assigned To</TableHead>
+                <TableHead />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={4} className="text-center">
+                    Loading...
+                  </TableCell>
+                </TableRow>
+              ) : (
+                conferences.map((c) => (
+                  <TableRow key={c.id}>
+                    <TableCell>{c.heading}</TableCell>
+                    <TableCell>{c.link}</TableCell>
+                    <TableCell>
+                      {c.assignedSubAdminIds && c.assignedSubAdminIds.length > 0
+                        ? c.assignedSubAdminIds.map(id => subAdmins.find(a => a.id === id)?.name).filter(Boolean).join(', ')
+                        : "Unassigned"}
+                    </TableCell>
+                    <TableCell className="flex gap-2">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={() => {
+                          setSelected(c);
+                          setEditOpen(true);
+                        }}
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="destructive"
+                        onClick={() => {
+                          setSelected(c);
+                          setDeleteOpen(true);
+                        }}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      {/* ADD */}
+      <Dialog open={addOpen} onOpenChange={setAddOpen}>
+        <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit Conference</DialogTitle>
-            <DialogDescription>
-              Update the details for the conference below.
-            </DialogDescription>
+            <DialogTitle>Add New Conference</DialogTitle>
+            <DialogDescription>Enter the name and link for the new conference.</DialogDescription>
           </DialogHeader>
-          {selectedConference && (
-            <div className="flex-grow overflow-y-auto">
-              <EditConferenceForm
-                conference={selectedConference}
-                onConferenceUpdated={handleConferenceUpdated}
-              />
-            </div>
-          )}
+          <ConferenceForm
+            onSubmit={add}
+            isSubmitting={submitting}
+            buttonText="Add Conference"
+            subAdmins={subAdmins}
+          />
         </DialogContent>
       </Dialog>
 
-      <AlertDialog open={isSuccessAlertOpen} onOpenChange={setIsSuccessAlertOpen}>
+      {/* EDIT */}
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Conference</DialogTitle>
+          </DialogHeader>
+          <ConferenceForm
+            onSubmit={edit}
+            isSubmitting={submitting}
+            buttonText="Save Changes"
+            defaultValues={selected || {}}
+            subAdmins={subAdmins}
+          />
+        </DialogContent>
+      </Dialog>
+
+      {/* DELETE */}
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Conference Added!</AlertDialogTitle>
+            <AlertDialogTitle>Delete listing?</AlertDialogTitle>
             <AlertDialogDescription>
-              The new conference has been successfully added to the list.
+              This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setIsSuccessAlertOpen(false)}>OK</AlertDialogAction>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={remove}>Delete</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
