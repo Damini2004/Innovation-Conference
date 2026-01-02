@@ -3,13 +3,14 @@
 'use server';
 
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDocs, DocumentData, QueryDocumentSnapshot, orderBy, query, doc, updateDoc, getDoc, deleteDoc, where, writeBatch } from 'firebase/firestore';
+import { collection, addDoc, getDocs, DocumentData, QueryDocumentSnapshot, orderBy, query, doc, updateDoc, getDoc, deleteDoc, where, writeBatch, runTransaction, increment } from 'firebase/firestore';
 import { z } from 'zod';
 import { getConferenceById } from './conferenceService';
 import { sendEmail } from './emailService';
 import { getPaymentUrl } from './settingsService';
 import type { Submission, HistoryEntry } from '@/lib/types';
 import { Timestamp } from 'firebase/firestore';
+import { getJournalById } from './journalService';
 
 
 // Zod schema for form data validation
@@ -41,6 +42,29 @@ interface AddSubmissionData {
 }
 
 type UpdateSubmissionData = z.infer<typeof updateSubmissionSchema>;
+
+
+async function getNextSubmissionId(targetAcronym: string): Promise<string> {
+    const counterRef = doc(db, 'counters', `submission_${targetAcronym}`);
+
+    const newCount = await runTransaction(db, async (transaction) => {
+        const counterDoc = await transaction.get(counterRef);
+        if (!counterDoc.exists()) {
+            transaction.set(counterRef, { currentCount: 1 });
+            return 1;
+        }
+        const newCount = counterDoc.data().currentCount + 1;
+        if (newCount > 1000) {
+             throw new Error("Submission count for this target has exceeded the limit of 1000.");
+        }
+        transaction.update(counterRef, { currentCount: newCount });
+        return newCount;
+    });
+
+    // Format the ID with leading zeros
+    const formattedCount = String(newCount).padStart(3, '0');
+    return `${targetAcronym.toUpperCase()}-${formattedCount}`;
+}
 
 export async function addSubmission(data: AddSubmissionData): Promise<{ success: boolean; message: string }> {
   try {
@@ -88,21 +112,32 @@ export async function addSubmission(data: AddSubmissionData): Promise<{ success:
         await updateDoc(originalSubmissionRef, updatedSubmissionData);
 
     } else {
+        // Handle new submission with custom ID
+        let acronym = 'SUB'; 
         let assignedSubAdminId: string | undefined = undefined;
+
         if (submissionData.submissionType === 'conference') {
             const conferenceResult = await getConferenceById(submissionData.targetId);
-            if (conferenceResult.success && conferenceResult.conference?.editorChoice) {
-                assignedSubAdminId = conferenceResult.conference.editorChoice;
+            if (conferenceResult.success && conferenceResult.conference) {
+                acronym = conferenceResult.conference.shortTitle || 'CONF';
+                if (conferenceResult.conference.editorChoice) {
+                   assignedSubAdminId = conferenceResult.conference.editorChoice;
+                }
             }
         } else if (submissionData.submissionType === 'journal') {
-            const journalRef = doc(db, 'journals', submissionData.targetId);
-            const journalSnap = await getDoc(journalRef);
-            if (journalSnap.exists() && journalSnap.data().editorChoice) {
-                assignedSubAdminId = journalSnap.data().editorChoice;
+            const journalResult = await getJournalById(submissionData.targetId);
+            if (journalResult.success && journalResult.journal) {
+                acronym = journalResult.journal.journalName.substring(0,5).toUpperCase();
+                if (journalResult.journal.editorChoice) {
+                   assignedSubAdminId = journalResult.journal.editorChoice;
+                }
             }
         }
         
-        await addDoc(collection(db, 'submissions'), {
+        const newSubmissionId = await getNextSubmissionId(acronym);
+        const newSubmissionRef = doc(db, 'submissions', newSubmissionId);
+
+        await setDoc(newSubmissionRef, {
             ...submissionData,
             status: 'Verification Pending',
             submittedAt: new Date(),

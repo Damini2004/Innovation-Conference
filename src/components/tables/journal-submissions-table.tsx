@@ -1,3 +1,4 @@
+
 // src/components/tables/journal-submissions-table.tsx
 "use client";
 
@@ -224,7 +225,7 @@ export default function JournalSubmissionsTable({ submissions, isLoading, onData
                 ) : (
                     filteredSubmissions.map((submission) => (
                       <TableRow key={submission.id}>
-                        <TableCell className="font-mono text-xs">{submission.id.substring(0, 6)}...</TableCell>
+                        <TableCell className="font-mono text-xs">{submission.id}</TableCell>
                         <TableCell className="font-medium max-w-xs truncate">{submission.title}</TableCell>
                         <TableCell>{submission.fullName}</TableCell>
                         <TableCell>

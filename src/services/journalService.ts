@@ -81,6 +81,37 @@ export async function getJournals(): Promise<Journal[]> {
     }
 }
 
+export async function getJournalById(id: string): Promise<{ success: boolean; message: string; journal?: Journal }> {
+    try {
+        if (!id) {
+            return { success: false, message: 'Journal ID is required.' };
+        }
+        const docRef = doc(db, 'journals', id);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+            return { success: false, message: 'Journal not found.' };
+        }
+        
+        const data = docSnap.data();
+        const journal: Journal = {
+            id: docSnap.id,
+            journalName: data.journalName,
+            description: data.description,
+            status: data.status,
+            imageSrc: data.imageSrc,
+            editorChoice: data.editorChoice,
+        };
+
+        return { success: true, message: 'Journal fetched successfully.', journal };
+
+    } catch (error) {
+        const message = error instanceof Error ? error.message : 'An unexpected error occurred.';
+        return { success: false, message: `Failed to fetch journal: ${message}` };
+    }
+}
+
+
 export async function updateJournal(id: string, data: Partial<AddJournalData>): Promise<{ success: boolean; message: string; updatedJournal?: Journal }> {
     try {
         const validationResult = journalSchema.partial().safeParse(data);
