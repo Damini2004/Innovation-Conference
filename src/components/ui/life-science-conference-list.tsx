@@ -1,4 +1,4 @@
-// src/components/ui/life-science-conference-list.tsx
+// src/components/ui/upcoming-conference-list.tsx
 "use client";
 
 import * as React from "react";
@@ -6,10 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { getLifeScienceConferences, LifeScienceConference } from "@/services/lifeScienceConferenceService";
 import Link from "next/link";
-import { ArrowRight, FlaskConical } from "lucide-react";
+import { ArrowRight, CalendarCheck } from "lucide-react";
 import { Skeleton } from "./skeleton";
 
-export default function LifeScienceConferenceList() {
+export default function UpcomingConferenceList() {
     const [conferences, setConferences] = React.useState<LifeScienceConference[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const { toast } = useToast();
@@ -23,7 +23,7 @@ export default function LifeScienceConferenceList() {
             } catch (error) {
                 toast({
                     title: "Error",
-                    description: "Could not fetch Life Science conferences.",
+                    description: "Could not fetch upcoming conferences.",
                     variant: "destructive",
                 });
             } finally {
@@ -37,8 +37,8 @@ export default function LifeScienceConferenceList() {
         <Card className="bg-red-600 text-white">
             <CardHeader className="text-center">
                 <CardTitle className="flex items-center justify-center gap-2">
-                    <FlaskConical />
-                    Life Science Conferences
+                    <CalendarCheck />
+                    Upcoming Conference
                 </CardTitle>
             </CardHeader>
             <CardContent className="p-4">

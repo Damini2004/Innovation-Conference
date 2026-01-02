@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/carousel";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { countries } from "@/lib/countries";
-import LifeScienceConferenceList from "@/components/ui/life-science-conference-list";
+import UpcomingConferenceList from "@/components/ui/life-science-conference-list";
 
 
 const months = [
@@ -246,7 +246,7 @@ export default function UpcomingConferencesPage() {
                                                      </div>
                         </CardContent>
                     </Card>
-                    <LifeScienceConferenceList />
+                    <UpcomingConferenceList />
                 </aside>
             </div>
         </div>

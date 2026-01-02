@@ -13,12 +13,12 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { getLifeScienceConferences, LifeScienceConference } from "@/services/lifeScienceConferenceService";
 import Link from "next/link";
-import { ArrowRight, FlaskConical } from "lucide-react";
+import { ArrowRight, CalendarCheck } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-export default function LifeScienceConferencesPage() {
+export default function UpcomingConferencesPage() {
     const [conferences, setConferences] = React.useState<LifeScienceConference[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const { toast } = useToast();
@@ -32,7 +32,7 @@ export default function LifeScienceConferencesPage() {
             } catch (error) {
                 toast({
                     title: "Error",
-                    description: "Could not fetch Life Science conferences.",
+                    description: "Could not fetch upcoming conferences.",
                     variant: "destructive",
                 });
             } finally {
@@ -60,13 +60,13 @@ export default function LifeScienceConferencesPage() {
                         <ol className="flex items-center gap-2 text-white/80">
                             <li><Link href="/" className="hover:text-primary">Home</Link></li>
                             <li>/ <Link href="/conference" className="hover:text-primary">Conferences</Link></li>
-                            <li className="text-primary">/ Life Science Conferences</li>
+                            <li className="text-primary">/ Upcoming Conferences</li>
                         </ol>
                         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mt-4 text-white">
-                            Life Science Conferences
+                            Upcoming Conferences
                         </h1>
                         <p className="mt-4 text-lg text-white/90 max-w-2xl">
-                           A curated list of special upcoming conferences in the field of Life Sciences.
+                           A curated list of special upcoming conferences.
                         </p>
                     </div>
                 </div>
@@ -93,13 +93,13 @@ export default function LifeScienceConferencesPage() {
                         <Card key={conf.id} className="flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-lg border-primary/20">
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-3">
-                                    <FlaskConical className="h-6 w-6 text-primary" />
+                                    <CalendarCheck className="h-6 w-6 text-primary" />
                                     {conf.heading}
                                 </CardTitle>
                                 <CardDescription>Special Listing</CardDescription>
                             </CardHeader>
                             <CardContent className="flex-grow">
-                                <p className="text-sm text-muted-foreground">This is a featured conference in the life sciences. Click below for more details and registration information.</p>
+                                <p className="text-sm text-muted-foreground">This is a featured upcoming conference. Click below for more details and registration information.</p>
                             </CardContent>
                             <CardFooter>
                                 <Button asChild className="w-full">
@@ -112,7 +112,7 @@ export default function LifeScienceConferencesPage() {
                     ))
                 ) : (
                     <div className="col-span-full text-center py-16">
-                        <p className="text-muted-foreground">No special life science conferences are listed at this time.</p>
+                        <p className="text-muted-foreground">No special upcoming conferences are listed at this time.</p>
                     </div>
                 )}
                 </div>
