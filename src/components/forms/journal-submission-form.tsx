@@ -24,11 +24,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { getJournals, type Journal } from "@/services/journalService";
-import { getConferences, type Conference } from "@/services/conferenceService";
+import { getJournals } from "@/services/journalService";
+import { getLifeScienceConferences } from "@/services/lifeScienceConferenceService";
 import { addSubmission } from "@/services/submissionService";
 import { useRouter } from "next/navigation";
-import { getCurrentDateInIndia } from "@/lib/utils";
 import { User, FileText, UploadCloud } from "lucide-react";
 import { CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../ui/card";
 
@@ -94,10 +93,8 @@ export default function JournalSubmissionForm() {
         const journals = await getJournals();
         fetchedItems = journals.filter(j => j.status === 'Active').map(j => ({ id: j.id, name: j.journalName }));
       } else if (type === 'conference') {
-        const conferences = await getConferences();
-        const currentDate = getCurrentDateInIndia();
-        const upcomingConferences = conferences.filter(conf => conf.dateObject && conf.dateObject.getTime() >= currentDate.getTime());
-        fetchedItems = upcomingConferences.map(c => ({ id: c.id, name: c.title }));
+        const conferences = await getLifeScienceConferences();
+        fetchedItems = conferences.map(c => ({ id: c.id, name: c.heading }));
       }
       setItems(fetchedItems);
     } catch (error) {
