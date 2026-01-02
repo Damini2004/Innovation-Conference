@@ -1,27 +1,28 @@
 
+
 import Link from "next/link";
 import { Logo } from "@/components/icons";
 import Image from "next/image";
 
 const supportLinks = [
-    { href: "#", label: "Support" },
-    { href: "#", label: "Docs" },
+    { href: "/contact-us", label: "Support" },
+    { href: "/publications/overview", label: "Docs" },
     { href: "/contact-us", label: "Contact Us" },
 ]
 
 const learnMoreLinks = [
-    { href: "#", label: "How it Works" },
+    { href: "/conference/about-conference", label: "How it Works" },
     { href: "/about", label: "Blog" },
     { href: "/login", label: "Log In" },
     { href: "/submit-journal", label: "Sign Up" },
 ]
 
 const quickLinks = [
-    { href: "#", label: "Schedule" },
+    { href: "/conference/upcoming-conferences", label: "Schedule" },
     { href: "/conference/scientific-gallery", label: "Gallery" },
-    { href: "#", label: "Team" },
+    { href: "/about", label: "About" },
     { href: "/about", label: "Blog" },
-    { href: "#", label: "Pricing" },
+    { href: "/submit-journal", label: "Submit Paper" },
 ]
 
 
@@ -33,13 +34,10 @@ const Footer = () => {
                     {/* Column 1: Info */}
                     <div className="space-y-4">
                         <h3 className="text-lg font-semibold text-white">
-                            <Image src="/InnovationConference.png" alt="Innovation Conferences" width={150} height={40} data-ai-hint="logo white" />
+                            <Image src="/InnovationConference.png" alt="Innovation Conference Series" width={150} height={40} data-ai-hint="logo white" />
                         </h3>
                         <p className="text-sm">
-                            If you think you have the passion,
-                            attitude and capability to join us
-                            the next big software company
-                            s so that we can get the convers.
+                            Empowering Research • Enabling Innovation • Creating Impact
                         </p>
                     </div>
 
@@ -73,6 +71,11 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
+            </div>
+             <div className="border-t border-gray-700 py-4">
+                <p className="text-center text-xs">
+                    © Innovation Conference Series | Researcher Connect Innovation and Impact Pvt. Ltd.
+                </p>
             </div>
         </footer>
     );

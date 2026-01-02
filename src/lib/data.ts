@@ -1,7 +1,7 @@
 
 export const heroData = {
-    title: "Empowering Research & Innovation",
-    subtitle: "Your trusted partner for academic publishing, conference management, and intellectual property services.",
-    date: "Jan 25-28, 2025",
-    location: "San Francisco, CA"
+    title: "Innovation Conference Series",
+    subtitle: "A global platform dedicated to advancing research, innovation, and interdisciplinary collaboration across diverse academic and professional domains.",
+    date: "Annual Conference Series",
+    location: "Global & Virtual Events"
 }

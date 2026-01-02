@@ -1,3 +1,4 @@
+
 // src/app/(public)/layout.tsx
 "use client";
 
@@ -77,19 +78,19 @@ const ContactSection = () => {
                                  <div className="flex items-start gap-4">
                                     <MapPin className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                                     <div className="text-sm">
-                                        <p>202-Innovation Conferences, Planet Apartment, Jaywant Nagar, Omkar Nagar, Nagpur</p>
+                                        <p>Innovation Conference Series, A Unit of Researcher Connect Innovation and Impact Pvt. Ltd.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <Phone className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                                     <div className="text-sm">
-                                        <p>+91-7020095748</p>
+                                        <p>9890917528 | 9960266198</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <Mail className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                                     <div className="text-sm">
-                                        <p>pureresearchinsights@gmail.com</p>
+                                        <p>contact@researcherconnect.com</p>
                                     </div>
                                 </div>
                             </CardContent>

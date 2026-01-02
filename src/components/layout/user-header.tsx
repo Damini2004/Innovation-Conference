@@ -1,3 +1,4 @@
+
 // src/components/layout/user-header.tsx
 "use client";
 
@@ -25,7 +26,7 @@ import {
   Building,
   Library,
   Lightbulb,
-  Image as ImageIcon,
+  ImageIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -153,12 +154,12 @@ export default function UserHeader() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1.5">
               <Phone className="h-3 w-3" />
-              <span>+91-7020095748</span>
+              <span>9890917528 | 9960266198</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Mail className="h-3 w-3" />
-              <a href="mailto:pureresearchinsights@gmail.com" className="hover:underline">
-                pureresearchinsights@gmail.com
+              <a href="mailto:contact@researcherconnect.com" className="hover:underline">
+                contact@researcherconnect.com
               </a>
             </div>
           </div>
@@ -166,7 +167,7 @@ export default function UserHeader() {
       </div>
       <div className="container flex h-14 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
-           <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={20} className="h-auto w-28"/>
+           <Image src="/InnovationConference.png" alt="Innovation Conference Series Logo" width={110} height={20} className="h-auto w-28"/>
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
@@ -223,7 +224,7 @@ export default function UserHeader() {
                     className="flex items-center gap-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    <Image src="/InnovationConference.png" alt="Impression Logo" width={110} height={30} />
+                    <Image src="/InnovationConference.png" alt="Innovation Conference Series Logo" width={110} height={30} />
                   </Link>
                 </SheetTitle>
               </SheetHeader>

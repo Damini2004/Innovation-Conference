@@ -1,3 +1,4 @@
+
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 #
 # Allow crawling of all content
@@ -6,4 +7,4 @@ Disallow: /sub-admin/
 Disallow: /super-admin/
 Allow: /
 
-Sitemap: https://www.pureresearchinsights.com/sitemap.xml
+Sitemap: https://www.innovationconferences.org/sitemap.xml

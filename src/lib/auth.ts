@@ -1,7 +1,7 @@
 // src/lib/auth.ts
 import { jwtVerify, SignJWT } from 'jose';
 
-const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY || 'your-super-secret-jwt-key-that-is-at-least-32-bytes-long');
+const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY || 'h9F3kL2P8sQ7XvR5MZ4A6WcEJYB1D0Tn');
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
