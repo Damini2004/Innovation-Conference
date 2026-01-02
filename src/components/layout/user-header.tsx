@@ -258,42 +258,40 @@ export default function UserHeader() {
                                   </PopoverContent>
                               </Popover>
                             )}
+                             {lifeScienceConferences.length > 0 && (
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                    <button className="group relative flex w-full select-none items-center justify-between rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
+                                            <div className="flex items-center gap-2 text-sm font-medium">
+                                                <FlaskConical className="h-4 w-4 text-primary/80" />
+                                                <span>Life Science Conferences</span>
+                                            </div>
+                                            <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:-rotate-90" />
+                                    </button>
+                                    </PopoverTrigger>
+                                    <PopoverContent side="right" align="start" className="p-2 w-[300px]">
+                                        <div className="grid grid-cols-1 gap-1">
+                                            {lifeScienceConferences.slice(0, 4).map(conf => (
+                                                <a key={conf.id} href={conf.link} target="_blank" rel="noopener noreferrer" className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
+                                                    <div className="flex items-center gap-2 text-sm font-medium leading-none">
+                                                        <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
+                                                        <span className="truncate">{conf.heading}</span>
+                                                    </div>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </PopoverContent>
+                                </Popover>
+                            )}
                          </>
                        )}
                       {item.subItems.map((subItem) => (
-                         item.label === "Conference" && subItem.href === "/conference/about-conference" ? null :
+                         (item.label === "Conference" && subItem.href === "/conference/about-conference") ? null :
                         <DropdownNavLink 
                             key={subItem.href} 
                             {...subItem} 
                         />
                       ))}
-                       {item.label === "Conference" && lifeScienceConferences.length > 0 && <Separator className="my-2" />}
-
-                       {item.label === "Conference" && lifeScienceConferences.length > 0 && (
-                        <Popover>
-                            <PopoverTrigger asChild>
-                               <button className="group relative flex w-full select-none items-center justify-between rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
-                                    <div className="flex items-center gap-2 text-sm font-medium">
-                                        <FlaskConical className="h-4 w-4 text-primary/80" />
-                                        <span>Upcoming Conferences</span>
-                                    </div>
-                                    <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:-rotate-90" />
-                               </button>
-                            </PopoverTrigger>
-                            <PopoverContent side="right" align="start" className="p-2 w-[300px]">
-                                <div className="grid grid-cols-1 gap-1">
-                                    {lifeScienceConferences.slice(0, 4).map(conf => (
-                                        <a key={conf.id} href={conf.link} target="_blank" rel="noopener noreferrer" className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all duration-200 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/20 hover:scale-105 focus:bg-accent focus:text-accent-foreground">
-                                            <div className="flex items-center gap-2 text-sm font-medium leading-none">
-                                                <FlaskConical className="h-4 w-4 text-primary/80 transition-colors group-hover:text-primary" />
-                                                <span className="truncate">{conf.heading}</span>
-                                            </div>
-                                        </a>
-                                    ))}
-                                </div>
-                            </PopoverContent>
-                        </Popover>
-                      )}
                     </div>
                 </PopoverContent>
               </Popover>
