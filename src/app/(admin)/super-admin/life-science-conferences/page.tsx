@@ -67,7 +67,7 @@ const LifeScienceConferenceForm = ({
         defaultValues: {
             heading: defaultValues?.heading || "",
             link: defaultValues?.link || "",
-            assignedSubAdminId: defaultValues?.assignedSubAdminId || "none",
+            assignedSubAdminId: defaultValues?.assignedSubAdminId || undefined,
         },
     });
 
@@ -109,7 +109,7 @@ const LifeScienceConferenceForm = ({
                             <PopoverTrigger asChild>
                                 <FormControl>
                                     <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value && "text-muted-foreground")} >
-                                        {field.value && field.value !== "none" ? subAdmins.find( (admin) => admin.id === field.value )?.name : "Select Sub-Admin"}
+                                        {field.value ? subAdmins.find( (admin) => admin.id === field.value )?.name : "Select Sub-Admin"}
                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                     </Button>
                                 </FormControl>
@@ -120,7 +120,7 @@ const LifeScienceConferenceForm = ({
                                     <CommandList>
                                         <CommandEmpty>No approved sub-admins found.</CommandEmpty>
                                         <CommandGroup>
-                                            <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", "none"); setIsPopoverOpen(false); }} >
+                                            <CommandItem value={"none"} onSelect={() => { form.setValue("assignedSubAdminId", undefined); setIsPopoverOpen(false); }} >
                                                 None
                                             </CommandItem>
                                             {subAdmins.map((admin) => (

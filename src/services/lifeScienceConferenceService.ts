@@ -30,7 +30,7 @@ export async function addLifeScienceConference(data: LifeScienceConferenceData):
     
     const dataToSave = {
         ...validationResult.data,
-        assignedSubAdminId: validationResult.data.assignedSubAdminId === 'none' ? null : validationResult.data.assignedSubAdminId,
+        assignedSubAdminId: validationResult.data.assignedSubAdminId || null,
         createdAt: serverTimestamp(),
     }
 
@@ -73,7 +73,7 @@ export async function updateLifeScienceConference(id: string, data: LifeScienceC
         
         const dataToSave = {
             ...validationResult.data,
-            assignedSubAdminId: validationResult.data.assignedSubAdminId === 'none' ? null : validationResult.data.assignedSubAdminId,
+            assignedSubAdminId: validationResult.data.assignedSubAdminId || null,
             updatedAt: serverTimestamp()
         };
 
