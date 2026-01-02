@@ -69,7 +69,6 @@ export default function LoginForm() {
                 description: `Redirecting to ${values.role} dashboard...`,
             });
             
-            // Use the redirect_to param if it exists, otherwise use the path from the API response
             const finalRedirectPath = searchParams.get('redirect_to') || result.redirectTo;
             
             // Perform a full page reload to ensure the new cookie is read correctly by the server.
