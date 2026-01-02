@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -144,6 +145,7 @@ function LifeScienceConferenceForm({
                   <Button
                     variant="outline"
                     role="combobox"
+                    aria-expanded={isPopoverOpen}
                     className="justify-between"
                   >
                     {field.value
@@ -161,7 +163,6 @@ function LifeScienceConferenceForm({
                         <CommandItem
                           value="none"
                           onSelect={(e) => {
-                            e.preventDefault();
                             form.setValue("assignedSubAdminId", undefined, {
                               shouldDirty: true,
                             });
