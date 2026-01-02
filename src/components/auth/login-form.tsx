@@ -25,8 +25,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
-import { verifySubAdminCredentials } from "@/services/subAdminService";
-import { verifySuperAdminCredentials } from "@/services/superAdminService";
 import * as React from "react";
 
 const formSchema = z.object({
@@ -52,40 +50,38 @@ export default function LoginForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
+    try {
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(values),
+        });
 
-    if (values.role === 'super-admin') {
-      const result = await verifySuperAdminCredentials(values.email, values.password);
-      if (result.success) {
-          toast({
-            title: "Login Successful",
-            description: "Redirecting to super-admin dashboard...",
-          });
-          router.push(`/${values.role}`);
-      } else {
-           toast({
-            title: "Login Failed",
-            description: result.message,
-            variant: "destructive",
-          });
-      }
-    } else if (values.role === 'sub-admin') {
-      const result = await verifySubAdminCredentials(values.email, values.password);
-      if (result.success) {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('currentUserEmail', values.email);
+        const result = await response.json();
+
+        if (response.ok) {
+            if (values.role === 'sub-admin' && typeof window !== 'undefined') {
+              localStorage.setItem('currentUserEmail', values.email);
+            }
+            toast({
+                title: "Login Successful",
+                description: `Redirecting to ${values.role} dashboard...`,
+            });
+            router.push(`/${values.role}`);
+            router.refresh(); // Refresh to ensure layout gets new cookie state
+        } else {
+            toast({
+                title: "Login Failed",
+                description: result.message || "An unknown error occurred.",
+                variant: "destructive",
+            });
         }
+    } catch (error) {
         toast({
-          title: "Login Successful",
-          description: "Redirecting to sub-admin dashboard...",
+            title: "Login Error",
+            description: "Could not connect to the server. Please try again.",
+            variant: "destructive",
         });
-        router.push(`/${values.role}`);
-      } else {
-        toast({
-          title: "Login Failed",
-          description: result.message,
-          variant: "destructive",
-        });
-      }
     }
 
     setIsSubmitting(false);

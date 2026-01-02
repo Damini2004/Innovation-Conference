@@ -1,0 +1,12 @@
+diff --git a/node_modules/@ckeditor/ckeditor5-react/package.json b/node_modules/@ckeditor/ckeditor5-react/package.json
+index 7c2a715..b1a6294 100644
+--- a/node_modules/@ckeditor/ckeditor5-react/package.json
++++ b/node_modules/@ckeditor/ckeditor5-react/package.json
+@@ -62,6 +62,6 @@
+ 	},
+ 	"peerDependencies": {
+ 		"@ckeditor/ckeditor5-core": "^42.0.0",
+-		"react": "^16.13.1 || ^17.0.0 || ^18.0.0"
++		"react": "^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+ 	}
+ }

@@ -191,7 +191,7 @@ export async function getSubAdminById(id: string): Promise<{ success: boolean; m
 
 
 
-export async function verifySubAdminCredentials(email: string, password_provided: string): Promise<{ success: boolean; message: string }> {
+export async function verifySubAdminCredentials(email: string, password_provided: string): Promise<{ success: boolean; message: string, subAdmin?: SubAdmin }> {
   try {
     const q = query(collection(db, 'subAdmins'), where('email', '==', email), limit(1));
     const querySnapshot = await getDocs(q);
@@ -210,8 +210,18 @@ export async function verifySubAdminCredentials(email: string, password_provided
     if (subAdminData.password !== password_provided) {
       return { success: false, message: 'Invalid email or password.' };
     }
+    
+    const subAdmin: SubAdmin = {
+        id: subAdminDoc.id,
+        name: subAdminData.name,
+        email: subAdminData.email,
+        phone: subAdminData.phone,
+        address: subAdminData.address,
+        status: subAdminData.status,
+        joinDate: subAdminData.joinDate,
+    };
 
-    return { success: true, message: 'Login successful!' };
+    return { success: true, message: 'Login successful!', subAdmin };
   } catch (error) {
     console.error("Error verifying sub-admin credentials:", error);
     return { success: false, message: 'An unexpected error occurred during login.' };

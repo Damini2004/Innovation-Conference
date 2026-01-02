@@ -1,4 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
+import SessionProvider from "@/components/auth/session-provider";
 
 export default function AdminLayout({
   children,
@@ -7,7 +8,9 @@ export default function AdminLayout({
 }) {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-muted/40">{children}</div>
+      <SessionProvider>
+        <div className="flex min-h-screen w-full bg-muted/40">{children}</div>
+      </SessionProvider>
     </SidebarProvider>
   );
 }
