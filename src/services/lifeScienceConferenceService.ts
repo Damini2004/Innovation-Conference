@@ -10,11 +10,13 @@ export interface LifeScienceConference {
     heading: string;
     link: string;
     createdAt: string; // Changed to string to be serializable
+    assignedSubAdminId?: string;
 }
 
 const schema = z.object({
   heading: z.string().min(5, "Heading must be at least 5 characters."),
   link: z.string().url("Please enter a valid URL."),
+  assignedSubAdminId: z.string().optional(),
 });
 
 export type LifeScienceConferenceData = z.infer<typeof schema>;
@@ -25,11 +27,14 @@ export async function addLifeScienceConference(data: LifeScienceConferenceData):
     if (!validationResult.success) {
       return { success: false, message: validationResult.error.errors[0].message };
     }
+    
+    const dataToSave = {
+        ...validationResult.data,
+        assignedSubAdminId: validationResult.data.assignedSubAdminId === 'none' ? null : validationResult.data.assignedSubAdminId,
+        createdAt: serverTimestamp(),
+    }
 
-    await addDoc(collection(db, 'lifeScienceConferences'), {
-      ...validationResult.data,
-      createdAt: serverTimestamp(),
-    });
+    await addDoc(collection(db, 'lifeScienceConferences'), dataToSave);
 
     return { success: true, message: 'Life Science Conference added successfully!' };
   } catch (error) {
@@ -50,6 +55,7 @@ export async function getLifeScienceConferences(): Promise<LifeScienceConference
                 heading: data.heading,
                 link: data.link,
                 createdAt: createdAtTimestamp?.toDate().toISOString() || new Date().toISOString(),
+                assignedSubAdminId: data.assignedSubAdminId,
             } as LifeScienceConference;
         });
     } catch (error) {
@@ -65,8 +71,14 @@ export async function updateLifeScienceConference(id: string, data: LifeScienceC
             return { success: false, message: validationResult.error.errors[0].message };
         }
         
+        const dataToSave = {
+            ...validationResult.data,
+            assignedSubAdminId: validationResult.data.assignedSubAdminId === 'none' ? null : validationResult.data.assignedSubAdminId,
+            updatedAt: serverTimestamp()
+        };
+
         const conferenceRef = doc(db, 'lifeScienceConferences', id);
-        await updateDoc(conferenceRef, { ...validationResult.data, updatedAt: serverTimestamp() });
+        await updateDoc(conferenceRef, dataToSave);
 
         return { success: true, message: 'Life Science Conference updated successfully!' };
     } catch (error) {
