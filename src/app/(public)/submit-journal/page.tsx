@@ -91,3 +91,8 @@ export default function SubmitJournalPage() {
               <Card className="max-w-4xl mx-auto shadow-xl border-primary/10 overflow-hidden">
                   <JournalSubmissionForm />
               </Card>
+          </div>
+      </section>
+    </>
+  );
+}
