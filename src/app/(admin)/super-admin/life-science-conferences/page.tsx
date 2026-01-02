@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -101,7 +100,7 @@ function LifeScienceConferenceForm({
     }
   }, [defaultValues, form]);
 
-  const [open, setOpen] = React.useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
 
   return (
     <Form {...form}>
@@ -140,8 +139,7 @@ function LifeScienceConferenceForm({
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Assign Sub-Admin (Optional)</FormLabel>
-
-              <Popover open={open} onOpenChange={setOpen}>
+              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -154,35 +152,33 @@ function LifeScienceConferenceForm({
                     <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
-
                 <PopoverContent className="p-0">
                   <Command>
                     <CommandInput placeholder="Search sub-admins..." />
                     <CommandList>
                       <CommandEmpty>No sub-admins found.</CommandEmpty>
-
                       <CommandGroup>
                         <CommandItem
                           value="none"
-                          onSelect={() => {
+                          onSelect={(e) => {
+                            e.preventDefault();
                             form.setValue("assignedSubAdminId", undefined, {
                               shouldDirty: true,
                             });
-                            setOpen(false);
+                            setIsPopoverOpen(false);
                           }}
                         >
                           None
                         </CommandItem>
-
                         {subAdmins.map((admin) => (
                           <CommandItem
                             key={admin.id}
                             value={admin.id}
-                            onSelect={(value) => {
-                              form.setValue("assignedSubAdminId", value, {
+                            onSelect={(currentValue) => {
+                              form.setValue("assignedSubAdminId", currentValue === field.value ? undefined : currentValue, {
                                 shouldDirty: true,
                               });
-                              setOpen(false);
+                              setIsPopoverOpen(false);
                             }}
                           >
                             <Check
@@ -201,12 +197,10 @@ function LifeScienceConferenceForm({
                   </Command>
                 </PopoverContent>
               </Popover>
-
               <FormMessage />
             </FormItem>
           )}
         />
-
         <Button type="submit" disabled={isSubmitting} className="w-full">
           {isSubmitting ? "Saving..." : buttonText}
         </Button>
