@@ -83,4 +83,5 @@ export default function SubAdminSidebar({ journalCount = 0, conferenceCount = 0,
         </SidebarMenuItem>
       </SidebarFooter>
     </Sidebar>
-  );
+  )
+};
